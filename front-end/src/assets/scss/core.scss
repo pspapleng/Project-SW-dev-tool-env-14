@@ -1,2 +1,30 @@
 $primary-color: #ffff;
+$primary-text-color: #908E89;
 $background-color: #C4C4C4;
+$appbar-background-color: #ffff;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+* {
+    font-family: 'Roboto', sans-serif!important;
+  }
+
+.navbar {
+    background-color: $appbar-background-color!important;
+    color: black!important;
+}
+
+.text-underline {
+  border-bottom: 2px solid #343434;
+  padding-right: .5rem;
+  padding-left: .5rem;
+}
+
+.color-black{
+  color: '#000000'!important;
+}
+
+.primary-text-color {
+  color: $primary-text-color
+}
