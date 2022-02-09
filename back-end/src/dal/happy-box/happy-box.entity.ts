@@ -1,6 +1,6 @@
-import { Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
+import { IsString } from 'class-validator';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseEntity } from '../base/base.entity';
-import { ImageEntity } from '../image/image.entity';
 import { UserEntity } from '../user/user.entity';
 
 @Entity({ name: 'happy_box' })
@@ -9,7 +9,7 @@ export class HappyBoxEntity extends BaseEntity {
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 
-  @OneToOne(() => ImageEntity)
-  @JoinColumn({ name: 'image_id' })
-  image: ImageEntity;
+  @IsString()
+  @Column({ type: 'text' })
+  imageUrl: string;
 }
