@@ -1,10 +1,9 @@
-import { HappyBoxEntity } from './../happy-box/happy-box.entity';
-import { FavoriteEntity } from './../favorite/favorite.entity';
 import { Exclude } from 'class-transformer';
 import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
-import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 import { BaseEntity } from '../base/base.entity';
-import { ImageEntity } from '../image/image.entity';
+import { FavoriteEntity } from './../favorite/favorite.entity';
+import { HappyBoxEntity } from './../happy-box/happy-box.entity';
 
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
@@ -36,13 +35,13 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'text' })
   bio: string;
 
-  @OneToOne(() => ImageEntity)
-  @JoinColumn({ name: 'profile_image_id' })
-  profileImage: ImageEntity;
+  @IsString()
+  @Column({ type: 'text' })
+  profileImageUrl: string;
 
-  @OneToOne(() => ImageEntity)
-  @JoinColumn({ name: 'cover_image_id' })
-  coverImage: ImageEntity;
+  @IsString()
+  @Column({ type: 'text' })
+  coverImageUrl: string;
 
   @OneToMany(() => FavoriteEntity, (favorite) => favorite.id)
   @JoinColumn({ name: 'favorite_id' })
