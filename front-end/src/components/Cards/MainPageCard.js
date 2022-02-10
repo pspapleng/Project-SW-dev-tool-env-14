@@ -1,18 +1,11 @@
 import React from "react";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
+// import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea, CardActions } from "@mui/material";
 
-function Home() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+function MainPageCard() {
 
   return (
       <div
@@ -121,4 +114,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default MainPageCard;

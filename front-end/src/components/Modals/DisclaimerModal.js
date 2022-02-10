@@ -4,7 +4,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-function Assessment() {
+function DisclaimerModal() {
   const [open, setOpen] = React.useState(false);
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -126,4 +126,4 @@ function Assessment() {
   );
 }
 
-export default Assessment;
+export default DisclaimerModal;

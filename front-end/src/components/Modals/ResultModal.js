@@ -9,7 +9,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 
-function Assessment() {
+function ResultModal() {
   const [openResult, setOpenResul] = React.useState(false);
 //   const handleOpenResul = () => setOpenResul(true);
   const handleCloseResul = () => setOpenResul(false);
@@ -134,4 +134,4 @@ function Assessment() {
   );
 }
 
-export default Assessment;
+export default ResultModal;

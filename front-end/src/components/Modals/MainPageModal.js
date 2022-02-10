@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 
-function Home() {
+function MainPageModal() {
   const [open, setOpen] = React.useState(false);
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -63,4 +63,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default MainPageModal;
