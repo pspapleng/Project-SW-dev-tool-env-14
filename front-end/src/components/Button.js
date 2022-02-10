@@ -1,10 +1,76 @@
 import React from 'react';
-import Buttons from '@mui/material/Button';
+import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
+import { styled } from '@mui/system';
 
-function Button(data) {
-  return (
-      <Buttons onClick={() => data.onSubmit(data.props.condition)}>{ data.props.title }</Buttons>
-  );
+
+const blackGray = styled('button')`
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 1.15rem;
+  background-color: #828282;
+  padding: 8px;
+  border-radius: 30px;
+  color: white;
+  transition: all 150ms ease;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background-color: #717171};
+  }
+
+`;
+
+
+const lightGray = styled('button')`
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 1.15rem;
+  background-color: #C4C4C4;
+  padding: 8px ;
+  border-radius: 30px;
+  color: black;
+  transition: all 150ms ease;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background-color: #AFAFAF;
+  }
+
+  &.${buttonUnstyledClasses.active} {
+    background-color: #828282;
+  }
+`;
+
+const red = styled('button')`
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 1.15rem;
+  background-color: #BB0202;
+  padding: 8px ;
+  border-radius: 30px;
+  color: white;
+  transition: all 150ms ease;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background-color: #720000;
+  }
+
+  &.${buttonUnstyledClasses.active} {
+    background-color: #828282;
+  }
+`;
+
+function DarkGrayBut(props) {
+  return <ButtonUnstyled {...props} component={blackGray} />;
 }
 
-export default Button;
+function LightGrayBut(props) {
+  return <ButtonUnstyled {...props} component={lightGray}/>;
+}
+
+
+function RedDelBut(props) {
+  return <ButtonUnstyled {...props} component={red} />;
+}
+export { DarkGrayBut, LightGrayBut, RedDelBut}
