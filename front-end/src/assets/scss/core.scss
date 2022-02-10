@@ -4,10 +4,11 @@ $background-color: #C4C4C4;
 $appbar-background-color: #ffff;
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
 
 * {
     font-family: 'Roboto', sans-serif!important;
+    font-family: 'Noto Sans Thai', sans-serif!important;
   }
 
 .navbar {
@@ -27,4 +28,8 @@ $appbar-background-color: #ffff;
 
 .primary-text-color {
   color: $primary-text-color
+}
+
+.background-color-gray {
+  background-color: #E5E5E5;
 }
