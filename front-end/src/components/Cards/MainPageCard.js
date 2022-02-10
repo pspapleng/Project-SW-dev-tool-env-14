@@ -4,62 +4,120 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { CardActionArea, CardActions } from "@mui/material";
 
 function Home() {
   const [open, setOpen] = React.useState(false);
-  // const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box
-              sx={{ width: 600, bgcolor: "background.paper", p: 4, position: 'absolute', top: '50%', left: '50%', borderRadius: '15px', textAlign: 'center'}}>
+      <div
+      style={{
+          height: "200px",
+          paddingTop: "20px",
+          paddingBottom: "20px",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        {/* -------------------------------------------service center card-------------------------------------- */}
+        <Card sx={{ borderRadius: "20px", margin: '0 0 30px 30px',width: '200px' }}>
+          <CardActionArea>
+            {/* if you want to add image, you will use CardMedia */}
+            {/* <CardMedia
+              component="img"
+              height="140"
+              image="/static/images/cards/contemplative-reptile.jpg"
+              alt="green iguana"
+            /> */}
+
+            <CardContent
+              sx={{ backgroundColor: "#f5f5f5", height: '130px', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}
+            >
               <Typography
-                id="modal-modal-title"
-                variant="h6"
-                component="h2"
-                sx={{ color: "#595959", fontSize: 38, fontWeight: "bold" }}
+                gutterBottom
+                variant="h5"
+                sx={{ color: "#908E89", display: 'flex',
+                flexDirection: 'column',
+                textAlign: 'center' }}
               >
-                แบบประเมิน
-                <Divider
-                  sx={{
-                    mx: 27,
-                    color: "#595959",
-                    borderBottomWidth: "initial",
-                  }}
-                />
+                Service center
               </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions
+            sx={{ backgroundColor: "#c4c4c4", height: '30px' }}
+          ></CardActions>
+        </Card>
+
+        {/* -------------------------------------------Assessment card-------------------------------------- */}
+        <Card sx={{ borderRadius: "20px", margin: '0 0 30px 30px',width: '200px' }}>
+          <CardActionArea>
+            {/* if you want to add image, you will use CardMedia */}
+            {/* <CardMedia
+              component="img"
+              height="140"
+              image="/static/images/cards/contemplative-reptile.jpg"
+              alt="green iguana"
+            /> */}
+
+            <CardContent
+              sx={{ backgroundColor: "#f5f5f5", height: '130px', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}
+            >
               <Typography
-                id="modal-modal-description"
-                sx={{ mt: 2, Color: "#595959", opacity: "0.67" }}
+                gutterBottom
+                variant="h5"
+                sx={{ color: "#908E89", display: 'flex',
+                flexDirection: 'column',
+                textAlign: 'center' }}
               >
-                คำอธิบายเกี่ยวกับแบบประเมิน
+                Assessment
               </Typography>
-              <Button
-                variant="contained"
-                sx={{
-                  borderRadius: "15px",
-                  marginTop: "10%",
-                  textTransform: "none",
-                  backgroundColor: "#595959",
-                  width: '30%',
-                  height: '20%',
-                  opacity: '0.67'
-                }}
-                className="button-modal"
+            </CardContent>
+          </CardActionArea>
+          <CardActions
+            sx={{ backgroundColor: "#c4c4c4", height: '30px' }}
+          ></CardActions>
+        </Card>
+
+        {/* -------------------------------------------Happy-Box card-------------------------------------- */}
+        <Card sx={{ borderRadius: "20px", margin: '0 0 30px 30px',width: '200px' }}>
+          <CardActionArea>
+            {/* if you want to add image, you will use CardMedia */}
+            {/* <CardMedia
+              component="img"
+              height="140"
+              image="/static/images/cards/contemplative-reptile.jpg"
+              alt="green iguana"
+            /> */}
+
+            <CardContent
+              sx={{ backgroundColor: "#f5f5f5", height: '130px', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}
+            >
+              <Typography
+                gutterBottom
+                variant="h5"
+                sx={{ color: "#908E89", display: 'flex',
+                flexDirection: 'column',
+                textAlign: 'center' }}
               >
-                Start an assessment
-              </Button>
-            </Box>
-          </Modal>
-        </div>
-    
+                Happy-Box
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions
+            sx={{ backgroundColor: "#c4c4c4", height: '30px' }}
+          ></CardActions>
+        </Card>
+
+        
+      </div>
   );
 }
 
