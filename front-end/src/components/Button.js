@@ -27,7 +27,7 @@ const lightGray = styled('button')`
   background-color: #C4C4C4;
   padding: 8px ;
   border-radius: 30px;
-  color: black;
+  color: white;
   transition: all 150ms ease;
   cursor: pointer;
   border: none;
@@ -61,6 +61,26 @@ const red = styled('button')`
   }
 `;
 
+const blue = styled('button')`
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 1.15rem;
+  background-color: #1976d2;
+  padding: 8px ;
+  border-radius: 30px;
+  color: white;
+  transition: all 150ms ease;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background-color: #378FE7;
+  }
+
+  &.${buttonUnstyledClasses.active} {
+    background-color: #828282;
+  }
+`;
+
 function DarkGrayBut(props) {
   return <ButtonUnstyled {...props} component={blackGray} />;
 }
@@ -73,4 +93,8 @@ function LightGrayBut(props) {
 function RedDelBut(props) {
   return <ButtonUnstyled {...props} component={red} />;
 }
-export { DarkGrayBut, LightGrayBut, RedDelBut}
+
+function BlueBut(props) {
+  return <ButtonUnstyled {...props} component={blue} />;
+}
+export { DarkGrayBut, LightGrayBut, RedDelBut, BlueBut}

@@ -1,15 +1,16 @@
 import React from "react";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
+import { DarkGrayBut, RedDelBut, BlueBut } from "../Button";
 function DisclaimerModal() {
   const [open, setOpen] = React.useState(false);
-  // const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
     <div>
+      <DarkGrayBut onClick={handleOpen}>disclaimer modal</DarkGrayBut>
       <Modal
         open={open}
         onClose={handleClose}
@@ -19,6 +20,8 @@ function DisclaimerModal() {
         <Box
           sx={{
             width: 600,
+            height: "80vh",
+            overflowY: "scroll",
             bgcolor: "background.paper",
             p: 2,
             position: "absolute",
@@ -83,33 +86,21 @@ function DisclaimerModal() {
           >
             <p>ท่านยอมรับเงื่อนไขหรือไม่?</p>
 
-            <Button
-              variant="contained"
-              color="primary"
+            <BlueBut
               sx={{
-                borderRadius: "15px",
-                textTransform: "none",
-                marginLeft: "3px",
-                width: "20%",
-                height: "20%",
-                opacity: 1,
+                width: "20%", mx: 1
               }}
             >
               "ยอมรับ"
-            </Button>
+            </BlueBut>
 
-            <Button
-              variant="contained"
-              color="error"
+            <RedDelBut
               sx={{
-                borderRadius: "15px",
-                textTransform: "none",
-                marginLeft: "3px",
+                width: "20%", mx: 1
               }}
-              className="button-modal-assessment"
             >
               "ไม่ยอมรับ"
-            </Button>
+            </RedDelBut>
             <Divider sx={{ my: 1.5 }} />
           </Typography>
           <a
