@@ -3,19 +3,29 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import { DarkGrayBut, RedDelBut, BlueBut } from "../Button";
+import { RedDelBut, BlueBut } from "../Button";
+import { useNavigate } from "react-router-dom";
+
+
 function DisclaimerModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  let navigate = useNavigate(); 
+  const [open, setOpen] = React.useState(true);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const backHome = () =>{ 
+    navigate('/Home');
+  }
+
   return (
     <div>
-      <DarkGrayBut onClick={handleOpen}>disclaimer modal</DarkGrayBut>
       <Modal
         open={open}
-        onClose={handleClose}
+        // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        backdrop="static"
+        keyboard="false"
       >
         <Box
           sx={{
@@ -87,16 +97,20 @@ function DisclaimerModal() {
             <p>ท่านยอมรับเงื่อนไขหรือไม่?</p>
 
             <BlueBut
+              onClick={handleClose}
               sx={{
-                width: "20%", mx: 1
+                width: "20%",
+                mx: 1,
               }}
             >
               "ยอมรับ"
             </BlueBut>
 
             <RedDelBut
+              onClick={backHome}
               sx={{
-                width: "20%", mx: 1
+                width: "20%",
+                mx: 1,
               }}
             >
               "ไม่ยอมรับ"
