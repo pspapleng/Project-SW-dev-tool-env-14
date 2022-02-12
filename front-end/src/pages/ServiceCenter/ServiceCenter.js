@@ -52,17 +52,15 @@ function ServiceCenter() {
       <Box sx={{ flexGrow: 1, py: 4, px: 6 }}>
         <Grid container spacing={2}>
           <Grid item xs={9}>
-            <Item>
+            <Item sx={{boxShadow: "none"}}>
               <Card data={serviceData}/>
             </Item>
           </Grid>
-          <Grid item xs={3}>
-            <Item>
+          <Grid item xs={3} sx={{display: 'flex', justifyContent: 'center'}}>
               <GGMap/>
-            </Item>
           </Grid>
-          <Grid item xs={9}>
-            <Item sx={{p: 3}}>
+          <Grid item xs={9} sx={{my: 2}}>
+            <Item sx={{p: 3, boxShadow: "none"}}>
               <div className='review-box'>
                 <span style={{fontSize: 30, fontWeight: 'bold'}}>10 reviews</span>
                 {serviceReivews.map((review, index) => <CommentBox key={index} data={review}/>)}
@@ -71,10 +69,10 @@ function ServiceCenter() {
             </Item>
           </Grid>
           <Grid item xs={3}>
-            <span style={{fontSize: 30, fontWeight: 'bold'}}>Suggestion</span>
-            <Item>
+            <div sx={{display: 'flex', justifyContent: 'center'}}>
+            <span style={{fontSize: 30, fontWeight: 'bold', marginLeft: 20}}>Suggestion</span>
               <Suggestion/>
-            </Item>
+            </div>
           </Grid>
         </Grid>
       </Box>

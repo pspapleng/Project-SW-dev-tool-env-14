@@ -18,3 +18,7 @@
  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
     border-color: (red);
 }
+
+.disable-button{
+    pointer-events: none;
+}
