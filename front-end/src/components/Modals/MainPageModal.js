@@ -10,7 +10,7 @@ function MainPageModal() {
   const [open, setOpen] = React.useState(true);
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const nextToAssessment = () =>{
     navigate('/Assessment');
   }
