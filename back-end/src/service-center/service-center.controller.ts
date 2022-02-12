@@ -5,23 +5,21 @@ import { ServiceCenterSerivce } from './service-center.service';
 export class ServiceCenterController {
   constructor(private serviceCenterSerivce: ServiceCenterSerivce) {}
 
-@Get()
-async getAllServiceCenter(
-  @Query('search') search: string)
-  {
-  return 'getAllServiceCenter '+search  
+  @Get()
+  async getAllServiceCenter(@Query('search') search: string) {
+    return 'getAllServiceCenter ' + search;
   }
 
-@Get('/location')
-async getServiceCenterByLocation(
-@Query('lat') lat: number, @Query('lon') lon: number) {
-    return ('get ServiceCenter By Location lat : '+lat+' lon : '+lon)
+  @Get('/location')
+  async getServiceCenterByLocation(
+    @Query('lat') lat: number,
+    @Query('lon') lon: number,
+  ) {
+    return this.serviceCenterSerivce.getServiceCenterByLocation(lat, lon);
   }
 
-@Get('/:id')
-async getServiceCenterById(@Param('id') id: string) {
-  return 'get serviceCenter by id '+id    
+  @Get('/:id')
+  async getServiceCenterById(@Param('id') id: string) {
+    return 'get serviceCenter by id ' + id;
   }
-
-
 }
