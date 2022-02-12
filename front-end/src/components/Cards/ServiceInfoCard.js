@@ -5,34 +5,53 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"></link>
 
-export default function ServiceInfoCard() {
+export default function ServiceInfoCard({data:{ name, locaion, cost, contact, description, imageUrl }}) {
+  const contentStyle = {
+    margin: "0px",
+    lineBreak: "auto",
+    fontSize: 18,
+    marginTop: 20,
+    color: '#797979',
+    display: 'flex',
+  }
+  const infoText = {
+    color: 'black',
+  }
 
   return (
     <Card sx={{ display: "flex", padding:"20px", boxShadow: "none"  }}>
-      <Box >
+      <Box>
         <Grid container style={{ flex: 1 }}>
-          <Grid item xs={6}>
+          <Grid item xs={7}>
             <CardMedia
               component="img"
               height="400"
               width='100%'
-              image="https://image.makewebeasy.net/makeweb/0/hxxlTCtx0/DefaultData%2Fdmh1_2.jpg?v=202012190947"
-              alt="Live from space album cover"
+              image={imageUrl ? imageUrl : "https://cr.lnwfile.com/2p7f81.jpg"}
             />
           </Grid>
-          <Grid item xs={6} style={{ paddingLeft: 20 }}>
-              <CardContent sx={{padding:"0px" }}>
-                <Typography component="div" variant="h5">
-                  Name
+          <Grid item xs={5} sx={{paddingLeft: 5}}>
+              <CardContent sx={{textAlign:'left', padding:"0px" }}>
+                <Typography component="div" variant="h5" sx={{fontWeight: 'bold', fontSize: 36, marginBottom: 3}}>
+                  { name }
                 </Typography>
-                <p style={{ margin: "0px", lineBreak: "auto" }}>
-                  Location / Online
-                </p>
-                <p style={{ margin: "0px", lineBreak: "auto" }}>Cost</p>
-                <p style={{ margin: "0px", lineBreak: "auto" }}>Contact</p>
-                <p style={{ margin: "0px", lineBreak: "auto" }}>Description</p>
+                  <div style={contentStyle}>
+                    Location:
+                  <span style={infoText}>{ locaion ? ` ${locaion}` : ' Online'}</span>
+                  </div>
+                  <div style={contentStyle}>
+                    Cost:
+                  <span style={infoText}>{cost || '-'}</span>
+                  </div>
+                  <div style={contentStyle}>
+                    Contract:
+                  <span style={infoText}>{ contact || '-'}</span>
+                  </div>
+                  <div style={contentStyle}>
+                    Description:
+                  <span style={infoText}>{ description || '-'}</span>
+                  </div>
               </CardContent>
 
           </Grid>
