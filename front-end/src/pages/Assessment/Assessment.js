@@ -32,9 +32,9 @@ function Assessment() {
       <DisclaimerModal />
       <Grid container justifyContent="center">
         <Grid item xs={10} style={{ textAlign: "right" }}>
-          <h1 style={{ marginBottom: 0 }}>1Q</h1>
+          <h1 style={{ marginBottom: 0 }}>{questions.length || 0}Q</h1>
           <p style={{ margin: 0 }}>แบบคัดกรองโรคซึมเศร้า </p>
-          <p style={{ marginTop: 0 }}>2 คำถาม </p>
+          <p style={{ marginTop: 0 }}>{questions.length || 0} คำถาม </p>
         </Grid>
         <Grid item xs={10}>
           <ThemeProvider theme={lightTheme}>

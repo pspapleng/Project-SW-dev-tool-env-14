@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -9,8 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function DisclaimerModal() {
   let navigate = useNavigate(); 
-  const [open, setOpen] = React.useState(true);
-  // const handleOpen = () => setOpen(true);
+  const [open, setOpen] = useState(true);
   const handleClose = () => setOpen(false);
 
   const backHome = () =>{ 
@@ -48,7 +47,7 @@ function DisclaimerModal() {
           >
             ข้อกำหนดและเงื่อนไข
           </Typography>
-          <Typography
+          <Box
             id="modal-modal-description"
             sx={{
               mt: 2,
@@ -59,7 +58,7 @@ function DisclaimerModal() {
             }}
           >
             <p>
-              MENTAL HEALTH CHECK IN เป็นเครื่องมือประเมินสุขภาพจิตเบื้องต้น
+              MOOD MENT CHECK IN เป็นเครื่องมือประเมินสุขภาพจิตเบื้องต้น
               และคัดกรองความเสี่ยงต่อปัญหาสุขภาพจิตจากสถานการณ์ COVID-19
               มีวัตถุประสงค์เพื่อช่วยให้บุคลากรสาธารณสุข, อสม., จิตอาสา
               ใช้ประเมินค้นหากลุ่มเสี่ยงต่อปัญหาสุขภาพจิตมาดูแล
@@ -79,7 +78,7 @@ function DisclaimerModal() {
               และการประเมินผลการพัฒนางานวิชาการด้านการดูแลฟื้นฟูเยียวยาจิตใจ
               และการเสริมสร้างพลังใจผู้ได้รับผลกระทบทางจิตใจจากสถานการณ์ระบาดของโรคติดเชื้อไวรัสโคโรน่า
               2019 และจะถูกเก็บรักษาเป็นความลับตามจรรยาบรรณวิชาชีพ
-              ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล (PDPA) พ.ศ.2562 &nbsp;
+              ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล (PDPA) พ.ศ.2562 <br/>
               <a
                 href="https://checkin.dmh.go.th/privacy-policy.php"
                 target="_blank"
@@ -88,8 +87,8 @@ function DisclaimerModal() {
                 (อ่านนโยบายคุ้มครองข้อมูลส่วนบุคคลของกรมสุขภาพจิต)
               </a>
             </p>
-          </Typography>
-          <Typography
+          </Box>
+          <Box
             sx={{ fontWeight: "bold", fontSize: 18, color: "#a94442"}}
           >
             <p>ท่านยอมรับเงื่อนไขหรือไม่?</p>
@@ -114,7 +113,7 @@ function DisclaimerModal() {
               "ไม่ยอมรับ"
             </RedDelBut>
             <Divider sx={{ my: 1.5 }} />
-          </Typography>
+          </Box>
           <a
             href="https://checkin.dmh.go.th/privacy-policy.php"
             target="_blank"
