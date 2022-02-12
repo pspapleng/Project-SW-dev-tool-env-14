@@ -39,5 +39,5 @@ jobs:
           context: ./back-end
           file: ./back-end/Dockerfile
           tags: |
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ github.event.release.tag_name }}
+            ghcr.io/${{ steps.repository.outputs.lowercase }}/back-end:latest
+            ghcr.io/${{ steps.repository.outputs.lowercase }}/back-end:${{ github.event.release.tag_name }}
