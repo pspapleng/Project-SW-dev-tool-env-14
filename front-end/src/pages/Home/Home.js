@@ -49,7 +49,7 @@ function Home() {
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s
             </Typography>
-              <DarkGrayBut onClick={goAssessment} style={{padding: '1vw 2vw', fontSize: '1.4vw'}} variant="contained">Make an assessment</DarkGrayBut>
+              <DarkGrayBut onClick={goAssessment} style={{marginTop: '2vw', padding: '1vw 2vw', fontSize: '1.4vw'}} variant="contained">Make an assessment</DarkGrayBut>
           </Box>
         </Grid>
       </Grid>
