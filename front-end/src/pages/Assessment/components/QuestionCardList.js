@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import Radios from "./Radios";
 // import StepBar from "./StepBar";
 
-function QuestionCardList({question}) {
+function QuestionCardList({question, onSelect}) {
   // const question = 
   //   {
   //       "id": "1",
@@ -28,7 +28,7 @@ function QuestionCardList({question}) {
       </h3>
       <div style={{paddingBottom: "10px"}}>
         {/* ------  Radio & Step-Bar -------- */}
-        <Radios />
+        <Radios onSelect={{onSelect}} />
         {/* <StepBar /> */}
       </div>
     </Item>

@@ -1,17 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Alert, Snackbar } from "@mui/material";
+
+//Import Component 
 import QuestionCardList from "./components/QuestionCardList";
 import { DarkGrayBut } from "../../components/Button";
-import DisclaimerModal from "../../components/Modals/DisclaimerModal"
+import DisclaimerModal from "../../components/Modals/DisclaimerModal";
+import ResultModal from "../../components/Modals/ResultModal"
 
 function Assessment() {
+  const [disclaimer, setDisclaimer] = useState(false);
+  const [assessChoice, setAssessChoice] = useState({});
+  const [onInpError, setOnInpError] = useState(false);
+  useEffect(() => {
+    setDisclaimer(localStorage.getItem("acceptDisclaimer"));
+  }, []);
 
-  function actionClick() {
-    console.log("Submit");
+  function twoQ() {
+    if ((assessChoice[1] === 0) & (assessChoice[2] === 0)) {
+      return 0;
+    } else if (assessChoice[1] === 1 || assessChoice[2] === 1) {
+      return 1;
+    } else {
+      return null
+    }
   }
-  
+
+  function actionSubmit() {
+    if(twoQ() === null){
+      setOnInpError(true);
+    }
+    else{
+
+    }
+  }
+
+  const setChoice = (choice, id) => {
+    let getChoice = assessChoice;
+    getChoice[id] = choice;
+    setAssessChoice(getChoice);
+  };
+
   const lightTheme = createTheme({ palette: { mode: "light" } });
   const questions = [
     {
@@ -27,9 +58,8 @@ function Assessment() {
   ];
 
   return (
-    
     <div className="background-color-gray">
-      <DisclaimerModal />
+      {disclaimer ? false : <DisclaimerModal />}
       <Grid container justifyContent="center">
         <Grid item xs={10} style={{ textAlign: "right" }}>
           <h1 style={{ marginBottom: 0 }}>{questions.length || 0}Q</h1>
@@ -46,18 +76,36 @@ function Assessment() {
             >
               {/* ------------ Loop All Question --------------- */}
               {questions.map((question) => (
-                <QuestionCardList key={question.id} question={question} />
+                <QuestionCardList
+                  onSelect={(choice) => {
+                    setChoice(choice, question.id);
+                  }}
+                  key={question.id}
+                  question={question}
+                />
               ))}
             </Box>
           </ThemeProvider>
         </Grid>
-        
       </Grid>
       <div style={{ paddingTop: 20, paddingBottom: 50, textAlign: "center" }}>
-        <DarkGrayBut style={{ minWidth: "150px" }} onClick="actionClick">
+        <DarkGrayBut onSubmit={actionSubmit} style={{ minWidth: "150px" }}>
           Submit
         </DarkGrayBut>
       </div>
+      <Snackbar
+        open={onInpError}
+        autoHideDuration={3000}
+        onClose={() => setOnInpError(false)}
+      >
+        <Alert
+          onClose={() => setOnInpError(false)}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          กรุณาใส่ข้อมูลให้ครบ
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

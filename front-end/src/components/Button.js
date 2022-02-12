@@ -82,7 +82,7 @@ const blue = styled('button')`
 `;
 
 function DarkGrayBut(props) {
-  return <ButtonUnstyled {...props} component={blackGray} />;
+  return <ButtonUnstyled onClick={() => props.onSubmit()} {...props} component={blackGray} />;
 }
 
 function LightGrayBut(props) {

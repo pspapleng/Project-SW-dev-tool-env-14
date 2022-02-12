@@ -10,8 +10,10 @@ import { useNavigate } from "react-router-dom";
 function DisclaimerModal() {
   let navigate = useNavigate(); 
   const [open, setOpen] = useState(true);
-  const handleClose = () => setOpen(false);
-
+  const isAccept = () => {
+    localStorage.setItem("acceptDisclaimer", true);
+    setOpen(false);
+  }
   const backHome = () =>{ 
     navigate('/Home');
   }
@@ -20,7 +22,6 @@ function DisclaimerModal() {
     <div>
       <Modal
         open={open}
-        // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         backdrop="static"
@@ -94,7 +95,7 @@ function DisclaimerModal() {
             <p>ท่านยอมรับเงื่อนไขหรือไม่?</p>
 
             <BlueBut
-              onClick={handleClose}
+              onClick={isAccept}
               sx={{
                 width: "20%",
                 mx: 1,
