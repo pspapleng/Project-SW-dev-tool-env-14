@@ -9,8 +9,8 @@ export class ReviewController {
     return 'create review'    
     }
   @Get('/:id')
-  async getReviewByServiceCenterId(@Param('id') id: string) {
-  return 'getReviewByServiceCenterId '+id    
+  async getReviewByServiceCenterId(@Param('id') serviceId: string) {
+  return this.reviewSerivce.getReviewByServiceCenterId(serviceId)    
   }
   @Patch('/:id')
   async updateReviewById(@Param('id') id: string) {
