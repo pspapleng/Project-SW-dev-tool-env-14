@@ -37,7 +37,7 @@ jobs:
           push: true
           target: production
           context: ./back-end
-          file: ./Dockerfile
+          file: ./back-end/Dockerfile
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ github.event.release.tag_name }}
