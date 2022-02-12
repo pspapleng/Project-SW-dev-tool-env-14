@@ -29,11 +29,9 @@ function DisclaimerModal() {
       >
         <Box
           sx={{
-            width: 600,
-            height: "80vh",
-            overflowY: "scroll",
+            width: 700,
             bgcolor: "background.paper",
-            p: 2,
+            p: 4,
             position: "absolute",
             top: "50%",
             left: "50%",
@@ -92,7 +90,7 @@ function DisclaimerModal() {
             </p>
           </Typography>
           <Typography
-            sx={{ fontWeight: "bold", fontSize: 18, color: "#a94442", my: 0 }}
+            sx={{ fontWeight: "bold", fontSize: 18, color: "#a94442"}}
           >
             <p>ท่านยอมรับเงื่อนไขหรือไม่?</p>
 
