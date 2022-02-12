@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -8,19 +8,23 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import { DarkGrayBut, LightGrayBut } from "../Button";
+import {useNavigate} from 'react-router-dom';
 
 function ResultModal({ isActive }) {
   const [open, setOpen] = useState(isActive);
   const [serviceCenter, setServiceCenter] = useState([]);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+  const handleOnClick = useCallback((id) => navigate(`/ServiceCenterInfo/${id}`, {replace: true}), [navigate]);
+
 
   useEffect(() => {
     setServiceCenter([{id:1, name: 'Paolo', location: 'Bangkok', imageUrl: '', distanct: 0},{id:2, name: 'Rama9', location: 'Bangkok', imageUrl: '', distanct: 10}]);
   }, []);
 
   const toService = (id) => {
-    console.log(id)
     handleClose()
+    handleOnClick(id)
   }
 
   const backToHome = () => {

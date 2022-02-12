@@ -96,12 +96,12 @@ const Navbar = () => {
             MoodMent
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center'}}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
                 <Button
                   key={page}
                   onClick={() => handleCloseNavMenu && setSelectedPage(page || 'Home')}
                   component={Link}
-                  to={page.replaceAll(' ', '')}
+                  to={index === 1 ? page.replaceAll(' ', '')+'Info/1' : page}
                   sx={{
                      my: 2, mx: 3, color: '#000000', display: 'block', textTransform: 'capitalize', fontSize: 24,
                      ':hover': {
