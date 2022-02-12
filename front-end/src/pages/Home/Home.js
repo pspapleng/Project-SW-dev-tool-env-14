@@ -7,8 +7,6 @@ import { DarkGrayBut } from "../../components/Button";
 import MainPageModal from "../../components/Modals/MainPageModal";
 import MainPageCard from "../../components/Cards/MainPageCard";
 function Home() {
-  
-  
   return (
     <div>
       <MainPageModal/>
@@ -27,6 +25,8 @@ function Home() {
               bottom: 0,
               left: "40px",
               right: 0,
+              width: "20vw",
+              textAlign: "center"
             }}
           >
             <Typography
@@ -34,22 +34,20 @@ function Home() {
                 color: "#fff",
                 fontSize: 35,
                 fontWeight: "bold",
-                width: "25%",
-                textAlign: "center",
               }}
             >
               MoodMent
             </Typography>
-            <Box sx={{ width: "25%", textAlign: "center", mt: 2 }}>
-              <Typography sx={{ color: "#fff" }}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s
+            <Typography sx={{ color: "#fff" }}>
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s
+                </p>
+                <DarkGrayBut variant="contained">
+                  Make an assessment
+                </DarkGrayBut>
               </Typography>
-              <DarkGrayBut variant="contained" style={{ marginTop: 20 }}>
-                Make an assessment
-              </DarkGrayBut>
-            </Box>
           </Box>
         </Grid>
       </Grid>

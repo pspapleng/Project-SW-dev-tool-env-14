@@ -1,5 +1,4 @@
 import React from "react";
-import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -28,7 +27,6 @@ function MainPageModal() {
         <Box
           sx={{
             width: 600,
-            height: "40vh",
             bgcolor: "background.paper",
             p: 4,
             position: "absolute",
@@ -54,25 +52,15 @@ function MainPageModal() {
               }}
             />
           </Typography>
-          <Grid id="top-row" container sx={{ justifyContent: "center" }}>
-            <Grid item xs={6}>
-              <Typography
+          <Typography
                 id="modal-modal-description"
                 sx={{ mt: 2, Color: "#595959", opacity: "0.67" }}
               >
                 <p>คำอธิบายเกี่ยวกับแบบประเมิน</p>
+                <DarkGrayBut onClick={nextToAssessment}>Start an assessment</DarkGrayBut>
               </Typography>
-            </Grid>
-          </Grid>
-          <Grid
-            id="bottom-row"
-            container
-            sx={{ justifyContent: "center", mt: "20%" }}
-          >
-            <Grid item xs={6}>
-              <DarkGrayBut onClick={nextToAssessment}>Start an assessment</DarkGrayBut>
-            </Grid>
-          </Grid>
+           
+              
         </Box>
       </Modal>
     </div>
