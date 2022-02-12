@@ -4,7 +4,13 @@ import { styled } from "@mui/material/styles";
 import Radios from "./Radios";
 import StepBar from "./StepBar";
 
-function QuestionCardList({ question }) {
+function QuestionCardList({question}) {
+  // const question = 
+  //   {
+  //       "id": "1",
+  //       "question": "ใน 2 สัปดาห์ที่ผ่านมา รวมวันนี้ ท่านรู้สึก หดหู่ เศร้า หรือท้อแท้สิ้นหวัง หรือไม่"
+
+  //   }
   const Item = styled(Paper)(({ theme }) => ({
     paddingLeft: 20,
     paddingRight: 20,
