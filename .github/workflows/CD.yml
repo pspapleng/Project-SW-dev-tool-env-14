@@ -41,3 +41,18 @@ jobs:
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}/back-end:latest
             ghcr.io/${{ steps.repository.outputs.lowercase }}/back-end:${{ github.event.release.tag_name }}
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    needs:
+      - dockerize_back_end
+    steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.PRIVATE_KEY }}
+          known_hosts: "just-a-placeholder-so-we-dont-get-errors"
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H 178.128.60.199 >> ~/.ssh/known_hosts
+      - name: Update Mongo Stream Service
+        run: ssh root@178.128.60.199 'cd ./deployments/ && sh ./setup.sh ${{ github.event.release.tag_name }}'
