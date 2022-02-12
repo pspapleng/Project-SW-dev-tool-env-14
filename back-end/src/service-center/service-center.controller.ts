@@ -20,6 +20,6 @@ export class ServiceCenterController {
 
   @Get('/:id')
   async getServiceCenterById(@Param('id') id: string) {
-    return 'get serviceCenter by id ' + id;
+    return this.serviceCenterSerivce.getServiceCenterById(id);   
   }
 }

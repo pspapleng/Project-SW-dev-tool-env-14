@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { getDistance } from 'geolib';
+import { ServiceCenterEntity } from 'src/dal/service-center/service-center.entity';
 import { ServiceCenterRepository } from './../dal/service-center/service-cennter.repository';
 
 @Injectable()
@@ -32,5 +33,12 @@ export class ServiceCenterSerivce {
       .filter((serviceCenter) => serviceCenter.distance < 30 * 1000) // filter service center nearme
       .sort((a, b) => a.distance - b.distance); // sort by distance desc
     return result;
+  }
+  async getServiceCenterById(id: string): Promise<ServiceCenterEntity> {
+    const service = await this.serviceCenterRepository.findOne(id).catch( (error) => {throw new BadRequestException(error.message)}) ;
+    if (!service){
+         throw new BadRequestException("service_not_found");
+    }
+    return service;
   }
 }
