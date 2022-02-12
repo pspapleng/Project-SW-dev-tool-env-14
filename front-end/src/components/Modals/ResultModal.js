@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -8,18 +8,23 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import { DarkGrayBut, LightGrayBut} from "../Button";
-function ResultModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+
+
+function ResultModal({isActive}) {
+  const [open, setOpen] = useState(isActive);
+  const [serviceCenter, setServiceCenter] = useState([])
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    setServiceCenter('dsadsadsadsa')
+  }, []);
+
   return (
     <div>
-      <DarkGrayBut onClick={handleOpen} >result modal</DarkGrayBut>
+      {/* <DarkGrayBut onClick={handleOpen} >result modal</DarkGrayBut> */}
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
         <Box
           sx={{
@@ -38,16 +43,18 @@ function ResultModal() {
             id="modal-modal-title"
             variant="h6"
             component="h2"
-            sx={{ fontSize: 18, fontWeight: "bold" }}
+            sx={{ fontSize: 28, fontWeight: "bold" }}
           >
+          {serviceCenter}
             การแปลผลประเมิน
           </Typography>
-          <Typography
+          <Box
             // id="modal-modal-description"
             sx={{
               mt: 2,
               Color: "#000",
               opacity: "0.67",
+              fontSize: 22,
               // textAlign: "center",
             }}
           >
@@ -63,12 +70,12 @@ function ResultModal() {
                 แบบประเมินโรคซึมเศร้า 9Q
               </a>
             </p>
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
+          </Box>
+          <Box sx={{ mt: 2 }}>
             <LightGrayBut style={{marginLeft: '5px',marginRight: '5px', width: '20%'}}>Back to Home</LightGrayBut>
-            <DarkGrayBut style={{marginLeft: '5px',marginRight: '5px', width: '20%'}}>Next to 9Q</DarkGrayBut>
+            <DarkGrayBut style={{marginLeft: '5px',marginRight: '5px', width: '20%'}} onSubmit={() => console.log('Not Avalible')}>Next to 9Q</DarkGrayBut>
             <Divider sx={{ my: 1.5 }} />
-          </Typography>
+          </Box>
           <Typography
             id="modal-modal-title"
             variant="h6"

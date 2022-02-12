@@ -14,6 +14,7 @@ function Assessment() {
   const [disclaimer, setDisclaimer] = useState(false);
   const [assessChoice, setAssessChoice] = useState({});
   const [onInpError, setOnInpError] = useState(false);
+  const [showResult, setShowResult] = useState(true);
   useEffect(() => {
     setDisclaimer(localStorage.getItem("acceptDisclaimer"));
   }, []);
@@ -21,7 +22,7 @@ function Assessment() {
   function twoQ() {
     if ((assessChoice[1] === 0) & (assessChoice[2] === 0)) {
       return 0;
-    } else if (assessChoice[1] === 1 || assessChoice[2] === 1) {
+    } else if ((assessChoice[1] === 1 || assessChoice[2] === 1) && Object.keys(assessChoice).length === 2) {
       return 1;
     } else {
       return null
@@ -33,7 +34,7 @@ function Assessment() {
       setOnInpError(true);
     }
     else{
-
+      setShowResult(true)
     }
   }
 
@@ -42,6 +43,10 @@ function Assessment() {
     getChoice[id] = choice;
     setAssessChoice(getChoice);
   };
+
+  const ActiveResultModal = () => {
+    return <ResultModal isActive={showResult}/>
+  }
 
   const lightTheme = createTheme({ palette: { mode: "light" } });
   const questions = [
@@ -60,6 +65,7 @@ function Assessment() {
   return (
     <div className="background-color-gray">
       {disclaimer ? false : <DisclaimerModal />}
+      <ActiveResultModal/>
       <Grid container justifyContent="center">
         <Grid item xs={10} style={{ textAlign: "right" }}>
           <h1 style={{ marginBottom: 0 }}>{questions.length || 0}Q</h1>
