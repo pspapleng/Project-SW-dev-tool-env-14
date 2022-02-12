@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+    dev:
+        build:
+            context: ./back-end
+            target: development
+            dockerfile: ./Dockerfile
+        command: yarn run start:dev
+        ports:
+            - 8080:80
+        volumes:
+            - ./back-end:/usr/src/app
+        restart: unless-stopped
