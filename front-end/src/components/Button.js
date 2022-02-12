@@ -82,19 +82,19 @@ const blue = styled('button')`
 `;
 
 function DarkGrayBut(props) {
-  return <ButtonUnstyled onClick={() => props.onSubmit()} {...props} component={blackGray} />;
+  return <ButtonUnstyled onClick={() => props.onClick()} {...props} component={blackGray} />;
 }
 
 function LightGrayBut(props) {
-  return <ButtonUnstyled {...props} component={lightGray}/>;
+  return <ButtonUnstyled onClick={() => props.onClick()} {...props} component={lightGray}/>;
 }
 
 
 function RedDelBut(props) {
-  return <ButtonUnstyled {...props} component={red} />;
+  return <ButtonUnstyled onClick={() => props.onClick()} {...props} component={red} />;
 }
 
 function BlueBut(props) {
-  return <ButtonUnstyled {...props} component={blue} />;
+  return <ButtonUnstyled onClick={() => props.onClick()} {...props} component={blue} />;
 }
 export { DarkGrayBut, LightGrayBut, RedDelBut, BlueBut}

@@ -95,7 +95,7 @@ function Assessment() {
         </Grid>
       </Grid>
       <div style={{ paddingTop: 20, paddingBottom: 50, textAlign: "center" }}>
-        <DarkGrayBut onSubmit={actionSubmit} style={{ minWidth: "150px" }}>
+        <DarkGrayBut onClick={actionSubmit} style={{ minWidth: "150px" }}>
           Submit
         </DarkGrayBut>
       </div>
