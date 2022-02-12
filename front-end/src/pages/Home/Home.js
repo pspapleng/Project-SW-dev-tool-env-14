@@ -9,7 +9,7 @@ import MainPageCard from "../../components/Cards/MainPageCard";
 function Home() {
   return (
     <div>
-      <MainPageModal/>
+      {localStorage.getItem("doAssessment") ? false : <MainPageModal />}
       <Grid id="top-row" container>
         <Grid item xs={4}>
           <img
@@ -26,7 +26,7 @@ function Home() {
               left: "40px",
               right: 0,
               width: "20vw",
-              textAlign: "center"
+              textAlign: "center",
             }}
           >
             <Typography
@@ -39,15 +39,13 @@ function Home() {
               MoodMent
             </Typography>
             <Typography sx={{ color: "#fff" }}>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s
-                </p>
-                <DarkGrayBut variant="contained">
-                  Make an assessment
-                </DarkGrayBut>
-              </Typography>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s
+              </p>
+              <DarkGrayBut variant="contained">Make an assessment</DarkGrayBut>
+            </Typography>
           </Box>
         </Grid>
       </Grid>

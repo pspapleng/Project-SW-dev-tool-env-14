@@ -14,7 +14,7 @@ function Assessment() {
   const [disclaimer, setDisclaimer] = useState(false);
   const [assessChoice, setAssessChoice] = useState({});
   const [onInpError, setOnInpError] = useState(false);
-  const [showResult, setShowResult] = useState(true);
+  const [showResult, setShowResult] = useState(false);
   useEffect(() => {
     setDisclaimer(localStorage.getItem("acceptDisclaimer"));
   }, []);
@@ -34,6 +34,7 @@ function Assessment() {
       setOnInpError(true);
     }
     else{
+      localStorage.setItem('doAssessment', true)
       setShowResult(true)
     }
   }
