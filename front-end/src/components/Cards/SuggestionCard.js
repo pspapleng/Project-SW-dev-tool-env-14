@@ -9,15 +9,15 @@ import Box from "@mui/material/Box";
 export default function SuggestionCard() {
   const textTest = "สถาบันสุขภาพจิตเด็กและวัยรุ่นราชนครินทร์";
   return (
-    <Card sx={{ maxWidth: 300, boxShadow: "none" }}>
+    <Card sx={{ ml:3, boxShadow: "none" }}>
       <CardActionArea>
         <CardMedia
           component="img"
-          height="130"
+          height="200"
           image="https://image.makewebeasy.net/makeweb/0/hxxlTCtx0/DefaultData%2Fdmh1_2.jpg?v=202012190947"
           alt="green iguana"
         />
-        <CardContent style={{ padding: "10px"}}>
+        <CardContent style={{ padding: "10px 20px"}}>
           <Box sx={{ width: "100%" }}>
             <Grid container style={{ fontWeight: "bold", flex: 1 }}>
               <Grid item xs={6} >
