@@ -12,3 +12,10 @@ services:
         volumes:
             - ./back-end:/usr/src/app
         restart: unless-stopped
+    front_end:
+        build:
+            context: ./front-end
+            target: production
+            dockerfile: ./Dockerfile
+        ports:
+            - 3000:80
