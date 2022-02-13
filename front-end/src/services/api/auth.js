@@ -27,6 +27,16 @@ const auth = {
         catch(e) {
             console.log(e)
         }
+    },
+
+    getServiceCenterById: async (id) => {
+        try{
+            const response = request.get(`/service_center/${id}`)
+            return response
+        }
+        catch(e) {
+            console.log(e)
+        }
     }
 }
 

@@ -1,62 +1,113 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-export default function ServiceInfoCard({data:{ name, locaion, cost, contact, description, imageUrl }}) {
+//Import Icon
+import LanguageIcon from "@mui/icons-material/Language";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import LocalPostOfficeIcon from "@mui/icons-material/LocalPostOffice";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+
+export default function ServiceInfoCard({ data }) {
   const contentStyle = {
     margin: "0px",
     lineBreak: "auto",
     fontSize: 18,
     marginTop: 20,
-    color: '#797979',
-    display: 'flex',
-  }
+    color: "#797979",
+    display: "flex",
+  };
   const infoText = {
-    color: 'black',
-  }
+    color: "black",
+  };
 
   return (
-    <Card sx={{ display: "flex", padding:"20px", boxShadow: "none"  }}>
-      <Box>
-        <Grid container style={{ flex: 1 }}>
-          <Grid item xs={7}>
-            <CardMedia
-              component="img"
-              height="400"
-              width='100%'
-              image={imageUrl ? imageUrl : "https://cr.lnwfile.com/2p7f81.jpg"}
-            />
-          </Grid>
-          <Grid item xs={5} sx={{paddingLeft: 5}}>
-              <CardContent sx={{textAlign:'left', padding:"0px" }}>
-                <Typography component="div" variant="h5" sx={{fontWeight: 'bold', fontSize: 36, marginBottom: 3}}>
-                  { name }
-                </Typography>
-                  <div style={contentStyle}>
-                    Location:
-                  <span style={infoText}>{ locaion ? ` ${locaion}` : ' Online'}</span>
-                  </div>
-                  <div style={contentStyle}>
-                    Cost:
-                  <span style={infoText}>{cost || '-'}</span>
-                  </div>
-                  <div style={contentStyle}>
-                    Contract:
-                  <span style={infoText}>{ contact || '-'}</span>
-                  </div>
-                  <div style={contentStyle}>
-                    Description:
-                  <span style={infoText}>{ description || '-'}</span>
-                  </div>
-              </CardContent>
-
-          </Grid>
+    <Card sx={{ display: "flex", padding: "20px", boxShadow: "none" }}>
+      <Grid container style={{ flex: 1 }}>
+        <Grid item xs={4} style={{ alignSelf: "center" }}>
+          <CardMedia
+            component="img"
+            style={{ width: "100%", height: "20vw", objectFit: "cover" }}
+            image={
+              data.imageUrl
+                ? data.imageUrl
+                : "https://cr.lnwfile.com/2p7f81.jpg"
+            }
+          />
         </Grid>
-      </Box>
+        <Grid item xs={8} sx={{ paddingLeft: 5 }}>
+          <CardContent sx={{ textAlign: "left", padding: "0px" }}>
+            <Typography
+              component="div"
+              variant="h5"
+              sx={{ fontWeight: "bold", fontSize: 36, marginBottom: 3 }}
+            >
+              {data.name}
+            </Typography>
+            <div style={contentStyle}>
+              <span style={infoText}>
+                {data.type === "ONLINE"
+                  ? "Online"
+                  : data.type === "BOTH"
+                  ? ` ${data.address} ${data.province} and Online`
+                  : `${data.address} ${data.province}`}
+              </span>
+            </div>
+            <div style={contentStyle}>
+              <span style={infoText}>{data.office_hours || "-"}</span>
+            </div>
+            {data.website ? (
+              <div style={contentStyle}>
+                <LanguageIcon sx={{ mr: 1 }} />
+                <a
+                  href={data.website}
+                  target="_blank"
+                  rel="noreferrer"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  {data.website.slice(0, 50)}
+                </a>
+              </div>
+            ) : (
+              false
+            )}
+            {data.facebook ? (
+              <div style={contentStyle}>
+                <FacebookIcon sx={{ mr: 1 }} />
+                <a
+                  href={data.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  {data.facebook.split("?")[0]}
+                </a>
+              </div>
+            ) : (
+              false
+            )}
+            {data.email ? (
+              data.email.length > 5 ? (
+                <div style={contentStyle}>
+                  <LocalPostOfficeIcon sx={{ mr: 1 }}/>
+                  <span style={infoText}>{data.email}</span>
+                </div>
+              ) : null
+            ) : null}
+            {data.cost !== '฿฿' ? (
+              <div style={contentStyle}>
+                <AttachMoneyIcon sx={{ mr: 1 }}/>
+                <span style={infoText}>{data.cost}</span>
+              </div>
+            ) : (
+              false
+            )}
+          </CardContent>
+        </Grid>
+      </Grid>
     </Card>
   );
 }
