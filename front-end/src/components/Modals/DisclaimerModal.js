@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -9,10 +9,11 @@ import { useNavigate } from "react-router-dom";
 
 function DisclaimerModal() {
   let navigate = useNavigate(); 
-  const [open, setOpen] = React.useState(true);
-  // const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+  const [open, setOpen] = useState(true);
+  const isAccept = () => {
+    localStorage.setItem("acceptDisclaimer", true);
+    setOpen(false);
+  }
   const backHome = () =>{ 
     navigate('/Home');
   }
@@ -21,7 +22,6 @@ function DisclaimerModal() {
     <div>
       <Modal
         open={open}
-        // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         backdrop="static"
@@ -29,7 +29,7 @@ function DisclaimerModal() {
       >
         <Box
           sx={{
-            width: 700,
+            width: '50%',
             bgcolor: "background.paper",
             p: 4,
             position: "absolute",
@@ -48,7 +48,7 @@ function DisclaimerModal() {
           >
             ข้อกำหนดและเงื่อนไข
           </Typography>
-          <Typography
+          <Box
             id="modal-modal-description"
             sx={{
               mt: 2,
@@ -59,43 +59,33 @@ function DisclaimerModal() {
             }}
           >
             <p>
-              MENTAL HEALTH CHECK IN เป็นเครื่องมือประเมินสุขภาพจิตเบื้องต้น
-              และคัดกรองความเสี่ยงต่อปัญหาสุขภาพจิตจากสถานการณ์ COVID-19
-              มีวัตถุประสงค์เพื่อช่วยให้บุคลากรสาธารณสุข, อสม., จิตอาสา
-              ใช้ประเมินค้นหากลุ่มเสี่ยงต่อปัญหาสุขภาพจิตมาดูแล
-              ตลอดจนประชาชนสามารถประเมินสุขภาพจิตตนเองและเข้าถึงบริการได้อย่างรวดเร็ว
-              การประเมินประกอบไปด้วย 5 ส่วนคือ ข้อมูลทั่วไป, แบบประเมินพลังใจ,
-              ภาวะเหนื่อยล้าหมดไฟ, ความเครียด, ภาวะซึมเศร้า,
-              ความเสี่ยงต่อการฆ่าตัวตาย ซึ่งเป็นการประเมินที่ไม่มีค่าใช้จ่ายใดๆ
-              โปรดอ่านคำถามโดยละเอียด และตอบคำถามให้ครบถ้วน
+            MoodMent Assessment เป็นเครื่องมือประเมินสุขภาพจิตเบื้องต้น และคัดกรองความเสี่ยงต่อปัญหาสุขภาพจิต 
+            มีวัตถุประสงค์เพื่อช่วยให้บุคคลทั่วไปสามารถประเมินสุขภาพจิตตนเองได้อย่างรวดเร็ว 
+            การประเมินประกอบไปด้วย 2 ส่วนคือ แบบประเมินภาวะซึมเศร้า และแบบประเมินความเสี่ยงต่อการฆ่าตัวตาย 
+            ซึ่งเป็นการประเมินที่ไม่มีค่าใช้จ่ายใดๆ โปรดอ่านคำถามโดยละเอียด และตอบคำถามตามความรู้สึกจริงอย่างครบถ้วน
             </p>
 
             <p>
-              ทั้งนี้หากผลการประเมินของท่านพบว่ามีความเสี่ยงต่อปัญหาสุขภาพจิต
-              จะมีการขอความยินยอมในการให้ข้อมูลส่วนบุคคลอีกครั้ง
-              เพื่อการติดตามดูแลโดยเจ้าหน้าที่สาธารณสุข หากท่านไม่ยินยอม
-              ท่านยังคงมีสิทธิในการใช้บริการดูแลจิตใจแบบออนไลน์อื่นๆ ได้
-              ข้อมูลที่รวบรวมไว้จะมีการใช้เพื่อประมวลผลประกอบการเฝ้าระวังสถานการณ์สุขภาพจิต
-              และการประเมินผลการพัฒนางานวิชาการด้านการดูแลฟื้นฟูเยียวยาจิตใจ
-              และการเสริมสร้างพลังใจผู้ได้รับผลกระทบทางจิตใจจากสถานการณ์ระบาดของโรคติดเชื้อไวรัสโคโรน่า
-              2019 และจะถูกเก็บรักษาเป็นความลับตามจรรยาบรรณวิชาชีพ
-              ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล (PDPA) พ.ศ.2562 &nbsp;
+            ถ้าหากผลการประเมินของคุณพบว่ามีความเสี่ยงต่อปัญหาสุขภาพจิต การตรวจรักษาเพิ่มเติมหรือการเข้ารับคำปรึกษาจากแพทย์
+            จะช่วยให้สามารถวินิจฉัยและทำการรักษาได้อย่างถูกต้อง และเราได้ทำการรวบรวมสถานที่ให้บริการด้านสุขภาพจิตไว้ใน
+            เว็บไซต์ของเราเพื่อให้การค้นหาของคุณเป็นไปอย่างสะดวกและรวดเร็ว ทั้งนี้จะไม่มีการเก็บหรือนำข้อมูลผลการประเมินของคุณไปใช้ 
+            และจะเก็บรักษาข้อมูลเป็นความลับตามจรรยาบรรณวิชาชีพ ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล (PDPA) พ.ศ.2562<br/>
               <a
-                href="https://checkin.dmh.go.th/privacy-policy.php"
+                href="https://ict.dmh.go.th/events/events/files/4.1%20checkin.pdf"
                 target="_blank"
                 rel="noreferrer"
               >
                 (อ่านนโยบายคุ้มครองข้อมูลส่วนบุคคลของกรมสุขภาพจิต)
               </a>
             </p>
-          </Typography>
-          <Typography
+          </Box>
+          <Box
             sx={{ fontWeight: "bold", fontSize: 18, color: "#a94442"}}
           >
             <p>ท่านยอมรับเงื่อนไขหรือไม่?</p>
 
             <BlueBut
-              onClick={handleClose}
+              onClick={isAccept}
               sx={{
                 width: "20%",
                 mx: 1,
@@ -114,7 +104,7 @@ function DisclaimerModal() {
               "ไม่ยอมรับ"
             </RedDelBut>
             <Divider sx={{ my: 1.5 }} />
-          </Typography>
+          </Box>
           <a
             href="https://checkin.dmh.go.th/privacy-policy.php"
             target="_blank"

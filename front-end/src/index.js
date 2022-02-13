@@ -7,6 +7,9 @@ import reportWebVitals from './reportWebVitals';
 //Usage Scss
 import '../src/assets/scss/core.scss';
 
+//Request User Location
+import callGeoLocation from './utils/getLocationUser'
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,3 +22,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+callGeoLocation()

@@ -6,7 +6,7 @@ import { styled } from '@mui/system';
 const blackGray = styled('button')`
   font-family: IBM Plex Sans, sans-serif;
   font-size: 1.15rem;
-  background-color: #828282;
+  background-color: #595959;
   padding: 8px;
   border-radius: 30px;
   color: white;
@@ -82,19 +82,19 @@ const blue = styled('button')`
 `;
 
 function DarkGrayBut(props) {
-  return <ButtonUnstyled {...props} component={blackGray}/>;
+  return <ButtonUnstyled onClick={() => props.onClick()} {...props} component={blackGray} />;
 }
 
 function LightGrayBut(props) {
-  return <ButtonUnstyled {...props} component={lightGray}/>;
+  return <ButtonUnstyled onClick={() => props.onClick()} {...props} component={lightGray}/>;
 }
 
 
 function RedDelBut(props) {
-  return <ButtonUnstyled {...props} component={red} />;
+  return <ButtonUnstyled onClick={() => props.onClick()} {...props} component={red} />;
 }
 
 function BlueBut(props) {
-  return <ButtonUnstyled {...props} component={blue} />;
+  return <ButtonUnstyled onClick={() => props.onClick()} {...props} component={blue} />;
 }
 export { DarkGrayBut, LightGrayBut, RedDelBut, BlueBut}

@@ -6,13 +6,21 @@ import Box from "@mui/material/Box";
 import { DarkGrayBut } from "../../components/Button";
 import MainPageModal from "../../components/Modals/MainPageModal";
 import MainPageCard from "../../components/Cards/MainPageCard";
+import { useNavigate } from "react-router-dom";
 function Home() {
+  const navigate = useNavigate();
+  const goAssessment = () => {
+    navigate('/Assessment');
+  }
   return (
     <div>
-      <MainPageModal/>
+      {localStorage.getItem("doAssessment") ? false : <MainPageModal />}
       <Grid id="top-row" container>
         <Grid item xs={4}>
           <img
+          style={{
+            position: 'relative'
+          }}
             src={require("../../assets/main2.jpg")}
             alt="main"
             width={"300%"}
@@ -21,33 +29,27 @@ function Home() {
           <Box
             sx={{
               position: "absolute",
-              top: "35%",
-              bottom: 0,
+              top: "20vw",
               left: "40px",
-              right: 0,
               width: "20vw",
-              textAlign: "center"
+              textAlign: "center",
             }}
           >
             <Typography
               sx={{
                 color: "#fff",
-                fontSize: 35,
+                fontSize: '2vw',
                 fontWeight: "bold",
               }}
             >
               MoodMent
             </Typography>
-            <Typography sx={{ color: "#fff" }}>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s
-                </p>
-                <DarkGrayBut variant="contained">
-                  Make an assessment
-                </DarkGrayBut>
-              </Typography>
+            <Typography sx={{ color: "#fff", fontSize: '1.3vw' }}>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s
+            </Typography>
+              <DarkGrayBut onClick={goAssessment} style={{marginTop: '2vw', padding: '1vw 2vw', fontSize: '1.4vw'}} variant="contained">Make an assessment</DarkGrayBut>
           </Box>
         </Grid>
       </Grid>

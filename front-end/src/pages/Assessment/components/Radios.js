@@ -5,8 +5,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 
-function Radios() {
-
+function Radios({ onSelect: {onSelect} }) {
     return(
         <FormControl >
           <RadioGroup
@@ -15,8 +14,8 @@ function Radios() {
             // value={value}
             // onChange={handleChange}
           >
-            <FormControlLabel value="yes" control={<Radio />} label="ใช่" />
-            <FormControlLabel value="no" control={<Radio />} label="ไม่ใช่" />
+            <FormControlLabel onClick={() => onSelect(1)} value="yes" control={<Radio />} label="ใช่" />
+            <FormControlLabel onClick={() => onSelect(0)} value="no" control={<Radio />} label="ไม่ใช่" />
           </RadioGroup>
       </FormControl>
     )
