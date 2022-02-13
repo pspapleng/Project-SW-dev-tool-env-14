@@ -11,13 +11,13 @@ import DisclaimerModal from "../../components/Modals/DisclaimerModal";
 import ResultModal from "../../components/Modals/ResultModal"
 
 function Assessment() {
-  const [disclaimer, setDisclaimer] = useState(false);
+  // const [disclaimer, setDisclaimer] = useState(false);
   const [assessChoice, setAssessChoice] = useState({});
   const [onInpError, setOnInpError] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(null);
   useEffect(() => {
-    setDisclaimer(localStorage.getItem("acceptDisclaimer"));
+    // setDisclaimer(localStorage.getItem("acceptDisclaimer"));
   }, []);
 
   function twoQ() {

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { DarkGrayBut } from "../Button";
 
 function MainPageModal() {
-  const [open, setOpen] = React.useState(true);
+  // const [open, setOpen] = useState(true);
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ function MainPageModal() {
   return (
     <div>
       <Modal
-        open={open}
+        open={true}
         // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
