@@ -57,7 +57,7 @@ export default function ServiceInfoCard({ data }) {
               </span>
             </div>
             <div style={contentStyle}>
-              <span style={infoText}>{data.office_hours || "-"}</span>
+              <span style={infoText}>เวลาทำการ: {data.office_hours || "-"}</span>
             </div>
             {data.website ? (
               <div style={contentStyle}>
