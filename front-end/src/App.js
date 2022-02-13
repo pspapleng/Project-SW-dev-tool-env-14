@@ -8,6 +8,8 @@ import {
 import Home from './pages/Home/Home'
 import Assessment from './pages/Assessment/Assessment'
 import ServiceCenter from './pages/ServiceCenter/ServiceCenter'
+import ServiceCenterInfo from './pages/ServiceCenter/ServiceCenterInfo'
+
 import FAQ from './pages/FAQ/FAQ'
 import NotFound from './pages/NotFound'
 
@@ -20,6 +22,7 @@ const App = () => {
     { path: "/Home", element: <Home/> },
     { path: "/Assessment", element: <Assessment/> },
     { path: "/ServiceCenter", element: <ServiceCenter/> },
+    { path: "/ServiceCenterInfo/:id", element: <ServiceCenterInfo/> },
     { path: "/FAQ", element: <FAQ/> },
     { path: "*", element: <NotFound /> },
   ]);

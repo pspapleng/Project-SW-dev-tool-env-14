@@ -42,10 +42,8 @@ const Navbar = () => {
       <Container maxWidth="1680">
         <Toolbar disableGutters sx={{ px: 1 }}>
           <Typography
-            variant="h6"
-            noWrap
             component="div"
-            sx={{ color: '#777272', display: { xs: 'none', md: 'flex' }, fontWeight: 600, fontSize: 38 }
+            sx={{ color: '#777272', display: { xs: 'none', md: 'flex' }, fontWeight: 600, fontSize: '2.3vw' }
           }
           >
             MoodMent
@@ -81,29 +79,30 @@ const Navbar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem disabled={page === ('Service Center' || 'FAQ')} key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <Typography
-            variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            sx={{ flexGrow: 1, color: '#777272', display: { xs: 'flex', md: 'none' }, fontSize: '22px', fontWeight: 600 }}
           >
             MoodMent
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center'}}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
                 <Button
                   key={page}
+                  disabled={page === 'FAQ' || page === 'Service center' ? true : false}
                   onClick={() => handleCloseNavMenu && setSelectedPage(page || 'Home')}
                   component={Link}
-                  to={page.replaceAll(' ', '')}
+                  to={index === 1 ? page.replaceAll(' ', '')+'Info/1' : page}
+                  style={{opacity: (page === 'FAQ' || page === 'Service center' ? .4 : 1)}}
                   sx={{
-                     my: 2, mx: 3, color: '#000000', display: 'block', textTransform: 'capitalize', fontSize: 24,
+                     my: 2, mx: 3, color: '#000000', display: 'block', textTransform: 'capitalize',
                      ':hover': {
                       bgcolor: 'transparent',
                       color: 'black'
@@ -114,7 +113,7 @@ const Navbar = () => {
                     noWrap
                     component="div"
                     className={page === selectedPage ? 'text-underline color-black' : 'primary-text-color'}
-                    sx={{ mr: 3, display: { xs: 'none', md: 'flex' }, fontSize: 24}}
+                    sx={{ mr: '1vh', display: { xs: 'none', md: 'flex' }, fontSize: '1.7vw'}}
                   >
                      {page}
                   </Typography>
@@ -122,10 +121,9 @@ const Navbar = () => {
             ))}
           </Box>
           <Typography
-            noWrap
             component="div"
             className='primary-text-color'
-            sx={{ mr: 3, display: { xs: 'none', md: 'flex' }, fontSize: 24}}
+            sx={{ mr: 3, display: { xs: 'none', md: 'flex' }, fontSize: '1.2vw'}}
           >
             Your mental health
           </Typography>

@@ -7,17 +7,17 @@ import { useNavigate } from 'react-router-dom';
 import { DarkGrayBut } from "../Button";
 
 function MainPageModal() {
-  const [open, setOpen] = React.useState(true);
+  // const [open, setOpen] = useState(true);
   // const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  let navigate = useNavigate();
+  // const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
   const nextToAssessment = () =>{
     navigate('/Assessment');
   }
   return (
     <div>
       <Modal
-        open={open}
+        open={true}
         // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -54,10 +54,10 @@ function MainPageModal() {
           </Typography>
           <Typography
                 id="modal-modal-description"
-                sx={{ mt: 2, Color: "#595959", opacity: "0.67" }}
+                sx={{ mt: 2, opacity: "0.67" }}
               >
                 <p>คำอธิบายเกี่ยวกับแบบประเมิน</p>
-                <DarkGrayBut onClick={nextToAssessment}>Start an assessment</DarkGrayBut>
+                <DarkGrayBut onClick={nextToAssessment} style={{fontWeight: 'bold', padding: '10px 25px', marginTop: 30}}>Start an assessment</DarkGrayBut>
               </Typography>
            
               

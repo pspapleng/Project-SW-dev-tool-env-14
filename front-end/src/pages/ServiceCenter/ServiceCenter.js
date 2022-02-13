@@ -1,7 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 function ServiceCenter() {
-  return <div>Service Center</div>;
+  return (
+    <div>ServiceCenter</div>
+  )
 }
 
-export default ServiceCenter;
+export default ServiceCenter
