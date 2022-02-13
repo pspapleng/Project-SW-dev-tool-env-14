@@ -18,6 +18,15 @@ const auth = {
         catch (e) {
             console.log(e)
         }
+    },
+    getServiceCenterByLocation: async (lat, lon) => {
+        try{
+            const response = request.get(`/service_center/location?lat=${lat}&lon=${lon}`)
+            return response
+        }
+        catch(e) {
+            console.log(e)
+        }
     }
 }
 

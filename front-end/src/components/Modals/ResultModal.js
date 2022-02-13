@@ -11,6 +11,7 @@ import { DarkGrayBut, LightGrayBut } from "../Button";
 import { useNavigate } from "react-router-dom";
 
 //Import axios
+import request from '../../services/api/auth'
 
 function ResultModal({ isActive, result }) {
   const [open, setOpen] = useState(isActive);
@@ -22,12 +23,14 @@ function ResultModal({ isActive, result }) {
     [navigate]
   );
 
-  useEffect(() => {
-
-    setServiceCenter([
-      { id: 1, name: "Paolo", location: "Bangkok", imageUrl: "", distanct: 0 },
-      { id: 2, name: "Rama9", location: "Bangkok", imageUrl: "", distanct: 10 },
-    ]);
+  useEffect( () => {
+   const fetchMyAPI = async (lat, lon) => {
+     const response = await request.getServiceCenterByLocation(lat, lon)
+     setServiceCenter(response.data)
+     return response
+    }
+    const {latitude, longitude} = JSON.parse(localStorage.getItem("userLocation"))
+    fetchMyAPI(latitude, longitude)
   }, []);
 
   const toService = (id) => {
