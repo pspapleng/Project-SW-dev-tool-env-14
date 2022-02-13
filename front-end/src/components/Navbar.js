@@ -79,7 +79,7 @@ const Navbar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem disabled={page === ('Service Center' || 'FAQ')} key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -96,9 +96,11 @@ const Navbar = () => {
             {pages.map((page, index) => (
                 <Button
                   key={page}
+                  disabled={page === 'FAQ' || page === 'Service center' ? true : false}
                   onClick={() => handleCloseNavMenu && setSelectedPage(page || 'Home')}
                   component={Link}
                   to={index === 1 ? page.replaceAll(' ', '')+'Info/1' : page}
+                  style={{opacity: (page === 'FAQ' || page === 'Service center' ? .4 : 1)}}
                   sx={{
                      my: 2, mx: 3, color: '#000000', display: 'block', textTransform: 'capitalize',
                      ':hover': {

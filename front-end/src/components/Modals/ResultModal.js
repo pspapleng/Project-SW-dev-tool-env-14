@@ -11,6 +11,7 @@ import { DarkGrayBut, LightGrayBut } from "../Button";
 import { useNavigate } from "react-router-dom";
 
 //Import axios
+import request from '../../services/api/auth'
 
 function ResultModal({ isActive, result }) {
   const [open, setOpen] = useState(isActive);
@@ -18,16 +19,28 @@ function ResultModal({ isActive, result }) {
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const handleOnClick = useCallback(
-    (id) => navigate(`/ServiceCenterInfo/${id}`, { replace: true }),
+    (id) => navigate(`/ServiceCenterInfo/${id}`, { serviceCenterId: id }),
     [navigate]
   );
 
-  useEffect(() => {
-
-    setServiceCenter([
-      { id: 1, name: "Paolo", location: "Bangkok", imageUrl: "", distanct: 0 },
-      { id: 2, name: "Rama9", location: "Bangkok", imageUrl: "", distanct: 10 },
-    ]);
+  useEffect( () => {
+   const fetchMyAPI = async (lat, lon) => {
+     const response = await request.getServiceCenterByLocation(lat, lon)
+      for (let index = 0; index < 2; index++) {
+        let prevNum = null
+        let rand = Math.floor(Math.random() * response.data.length)
+        while (true) {
+          rand = Math.floor(Math.random() * response.data.length)
+          if(rand !== prevNum || prevNum === null){
+            break
+          }
+        }
+        setServiceCenter(oldArray => [...oldArray, response.data[rand]]);
+      }
+      return response
+    }
+    const {latitude, longitude} = JSON.parse(localStorage.getItem("userLocation"))
+    fetchMyAPI(latitude, longitude)
   }, []);
 
   const toService = (id) => {
@@ -129,7 +142,9 @@ function ResultModal({ isActive, result }) {
             สถานที่ให้บริการที่แนะนำสำหรับคุณ
           </Typography>
 
-          {serviceCenter.map((service, index) => (
+          { serviceCenter.length > 0 ?
+          serviceCenter.map((service, index) => {
+            return (
             <Card
               onClick={() => toService(service.id)}
               key={index}
@@ -147,13 +162,11 @@ function ResultModal({ isActive, result }) {
                 },
               }}
             >
-              <Box>
                 <Grid container style={{ flex: 1 }}>
-                  <Grid item xs={6}>
+                  <Grid item xs={3}>
                     <CardMedia
                       component="img"
-                      height="100"
-                      width="100%"
+                      style={{width: 150, height: 150, objectFit: 'cover'}}
                       image={
                         service.imageUrl
                           ? service.imageUrl
@@ -162,36 +175,36 @@ function ResultModal({ isActive, result }) {
                       alt="Live from space album cover"
                     />
                   </Grid>
-                  <Grid item xs={6} style={{ paddingLeft: 20 }}>
+                  <Grid item xs={7} style={{ paddingLeft: 20 }}>
                     <CardContent sx={{ padding: "0px" }}>
                       <Box sx={{ textAlign: "left" }}>
                         <Typography
                           component="div"
                           variant="h5"
+                          width={'100%'}
                           sx={{ fontWeight: "bold" }}
                         >
                           {service.name}
                         </Typography>
-                        {service.location ? (
                           <Typography
                             style={{ display: "flex", alignItems: "flex-end" }}
                           >
-                            {service.location}
+                            {service.type === 'ONLINE' ? false : service.province}
                             <br />
-                            {service.distanct > -1
-                              ? `${service.distanct} km. away`
+                            {service.distance > -1 & service.type !== 'ONLINE'
+                              ? `${(service.distance/1000).toFixed(2)} km. away`
                               : ""}
                           </Typography>
-                        ) : (
-                          "Online"
-                        )}
+                          {service.type === 'ONLINE' ? 'Online' : service.type === 'BOTH' ? 'Online and On Site' : 'On Site'}
                       </Box>
                     </CardContent>
                   </Grid>
                 </Grid>
-              </Box>
             </Card>
-          ))}
+          )})
+          :
+          false
+          }
         </Box>
       </Modal>
     </div>
