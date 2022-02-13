@@ -65,7 +65,7 @@ function Assessment() {
 
   return (
     <div className="background-color-gray">
-      {disclaimer ? false : <DisclaimerModal />}
+      <DisclaimerModal />
       <ActiveResultModal/>
       <Grid container justifyContent="center">
         <Grid item xs={10} style={{ textAlign: "right" }}>
