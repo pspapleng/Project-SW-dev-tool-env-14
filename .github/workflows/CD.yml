@@ -42,7 +42,7 @@ jobs:
             ghcr.io/${{ steps.repository.outputs.lowercase }}/back-end:latest
             ghcr.io/${{ steps.repository.outputs.lowercase }}/back-end:${{ github.event.release.tag_name }}
 
-dockerize_front_end:
+  dockerize_front_end:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
