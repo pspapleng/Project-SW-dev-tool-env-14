@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 //Import Components
 import Card from '../../components/Cards/ServiceInfoCard'
 import GGMap from '../../components/Cards/GGMapCard'
-import Suggestion from '../../components/Cards/SuggestionCard'
+// import Suggestion from '../../components/Cards/SuggestionCard'
 import CommentBox from './components/CommentBox'
 import ReviewForm from './components/ReviewForm'
 
