@@ -55,7 +55,7 @@ function ResultModal({ isActive, result }) {
   return (
     <div>
       {/* <DarkGrayBut onClick={handleOpen} >result modal</DarkGrayBut> */}
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} >
         <Box
           sx={{
             width: 800,
@@ -92,11 +92,12 @@ function ResultModal({ isActive, result }) {
               เป็นผู้มีความเสี่ยง หรือ <br /> มีแนวโน้มที่จะเป็นโรคซึมเศร้า
               <p>
                 แนะนำให้ประเมินต่อด้วย&nbsp;
+                {/* <span>แบบประเมินโรคซึมเศร้า 9Q</span> */}
                 <a
-                  href="https://checkin.dmh.go.th/privacy-policy.php"
+                  href="*"
                   target="_blank"
                   rel="noreferrer"
-                  sx={{ fontWeight: "bold" }}
+                  sx={{ fontWeight: "bold"}}
                 >
                   แบบประเมินโรคซึมเศร้า 9Q
                 </a>

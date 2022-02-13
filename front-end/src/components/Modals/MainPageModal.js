@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from 'react-router-dom';
 import { DarkGrayBut } from "../Button";
+import { Alert, Snackbar } from "@mui/material";
 
 function MainPageModal() {
   // const [open, setOpen] = useState(true);
@@ -12,10 +13,17 @@ function MainPageModal() {
   // const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const nextToAssessment = () =>{
-    navigate('/Assessment');
+    if (localStorage.getItem("userLocation")) {
+      navigate('/Assessment');
+    } else {
+      alert("Please allow location access to continue")
+      
+    }
+    
   }
   return (
     <div>
+
       <Modal
         open={true}
         // onClose={handleClose}

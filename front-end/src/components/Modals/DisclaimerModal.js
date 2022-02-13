@@ -91,7 +91,7 @@ function DisclaimerModal() {
                 mx: 1,
               }}
             >
-              "ยอมรับ"
+              ยอมรับ
             </BlueBut>
 
             <RedDelBut
@@ -101,12 +101,12 @@ function DisclaimerModal() {
                 mx: 1,
               }}
             >
-              "ไม่ยอมรับ"
+              ไม่ยอมรับ
             </RedDelBut>
             <Divider sx={{ my: 1.5 }} />
           </Box>
           <a
-            href="https://checkin.dmh.go.th/privacy-policy.php"
+            href="https://ict.dmh.go.th/events/events/files/4.1%20checkin.pdf"
             target="_blank"
             rel="noreferrer"
           >
