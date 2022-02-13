@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from 'react-router-dom';
 import { DarkGrayBut } from "../Button";
+import { Alert, Snackbar } from "@mui/material";
 
 function MainPageModal() {
   // const [open, setOpen] = useState(true);
@@ -12,10 +13,17 @@ function MainPageModal() {
   // const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const nextToAssessment = () =>{
-    navigate('/Assessment');
+    if (localStorage.getItem("userLocation")) {
+      navigate('/Assessment');
+    } else {
+      alert("Please allow location access to continue")
+      
+    }
+    
   }
   return (
     <div>
+
       <Modal
         open={true}
         // onClose={handleClose}
@@ -41,9 +49,9 @@ function MainPageModal() {
             id="modal-modal-title"
             variant="h6"
             component="h2"
-            sx={{ color: "#595959", fontSize: 38, fontWeight: "bold" }}
+            sx={{ color: "#595959", fontSize: 32, fontWeight: "bold" }}
           >
-            แบบประเมิน
+            แบบประเมินคัดกรองโรคซึมเศร้า 2 คำถาม
             <Divider
               sx={{
                 mx: 27,
@@ -56,7 +64,7 @@ function MainPageModal() {
                 id="modal-modal-description"
                 sx={{ mt: 2, opacity: "0.67" }}
               >
-                <p>คำอธิบายเกี่ยวกับแบบประเมิน</p>
+                <p>การทำแบบคัดกรองโรคซึมเศร้า 2 คำถาม นั้นมีจุดประสงค์เพื่อให้คุณสามารถประเมินสุขภาพจิตในระดับเบื้องต้นได้ด้วยตนเอง โปรดอ่านคำถามโดยละเอียด และตอบคำถามตามความรู้สึกจริงอย่างครบถ้วน</p>
                 <DarkGrayBut onClick={nextToAssessment} style={{fontWeight: 'bold', padding: '10px 25px', marginTop: 30}}>Start an assessment</DarkGrayBut>
               </Typography>
            
