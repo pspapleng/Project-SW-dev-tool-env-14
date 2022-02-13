@@ -15,15 +15,18 @@ function Assessment() {
   const [assessChoice, setAssessChoice] = useState({});
   const [onInpError, setOnInpError] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [result, setResult] = useState(null);
   useEffect(() => {
     setDisclaimer(localStorage.getItem("acceptDisclaimer"));
   }, []);
 
   function twoQ() {
     if ((assessChoice[1] === 0) & (assessChoice[2] === 0)) {
-      return 0;
-    } else if ((assessChoice[1] === 1 || assessChoice[2] === 1) && Object.keys(assessChoice).length === 2) {
-      return 1;
+        setResult(0)
+        return 0;
+    }else if ((assessChoice[1] === 1 || assessChoice[2] === 1) && Object.keys(assessChoice).length === 2) {
+        setResult(1)
+        return 1;
     } else {
       return null
     }
@@ -46,7 +49,7 @@ function Assessment() {
   };
 
   const ActiveResultModal = () => {
-    return <ResultModal isActive={showResult}/>
+    return <ResultModal result={result} isActive={showResult}/>
   }
 
   const lightTheme = createTheme({ palette: { mode: "light" } });

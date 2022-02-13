@@ -8,28 +8,36 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import { DarkGrayBut, LightGrayBut } from "../Button";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-function ResultModal({ isActive }) {
+//Import axios
+
+function ResultModal({ isActive, result }) {
   const [open, setOpen] = useState(isActive);
   const [serviceCenter, setServiceCenter] = useState([]);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-  const handleOnClick = useCallback((id) => navigate(`/ServiceCenterInfo/${id}`, {replace: true}), [navigate]);
-
+  const handleOnClick = useCallback(
+    (id) => navigate(`/ServiceCenterInfo/${id}`, { replace: true }),
+    [navigate]
+  );
 
   useEffect(() => {
-    setServiceCenter([{id:1, name: 'Paolo', location: 'Bangkok', imageUrl: '', distanct: 0},{id:2, name: 'Rama9', location: 'Bangkok', imageUrl: '', distanct: 10}]);
+
+    setServiceCenter([
+      { id: 1, name: "Paolo", location: "Bangkok", imageUrl: "", distanct: 0 },
+      { id: 2, name: "Rama9", location: "Bangkok", imageUrl: "", distanct: 10 },
+    ]);
   }, []);
 
   const toService = (id) => {
-    handleClose()
-    handleOnClick(id)
-  }
+    handleClose();
+    handleOnClick(id);
+  };
 
   const backToHome = () => {
     window.location.href = "/";
-  }
+  };
 
   return (
     <div>
@@ -57,29 +65,42 @@ function ResultModal({ isActive }) {
           >
             การแปลผลประเมิน
           </Typography>
-          <Box
-            // id="modal-modal-description"
-            sx={{
-              mt: 2,
-              Color: "#000",
-              opacity: "0.67",
-              fontSize: 22,
-              // textAlign: "center",
-            }}
-          >
-            เป็นผู้มีความเสี่ยง หรือ <br /> มีแนวโน้มที่จะเป็นโรคซึมเศร้า
-            <p>
-              แนะนำให้ประเมินต่อด้วย&nbsp;
-              <a
-                href="https://checkin.dmh.go.th/privacy-policy.php"
-                target="_blank"
-                rel="noreferrer"
-                sx={{ fontWeight: "bold" }}
-              >
-                แบบประเมินโรคซึมเศร้า 9Q
-              </a>
-            </p>
-          </Box>
+          {result ? (
+            <Box
+              // id="modal-modal-description"
+              sx={{
+                mt: 2,
+                Color: "#000",
+                opacity: "0.67",
+                fontSize: 22,
+                // textAlign: "center",
+              }}
+            >
+              เป็นผู้มีความเสี่ยง หรือ <br /> มีแนวโน้มที่จะเป็นโรคซึมเศร้า
+              <p>
+                แนะนำให้ประเมินต่อด้วย&nbsp;
+                <a
+                  href="https://checkin.dmh.go.th/privacy-policy.php"
+                  target="_blank"
+                  rel="noreferrer"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  แบบประเมินโรคซึมเศร้า 9Q
+                </a>
+              </p>
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                mt: 2,
+                Color: "#000",
+                opacity: "0.67",
+                fontSize: 22,
+              }}
+            >
+              ไม่มีความเสี่ยง หรือ <br /> แนวโน้มที่จะเป็นโรคซึมเศร้า
+            </Box>
+          )}
           <Box sx={{ mt: 2 }}>
             <LightGrayBut
               onClick={backToHome}
@@ -87,12 +108,16 @@ function ResultModal({ isActive }) {
             >
               Back to Home
             </LightGrayBut>
-            <DarkGrayBut
-              style={{ marginLeft: "5px", marginRight: "5px", width: "20%" }}
-              onClick={() => console.log("Not Avalible")}
-            >
-              Next to 9Q
-            </DarkGrayBut>
+            {result ? (
+              <DarkGrayBut
+                style={{ marginLeft: "5px", marginRight: "5px", width: "20%" }}
+                onClick={() => console.log("Not Avalible")}
+              >
+                Next to 9Q
+              </DarkGrayBut>
+            ) : (
+              false
+            )}
             <Divider sx={{ my: 1.5 }} />
           </Box>
           <Typography
@@ -104,62 +129,69 @@ function ResultModal({ isActive }) {
             สถานที่ให้บริการที่แนะนำสำหรับคุณ
           </Typography>
 
-          {serviceCenter.map((service, index) => 
-              <Card
-                onClick={() => toService(service.id)}
-                key={index}
-                sx={{
-                  display: "flex",
-                  padding: "20px",
-                  boxShadow: "none",
-                  transition: 'background-color 500ms',
-                  mt: 2,
-                  ':hover': {
-                    bgcolor: 'lightgray',
-                    // opacity: .6,
-                    cursor: 'pointer',
-                    transition: 'background-color 500ms'
-                  },
-                }}
-              >
-                <Box>
-                  <Grid container style={{ flex: 1 }}>
-                    <Grid item xs={6}>
-                      <CardMedia
-                        component="img"
-                        height="100"
-                        width="100%"
-                        image={service.imageUrl ? service.imageUrl : 'https://cr.lnwfile.com/2p7f81.jpg'}
-                        alt="Live from space album cover"
-                      />
-                    </Grid>
-                    <Grid item xs={6} style={{ paddingLeft: 20 }}>
-                      <CardContent sx={{ padding: "0px" }}>
-                        <Box sx={{ textAlign: "left" }}>
-                          <Typography
-                            component="div"
-                            variant="h5"
-                            sx={{ fontWeight: "bold" }}
-                          >
-                            {service.name}
-                          </Typography>
-                          {
-                            service.location ? 
-                            <Typography style={{display: 'flex', alignItems: 'flex-end'}}>
-                              { service.location }
-                              <br/>
-                              { service.distanct > -1 ? `${service.distanct} km. away` : ''} 
-                            </Typography>
-                            :
-                            'Online'
-                          }
-                        </Box>
-                      </CardContent>
-                    </Grid>
+          {serviceCenter.map((service, index) => (
+            <Card
+              onClick={() => toService(service.id)}
+              key={index}
+              sx={{
+                display: "flex",
+                padding: "20px",
+                boxShadow: "none",
+                transition: "background-color 500ms",
+                mt: 2,
+                ":hover": {
+                  bgcolor: "lightgray",
+                  // opacity: .6,
+                  cursor: "pointer",
+                  transition: "background-color 500ms",
+                },
+              }}
+            >
+              <Box>
+                <Grid container style={{ flex: 1 }}>
+                  <Grid item xs={6}>
+                    <CardMedia
+                      component="img"
+                      height="100"
+                      width="100%"
+                      image={
+                        service.imageUrl
+                          ? service.imageUrl
+                          : "https://cr.lnwfile.com/2p7f81.jpg"
+                      }
+                      alt="Live from space album cover"
+                    />
                   </Grid>
-                </Box>
-              </Card>
-          )}
+                  <Grid item xs={6} style={{ paddingLeft: 20 }}>
+                    <CardContent sx={{ padding: "0px" }}>
+                      <Box sx={{ textAlign: "left" }}>
+                        <Typography
+                          component="div"
+                          variant="h5"
+                          sx={{ fontWeight: "bold" }}
+                        >
+                          {service.name}
+                        </Typography>
+                        {service.location ? (
+                          <Typography
+                            style={{ display: "flex", alignItems: "flex-end" }}
+                          >
+                            {service.location}
+                            <br />
+                            {service.distanct > -1
+                              ? `${service.distanct} km. away`
+                              : ""}
+                          </Typography>
+                        ) : (
+                          "Online"
+                        )}
+                      </Box>
+                    </CardContent>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Card>
+          ))}
         </Box>
       </Modal>
     </div>
