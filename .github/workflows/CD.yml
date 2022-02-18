@@ -36,8 +36,59 @@ jobs:
           pull: true
           push: true
           target: production
-          context: .
+          context: ./back-end
           file: ./back-end/Dockerfile
           tags: |
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
-            ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ github.event.release.tag_name }}
+            ghcr.io/${{ steps.repository.outputs.lowercase }}/back-end:latest
+            ghcr.io/${{ steps.repository.outputs.lowercase }}/back-end:${{ github.event.release.tag_name }}
+
+  dockerize_front_end:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "current version is ${{ github.event.release.tag_name }}"
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Log in to GitHub Docker Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PAT }}
+      - name: lowercase repository
+        id: repository
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: ${{ github.repository }}
+      - name: Build container image
+        uses: docker/build-push-action@v2
+        with:
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          pull: true
+          push: true
+          target: production
+          context: ./front-end
+          file: ./front-end/Dockerfile
+          tags: |
+            ghcr.io/${{ steps.repository.outputs.lowercase }}/front-end:latest
+            ghcr.io/${{ steps.repository.outputs.lowercase }}/front-end:${{ github.event.release.tag_name }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    needs:
+      - dockerize_back_end
+      - dockerize_front_end
+    steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.PRIVATE_KEY }}
+          known_hosts: "just-a-placeholder-so-we-dont-get-errors"
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H 178.128.60.199 >> ~/.ssh/known_hosts
+      - name: Update Mongo Stream Service
+        run: ssh root@178.128.60.199 'cd ./deployments/ && sh ./setup.sh ${{ github.event.release.tag_name }}'
