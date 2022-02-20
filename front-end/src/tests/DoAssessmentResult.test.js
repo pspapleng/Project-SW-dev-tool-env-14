@@ -45,23 +45,5 @@ describe("show modal when button is clicked", () => {
   });
 });
 
-describe("result", () => {
-    // const props = { doSomething: jest.fn() };
-  
-    it("Should show result modal when button is clicked", async () => {
-      const wrapper = shallow(<Assessment />);
-      let actionSubmit = wrapper.find("actionSubmit");
-      actionSubmit = jest.fn();
-      actionSubmit.mockResolvedValue({ showResult: true });
-      await expect(actionSubmit()).resolves.toEqual({ showResult: true });
-    });
-    it("should render the input field", async () => {
-      const wrapper = shallow(<Assessment />);
-      let actionSubmit = wrapper.find("actionSubmit");
-      actionSubmit = jest.fn();
-  
-      actionSubmit.mockResolvedValue({ onInpError: true });
-      await expect(actionSubmit()).resolves.toEqual({ onInpError: true });
-    });
-  });
+
   
