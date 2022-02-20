@@ -21,6 +21,7 @@ function Assessment() {
   }, []);
 
   function twoQ() {
+    // console.log(assessChoice)
     if ((assessChoice[1] === 0) & (assessChoice[2] === 0)) {
         setResult(0)
         return 0;
@@ -30,6 +31,7 @@ function Assessment() {
     } else {
       return null
     }
+    
   }
 
   function actionSubmit() {

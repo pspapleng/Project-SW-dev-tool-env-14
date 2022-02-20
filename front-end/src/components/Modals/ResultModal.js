@@ -26,6 +26,7 @@ function ResultModal({ isActive, result }) {
   useEffect( () => {
    const fetchMyAPI = async (lat, lon) => {
      const response = await request.getServiceCenterByLocation(lat, lon)
+     console.log(response)
       for (let index = 0; index < 2; index++) {
         let prevNum = null
         let rand = Math.floor(Math.random() * response.data.length)
@@ -36,6 +37,7 @@ function ResultModal({ isActive, result }) {
           }
         }
         setServiceCenter(oldArray => [...oldArray, response.data[rand]]);
+        console.log(response.data[rand])
       }
       return response
     }
