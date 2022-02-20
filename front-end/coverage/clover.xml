@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1645354511180" clover="3.2.0">
-  <project timestamp="1645354511180" name="All files">
-    <metrics statements="164" coveredstatements="30" conditionals="83" coveredconditionals="4" methods="72" coveredmethods="5" elements="319" coveredelements="39" complexity="0" loc="164" ncloc="164" packages="14" files="23" classes="23"/>
+<coverage generated="1645358216381" clover="3.2.0">
+  <project timestamp="1645358216381" name="All files">
+    <metrics statements="159" coveredstatements="25" conditionals="81" coveredconditionals="2" methods="70" coveredmethods="3" elements="310" coveredelements="30" complexity="0" loc="159" ncloc="159" packages="13" files="22" classes="22"/>
     <package name="src">
       <metrics statements="5" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
       <file name="App.js" path="D:\3_2\full-stack web\project\Moodment\front-end\src\App.js">
@@ -135,11 +135,11 @@
       <metrics statements="29" coveredstatements="11" conditionals="13" coveredconditionals="2" methods="10" coveredmethods="2"/>
       <file name="Assessment.js" path="D:\3_2\full-stack web\project\Moodment\front-end\src\pages\Assessment\Assessment.js">
         <metrics statements="29" coveredstatements="11" conditionals="13" coveredconditionals="2" methods="10" coveredmethods="2"/>
-        <line num="15" count="3" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="17" count="3" type="stmt"/>
-        <line num="18" count="3" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
         <line num="25" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
@@ -151,16 +151,16 @@
         <line num="39" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
-        <line num="47" count="3" type="stmt"/>
+        <line num="47" count="4" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
         <line num="49" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
-        <line num="53" count="3" type="stmt"/>
+        <line num="53" count="4" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
-        <line num="57" count="3" type="stmt"/>
-        <line num="58" count="3" type="stmt"/>
-        <line num="71" count="3" type="stmt"/>
-        <line num="91" count="6" type="stmt"/>
+        <line num="57" count="4" type="stmt"/>
+        <line num="58" count="4" type="stmt"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="91" count="8" type="stmt"/>
         <line num="93" count="0" type="stmt"/>
         <line num="111" count="0" type="stmt"/>
         <line num="114" count="0" type="stmt"/>
@@ -264,17 +264,6 @@
         <line num="34" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
-      </file>
-    </package>
-    <package name="src.tests">
-      <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
-      <file name="CheckboxWithLabel.js" path="D:\3_2\full-stack web\project\Moodment\front-end\src\tests\CheckboxWithLabel.js">
-        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
       </file>
     </package>
   </project>

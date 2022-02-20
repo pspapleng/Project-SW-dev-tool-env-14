@@ -34,6 +34,7 @@ describe("show modal when button is clicked", () => {
     actionSubmit = jest.fn();
     actionSubmit.mockResolvedValue({ showResult: true });
     await expect(actionSubmit()).resolves.toEqual({ showResult: true });
+    await expect(wrapper.find("ActiveResultModal")).toHaveLength(1);
   });
   it("should render the input field", async () => {
     const wrapper = shallow(<Assessment />);
