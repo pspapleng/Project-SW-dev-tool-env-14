@@ -46,7 +46,6 @@ describe('ReviewService', () => {
           expect(typeof e).toBe('object');
           expect(e.serviceCenter).toEqual(serviceId);
         });
-        // expect(fetchedData.length).toBe(1);
       });
     });
   });
