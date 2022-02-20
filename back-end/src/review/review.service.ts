@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ReviewEntity } from 'src/dal/review/review.entity';
-import { ReviewRepository } from 'src/dal/review/review.repository';
+import { ReviewEntity } from './../dal/review/review.entity';
+import { ReviewRepository } from './../dal/review/review.repository';
+
 
 @Injectable()
 export class ReviewSerivce {
