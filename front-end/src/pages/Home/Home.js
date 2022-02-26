@@ -6,11 +6,12 @@ import Box from "@mui/material/Box";
 import { DarkGrayBut } from "../../components/Button";
 import MainPageModal from "../../components/Modals/MainPageModal";
 import MainPageCard from "../../components/Cards/MainPageCard";
-import { useNavigate } from "react-router-dom";
+// import { Redirect,useNavigate } from "react-router-dom";
 function Home() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const goAssessment = () => {
-    navigate('/Assessment');
+    // navigate('/Assessment');
+    window.location.href = '/Assessment';
   }
   return (
     <div>

@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { render, fireEvent } from "@testing-library/react";
-import { DarkGrayBut } from "../components/Button";
+// import { render, fireEvent } from "@testing-library/react";
+// import { DarkGrayBut } from "../components/Button";
 
 import Assessment from "../pages/Assessment/Assessment";
-import ResultModal from "../components/Modals/ResultModal";
+// import ResultModal from "../components/Modals/ResultModal";
 // import Radios from '../pages/Assessment/components/Radios'
 
 describe("user choose radios choices", () => {
@@ -25,26 +25,26 @@ describe("user choose radios choices", () => {
   });
 });
 
-describe("show modal when button is clicked", () => {
-  // const props = { doSomething: jest.fn() };
+// describe("show modal when button is clicked", () => {
+//   // const props = { doSomething: jest.fn() };
 
-  it("Should show result modal when button is clicked", async () => {
-    const wrapper = shallow(<Assessment />);
-    let actionSubmit = wrapper.find("actionSubmit");
-    actionSubmit = jest.fn();
-    actionSubmit.mockResolvedValue({ showResult: true });
-    await expect(actionSubmit()).resolves.toEqual({ showResult: true });
-    await expect(wrapper.find("ActiveResultModal")).toHaveLength(1);
-  });
-  it("should render the input field", async () => {
-    const wrapper = shallow(<Assessment />);
-    let actionSubmit = wrapper.find("actionSubmit");
-    actionSubmit = jest.fn();
+//   it("Should show result modal when button is clicked", async () => {
+//     const wrapper = shallow(<Assessment />);
+//     let actionSubmit = wrapper.find("actionSubmit");
+//     actionSubmit = jest.fn();
+//     actionSubmit.mockResolvedValue({ showResult: true });
+//     await expect(actionSubmit()).resolves.toEqual({ showResult: true });
+//     await expect(wrapper.find("ActiveResultModal")).toHaveLength(1);
+//   });
+//   it("should render the input field", async () => {
+//     const wrapper = shallow(<Assessment />);
+//     let actionSubmit = wrapper.find("actionSubmit");
+//     actionSubmit = jest.fn();
 
-    actionSubmit.mockResolvedValue({ onInpError: true });
-    await expect(actionSubmit()).resolves.toEqual({ onInpError: true });
-  });
-});
+//     actionSubmit.mockResolvedValue({ onInpError: true });
+//     await expect(actionSubmit()).resolves.toEqual({ onInpError: true });
+//   });
+// });
 
 
   

@@ -8,7 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import { DarkGrayBut, LightGrayBut } from "../Button";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 //Import axios
 import request from '../../services/api/auth'
@@ -17,10 +17,10 @@ function ResultModal({ isActive, result }) {
   const [open, setOpen] = useState(isActive);
   const [serviceCenter, setServiceCenter] = useState([]);
   const handleClose = () => setOpen(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleOnClick = useCallback(
-    (id) => navigate(`/ServiceCenterInfo/${id}`, { serviceCenterId: id }),
-    [navigate]
+    (id) => (window.location.href =`/ServiceCenterInfo/${id}`, { serviceCenterId: id }),
+    []
   );
 
   useEffect( () => {
