@@ -11,7 +11,7 @@ function Home() {
   // const navigate = useNavigate();
   const goAssessment = () => {
     // navigate('/Assessment');
-    window.location.href = '/Assessment';
+    window.location = '/Assessment';
   }
   return (
     <div>

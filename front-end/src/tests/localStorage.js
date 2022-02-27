@@ -1,3 +1,4 @@
+// Mock LocalStorage
 global.localStorage = {
     data: {},
     getItem(key) {
