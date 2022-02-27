@@ -13,8 +13,8 @@ import { DarkGrayBut, LightGrayBut } from "../Button";
 //Import axios
 import request from '../../services/api/auth'
 
-function ResultModal({ isActive, result }) {
-  const [open, setOpen] = useState(isActive);
+function ResultModal({ result }) {
+  const [open, setOpen] = useState(true);
   const [serviceCenter, setServiceCenter] = useState([]);
   const handleClose = () => setOpen(false);
   // const navigate = useNavigate();
@@ -51,7 +51,7 @@ function ResultModal({ isActive, result }) {
   };
 
   const backToHome = () => {
-    window.location.href = "/";
+    window.location = "/";
   };
 
   return (
