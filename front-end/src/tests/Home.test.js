@@ -21,26 +21,11 @@ test("check lat,lon", () => {
   Object.is(mine, global.navigator.geolocation);
 });
 
-// it("test set user location in localstate", () => {
-//     // const wrapper = mount(callGeoLocation());
-//     // let callGeo = wrapper.find("window.navigator.geolocation");
-//     // callGeo = jest.fn().mockResolvedValue({});
-//     // expect(callGeo()).toEqual({obj});
-//     const localStorageMock = {
-//         getItem: jest.fn(),
-//         setItem: jest.fn(),
-//         clear: jest.fn()
-//       };
-//       global.localStorage = localStorageMock;
-//       expect(localStorage.getItem.mock.calls.length).toBe(1)
-
-//   });
 describe("Should show MainPageModal", () => {
   let item;
   beforeAll(() => {
     const wrapper = shallow(<Home />);
     wrapper.find("localStorage.getItem");
-    
   });
 
   afterEach(() => {
@@ -60,7 +45,6 @@ describe("Should show MainPageModal", () => {
     }
     expect(item).toEqual(false);
   });
-
 });
 
 describe("Click Button navigate to '/Assessment' tests", () => {

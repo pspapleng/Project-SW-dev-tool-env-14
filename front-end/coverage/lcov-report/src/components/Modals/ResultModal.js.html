@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">27.27% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/33</span>
+                <span class='fraction'>9/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">15% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>3/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">18.18% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>2/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">30% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/30</span>
+                <span class='fraction'>9/30</span>
             </div>
         
             
@@ -296,37 +296,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -335,8 +321,22 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -512,17 +512,17 @@ import { DarkGrayBut, LightGrayBut } from "../Button";
 //Import axios
 import request from '../../services/api/auth'
 &nbsp;
-function <span class="fstat-no" title="function not covered" >ResultModal(</span>{ isActive, result }) {
-  const [open, setOpen] = <span class="cstat-no" title="statement not covered" >useState(isActive);</span>
-  const [serviceCenter, setServiceCenter] = <span class="cstat-no" title="statement not covered" >useState([]);</span>
-  const handleClose = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setOpen(false);</span></span>
+function ResultModal({ result }) {
+  const [open, setOpen] = useState(true);
+  const [serviceCenter, setServiceCenter] = useState([]);
+  const handleClose = <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setOpen(false);</span>
   // const navigate = useNavigate();
-  const handleOnClick = <span class="cstat-no" title="statement not covered" >useCallback(</span>
+  const handleOnClick = useCallback(
 <span class="fstat-no" title="function not covered" >    (i</span>d) =&gt; (<span class="cstat-no" title="statement not covered" >window.location.href =`/ServiceCenterInfo/${id}`, { serviceCenterId: id })</span>,
     []
   );
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect( <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+  useEffect( <span class="fstat-no" title="function not covered" >()</span> =&gt; {
    const fetchMyAPI = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (lat, lon) =&gt; {</span>
      const response = <span class="cstat-no" title="statement not covered" >await request.getServiceCenterByLocation(lat, lon)</span>
 <span class="cstat-no" title="statement not covered" >     console.log(response)</span>
@@ -544,16 +544,16 @@ function <span class="fstat-no" title="function not covered" >ResultModal(</span
 <span class="cstat-no" title="statement not covered" >    fetchMyAPI(latitude, longitude)</span>
   }, []);
 &nbsp;
-  const toService = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(i</span>d) =&gt; {</span>
+  const toService = <span class="fstat-no" title="function not covered" >(i</span>d) =&gt; {
 <span class="cstat-no" title="statement not covered" >    handleClose();</span>
 <span class="cstat-no" title="statement not covered" >    handleOnClick(id);</span>
   };
 &nbsp;
-  const backToHome = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    window.location.href = "/";</span>
+  const backToHome = () =&gt; {
+    window.location = "/";
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;div&gt;
       {/* &lt;DarkGrayBut onClick={handleOpen} &gt;result modal&lt;/DarkGrayBut&gt; */}
       &lt;Modal open={open} &gt;
@@ -580,7 +580,7 @@ function <span class="fstat-no" title="function not covered" >ResultModal(</span
             การแปลผลประเมิน
           &lt;/Typography&gt;
           {result ? (
-            &lt;Box
+<span class="branch-0 cbranch-no" title="branch not covered" >            &lt;Box</span>
               // id="modal-modal-description"
               sx={{
                 mt: 2,
@@ -624,7 +624,7 @@ function <span class="fstat-no" title="function not covered" >ResultModal(</span
               Back to Home
             &lt;/LightGrayBut&gt;
             {result ? (
-              &lt;DarkGrayBut
+<span class="branch-0 cbranch-no" title="branch not covered" >              &lt;DarkGrayBut</span>
                 style={{ marginLeft: "5px", marginRight: "5px", width: "20%" }}
                 onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >console.log("Not Avalible")}</span>
               &gt;
@@ -645,7 +645,7 @@ function <span class="fstat-no" title="function not covered" >ResultModal(</span
           &lt;/Typography&gt;
 &nbsp;
           { serviceCenter.length &gt; 0 ?
-          serviceCenter.map(<span class="fstat-no" title="function not covered" >(s</span>ervice, index) =&gt; {
+<span class="branch-0 cbranch-no" title="branch not covered" >          serviceCenter.map(<span class="fstat-no" title="function not covered" >(s</span>ervice, index) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >            return (</span>
             &lt;Card
               onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >toService(service.id)}</span>
@@ -721,7 +721,7 @@ export default ResultModal;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Feb 27 2022 20:11:20 GMT+0700 (เวลาอินโดจีน)
+                at Thu Mar 03 2022 03:12:37 GMT+0700 (เวลาอินโดจีน)
             </div>
         <script src="../../../prettify.js"></script>
         <script>
