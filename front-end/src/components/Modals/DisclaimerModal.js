@@ -4,18 +4,18 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { RedDelBut, BlueBut } from "../Button";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 
 function DisclaimerModal() {
-  let navigate = useNavigate(); 
+  // let navigate = useNavigate(); 
   const [open, setOpen] = useState(true);
   const isAccept = () => {
     localStorage.setItem("acceptDisclaimer", true);
     setOpen(false);
   }
   const backHome = () =>{ 
-    navigate('/Home');
+    window.location = '/Home';
   }
 
   return (
