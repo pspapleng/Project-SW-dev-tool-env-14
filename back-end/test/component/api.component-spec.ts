@@ -34,7 +34,7 @@ describe('Component test backend', () => {
     await app.close();
   });
 
-  //it kmitl coordinate 13.7749,100.5197
+  //Test Api GetServiceCenterByLocation using latitude longitude
   describe('GetServiceCenterByLocation', () => {
     it('should return correct service center', async () => {
       const { body: services } = await supertest(app.getHttpServer())
@@ -50,6 +50,7 @@ describe('Component test backend', () => {
     });
   });
 
+  //Test Api GetServiceCenterById using ServiceCenterId
   describe('GetServiceCenterById', () => {
     it('should return correct service center', async () => {
       const id = "31a26fa9-55db-4059-b4a3-4c59de3f9b5b";
@@ -63,9 +64,9 @@ describe('Component test backend', () => {
     });
   });
 
+  //Test Api GetReviewByServiceCenterId using ServiceCenterId
   describe('GetReviewByServiceCenter', () => {
     it('should return correct service center', async () => {
-      // GET /service_center/location
       const serviceId = "31a26fa9-55db-4059-b4a3-4c59de3f9b5b";
       const { body: reviews } = await supertest(app.getHttpServer())
     .get(`/review/${serviceId}`)
