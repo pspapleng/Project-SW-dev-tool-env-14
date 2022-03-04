@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "unit-test": "jest -i ./src/tests/unit.test.js",
     "test-coverage": "jest --coverage",
     "eject": "react-scripts eject"
   },
