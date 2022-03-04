@@ -1,0 +1,1 @@
+export const mockReview = [{ content: 'บริการดีเริ่ดค่ะ แนะนำ' }];
