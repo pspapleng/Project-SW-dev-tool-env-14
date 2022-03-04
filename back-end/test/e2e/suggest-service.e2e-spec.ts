@@ -36,7 +36,7 @@ describe('Suggest Service Center Feature', () => {
 
   //it kmitl coordinate 13.7749,100.5197
   describe('Run GetServiceCenterByLocation and GetServiceCenterById and GetReviewByServiceCenter', () => {
-    it('should return correct service center', async () => {
+    it('should return correct service center and correct review', async () => {
       // GET /service_center/location
       const { body: services } = await supertest(app.getHttpServer())
         .get(`/service_center/location?lat=13.7749&lon=100.5197`)
