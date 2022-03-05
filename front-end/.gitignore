@@ -15,3 +15,7 @@ node_modules
 
 # Ignore build foler
 build
+
+.nyc_output
+coverage
+cypress/fixtures
