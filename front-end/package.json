@@ -22,11 +22,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "npm run cypress:run",
+    "cypress:component:run": "npm run cypress:start:wait -- \"cypress open\"",
+    "cypress:component:cov": "npx nyc report --reporter=text-summary --statements --branches --functions --lines \"./cypress/integration/component.spec.js\"",
     "eject": "react-scripts eject",
     "cypress:start:app": "cross-env BROWSER=none react-scripts -r @cypress/instrument-cra start",
     "cypress:start:wait": "start-test cypress:start:app http://localhost:3000",
-    "cypress:open": "npm run cypress:start:wait -- \"cypress open\"",
     "cypress:run": "npm run cypress:start:wait -- \"cypress run\""
   },
   "eslintConfig": {
