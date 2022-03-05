@@ -1,4 +1,3 @@
-// import { getDistance } from "geolib";
 function fakeLocation(latitude, longitude) {
   return {
     onBeforeLoad(win) {
@@ -41,14 +40,14 @@ describe("Component Testing", function () {
           "cost": "1300฿ - 3000฿",
           "latitude": "13.77396306",
           "longitude": "100.5651552"
-      }
+      }   
       ]
-    ).as("getLocation");
+    ).as("getServiceCenterByLocation");
 
-    cy.intercept(
+   cy.intercept(
       {
         method: "GET",
-        url: `/service_center/**`,
+        path: `/service_center/**`,
       },
       [
         {
@@ -76,7 +75,7 @@ describe("Component Testing", function () {
 
   });
 
-  //สถานที่ให้บริการที่แนะนำลำกับที่ 1 และเป็นการตอบแบบสอบถามด้วยผู้ใช้ที่ไม่มีความเสี่ยง
+  // //สถานที่ให้บริการที่แนะนำลำกับที่ 1 และเป็นการตอบแบบสอบถามด้วยผู้ใช้ที่ไม่มีความเสี่ยง
   it("get correct page (Home -> Assessment -> ServiceCenterInfo) and get API getServiceCenterByLocation", function () {
 
     cy.location().should((loc) => {
@@ -97,11 +96,8 @@ describe("Component Testing", function () {
 
     cy.get("button").contains("Submit").click();
 
-    
     cy.contains("การแปลผลประเมิน");   
     
-    // cy.wait('@getLocation')
-
     cy.get(
       '[class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-j0g0od-MuiPaper-root-MuiCard-root"]'
     )
@@ -110,9 +106,9 @@ describe("Component Testing", function () {
       .eq(0)
       .click();
 
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.contains("/ServiceCenterInfo");
-    });
+    cy.url().should('include', 'ServiceCenterInfo')
+
+    
   });
 
   it("get correct id from assessment to service center", function () {
@@ -143,19 +139,14 @@ describe("Component Testing", function () {
       .should("have.length", 2)
       .eq(0)
       .click();
-    
-    
-    
 
     cy.url().then((url) => {
       const currentURL = url.split("/");
       const currentID = currentURL[4];
       cy.log(currentID)
 
-
-      cy.wait('@getServiceCenterById').its('response.body').its('0').its('id').should('eq', `${currentID}`)
-
-      
+      cy.wait('@getServiceCenterById').its('response.body').its('0').its('id').should('eq', `${currentID}`)    
+     
     });
   });
 });
