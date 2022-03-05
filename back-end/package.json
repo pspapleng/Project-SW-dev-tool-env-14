@@ -23,7 +23,10 @@
     "test:e2e:cov": "yarn run test:e2e -- --coverage",
     "test:component": "jest --config ./test/component/jest-component.json --detectOpenHandles",
     "test:component:watch": "yarn run test:component -- --watch",
-    "test:component:cov": "yarn run test:component -- --coverage"
+    "test:component:cov": "yarn run test:component -- --coverage",
+    "test:integration": "jest --config ./test/integration/jest-integration.json --detectOpenHandles",
+    "test:integration:watch": "yarn run test:integration -- --watch",
+    "test:integration:cov": "yarn run test:integration -- --coverage"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
