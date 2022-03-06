@@ -27,8 +27,8 @@
     "cypress:component:run": "npm run cypress:start:wait -- \"cypress open\"",
     "cypress:component:cov": "npx nyc report --reporter=text-summary --statements --branches --functions --lines \"./cypress/integration/component.spec.js\"",
     "eject": "react-scripts eject",
-    "unit-test": "jest -i ./src/tests/unit.test.js",
-    "unit-test-coverage": "jest --coverage ./src/tests/unit.test.js ./src/app.test.js",
+    "jest:unit:run": "jest -i ./src/tests/unit.test.js",
+    "jest:unit:cov": "jest --coverage ./src/tests/unit.test.js ./src/app.test.js",
     "cypress:start:app": "cross-env BROWSER=none react-scripts -r @cypress/instrument-cra start",
     "cypress:start:wait": "start-test cypress:start:app http://localhost:3000",
     "cypress:run": "npm run cypress:start:wait -- \"cypress run\""
