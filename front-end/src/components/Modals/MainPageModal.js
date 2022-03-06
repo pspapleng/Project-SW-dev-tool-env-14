@@ -1,29 +1,33 @@
-import React from "react";
+import React, {useState} from "react";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { DarkGrayBut } from "../Button";
-import { Alert, Snackbar } from "@mui/material";
+// import { Alert, Snackbar } from "@mui/material";
+import AlertModal from "./AlertModal"
 
 function MainPageModal() {
-  // const [open, setOpen] = useState(true);
+  const [alert, setAlert] = useState(false);
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const nextToAssessment = () =>{
     if (localStorage.getItem("userLocation")) {
-      navigate('/Assessment');
+      window.location.href = '/Assessment';
     } else {
-      alert("Please allow location access to continue")
-      
+      setAlert(true);
     }
     
   }
+  const closeAlert = (closeAlert) => {
+    setAlert(closeAlert)
+  }
+
   return (
     <div>
-
+        {alert ? <AlertModal alert={alert} closeAlert={closeAlert}/> : false}
       <Modal
         open={true}
         // onClose={handleClose}

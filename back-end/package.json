@@ -18,7 +18,15 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/e2e/jest-e2e.json --detectOpenHandles",
+    "test:e2e:watch": "yarn run test:e2e -- --watch",
+    "test:e2e:cov": "yarn run test:e2e -- --coverage",
+    "test:component": "jest --config ./test/component/jest-component.json --detectOpenHandles",
+    "test:component:watch": "yarn run test:component -- --watch",
+    "test:component:cov": "yarn run test:component -- --coverage",
+    "test:integration": "jest --config ./test/integration/jest-integration.json --detectOpenHandles",
+    "test:integration:watch": "yarn run test:integration -- --watch",
+    "test:integration:cov": "yarn run test:integration -- --coverage"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -36,6 +44,7 @@
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.7",
     "@nestjs/cli": "^8.0.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
