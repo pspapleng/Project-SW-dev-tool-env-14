@@ -7,7 +7,7 @@
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.3.1",
-    "@mui/material": "^5.4.0",
+    "@mui/material": "^5.yarn run 4.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -24,14 +24,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "cypress:component:run": "npm run cypress:start:wait -- \"cypress open\"",
-    "cypress:component:cov": "npx nyc report --reporter=text-summary --statements --branches --functions --lines \"./cypress/integration/component.spec.js\"",
+    "test": "npm run cypress:run",
     "eject": "react-scripts eject",
     "jest:unit:run": "jest -i ./src/tests/unit.test.js",
     "jest:unit:cov": "jest --coverage ./src/tests/unit.test.js ./src/app.test.js",
     "cypress:start:app": "cross-env BROWSER=none react-scripts -r @cypress/instrument-cra start",
     "cypress:start:wait": "start-test cypress:start:app http://localhost:3000",
-    "cypress:run": "npm run cypress:start:wait -- \"cypress run\""
+    "cypress:run": "npm run cypress:start:wait -- \"cypress open\"",
+    "cypress:cov": "npx nyc report --reporter=text-summary"
   },
   "eslintConfig": {
     "extends": [
