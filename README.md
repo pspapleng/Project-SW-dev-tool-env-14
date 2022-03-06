@@ -4,6 +4,40 @@
 * กลุ่ม 14
 * [View more in Wiki](https://github.com/pspapleng/Project-SW-dev-tool-env-14/wiki)
 
+## How to run with docker-compose
+
+### All service
+
+```
+docker-compose up
+```
+
+### front-end only
+
+- front-end port `3000`
+
+- http://localhost:3000
+
+```
+docker-compose up -d front_end
+```
+
+### back-end only
+
+- back-end port `8080`
+
+- http://localhost:8080
+
+```
+docker-compose up -d back_end
+```
+
+### stop and remove container (all service)
+
+```
+docker-compose down
+```
+
 ## Members
 
 | Information                   | Github                                      |                  | Information                     | Github                                      |                  |

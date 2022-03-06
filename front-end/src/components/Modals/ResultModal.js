@@ -8,24 +8,25 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import { DarkGrayBut, LightGrayBut } from "../Button";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 //Import axios
 import request from '../../services/api/auth'
 
-function ResultModal({ isActive, result }) {
-  const [open, setOpen] = useState(isActive);
+function ResultModal({ result }) {
+  const [open, setOpen] = useState(true);
   const [serviceCenter, setServiceCenter] = useState([]);
   const handleClose = () => setOpen(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleOnClick = useCallback(
-    (id) => navigate(`/ServiceCenterInfo/${id}`, { serviceCenterId: id }),
-    [navigate]
+    (id) => (window.location.href =`/ServiceCenterInfo/${id}`, { serviceCenterId: id }),
+    []
   );
 
   useEffect( () => {
    const fetchMyAPI = async (lat, lon) => {
      const response = await request.getServiceCenterByLocation(lat, lon)
+     console.log(response)
       for (let index = 0; index < 2; index++) {
         let prevNum = null
         let rand = Math.floor(Math.random() * response.data.length)
@@ -36,6 +37,7 @@ function ResultModal({ isActive, result }) {
           }
         }
         setServiceCenter(oldArray => [...oldArray, response.data[rand]]);
+        console.log(response.data[rand])
       }
       return response
     }
@@ -49,7 +51,7 @@ function ResultModal({ isActive, result }) {
   };
 
   const backToHome = () => {
-    window.location.href = "/";
+    window.location = "/";
   };
 
   return (
