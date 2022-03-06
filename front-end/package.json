@@ -24,16 +24,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "cypress:component:run": "npm run cypress:start:wait -- \"cypress open\"",
-    "cypress:component:cov": "npx nyc report --reporter=text-summary --statements --branches --functions --lines \"./cypress/integration/component.spec.js\"",
+    "test": "npm run cypress:run",
     "eject": "react-scripts eject",
     "jest:unit:run": "jest -i ./src/tests/unit.test.js",
     "jest:unit:cov": "jest --coverage ./src/tests/unit.test.js ./src/app.test.js",
     "cypress:start:app": "cross-env BROWSER=none react-scripts -r @cypress/instrument-cra start",
     "cypress:start:wait": "start-test cypress:start:app http://localhost:3000",
-    "cypress:run": "npm run cypress:start:wait -- \"cypress run\"",
-    "cypress:e2e:run": "npm run cypress:run -- spec \"./cypress/integration/e2e/suggest-service.e2e.spec.js\"",
-    "cypress:e2e:cov": "npx nyc report --reporter=text-summary --statements --branches --functions --lines \"./cypress/integration/suggest-service.e2e.spec.js\""
+    "cypress:run": "npm run cypress:start:wait -- \"cypress open\"",
+    "cypress:cov": "npx nyc report --reporter=text-summary"
   },
   "eslintConfig": {
     "extends": [
