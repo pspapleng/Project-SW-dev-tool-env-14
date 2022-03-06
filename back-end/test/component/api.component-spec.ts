@@ -8,7 +8,7 @@ import { ServiceCenterModule } from '../../src/service-center/service-center.mod
 import { ReviewModule } from './../../src/review/review.module';
 import { UserModule } from './../../src/user/user.module';
 
-describe('Suggest Service Center Feature', () => {
+describe('Component test backend', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -34,10 +34,9 @@ describe('Suggest Service Center Feature', () => {
     await app.close();
   });
 
-  //it kmitl coordinate 13.7749,100.5197
-  describe('Run GetServiceCenterByLocation and GetServiceCenterById and GetReviewByServiceCenter', () => {
-    it('should return correct service center and correct review', async () => {
-      // GET /service_center/location
+  //Test Api GetServiceCenterByLocation using latitude longitude
+  describe('GetServiceCenterByLocation', () => {
+    it('should return correct service center', async () => {
       const { body: services } = await supertest(app.getHttpServer())
         .get(`/service_center/location?lat=13.7749&lon=100.5197`)
         .set('Accept', 'application/json')
@@ -47,29 +46,38 @@ describe('Suggest Service Center Feature', () => {
         expect(typeof e).toBe('object');
         expect(e.distance).toBeLessThan(30 * 1000);
       });
-      expect(services.length).toBeGreaterThan(0); // always include online service
-
-      // GET /service_center/:id'
-      const id = services[Math.floor(Math.random() * services.length)].id;
-      const { body: service } = await supertest(app.getHttpServer())
-        .get(`/service_center/${id}`)
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(200);
-      expect(typeof service).toBe('object');
-      expect(service.id).toBe(id);
-
-      // GET /review/:serviceId'
-      const serviceId = service.id;
-      const { body: reviews } = await supertest(app.getHttpServer())
-        .get(`/review/${serviceId}`)
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(200);
-      reviews.forEach((e) => {
-        expect(typeof e).toBe('object');
-      });
-      expect(reviews.length).toBeGreaterThanOrEqual(0);
+      expect(services.length).toBeGreaterThan(0);
     });
   });
+
+  //Test Api GetServiceCenterById using ServiceCenterId
+  describe('GetServiceCenterById', () => {
+    it('should return correct service center', async () => {
+      const id = "31a26fa9-55db-4059-b4a3-4c59de3f9b5b";
+    const { body: service } = await supertest(app.getHttpServer())
+    .get(`/service_center/${id}`)
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect(200);
+    expect(typeof service).toBe('object');
+    expect(service.id).toBe(id);
+    });
+  });
+
+  //Test Api GetReviewByServiceCenterId using ServiceCenterId
+  describe('GetReviewByServiceCenter', () => {
+    it('should return correct service center', async () => {
+      const serviceId = "31a26fa9-55db-4059-b4a3-4c59de3f9b5b";
+      const { body: reviews } = await supertest(app.getHttpServer())
+    .get(`/review/${serviceId}`)
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect(200);
+  reviews.forEach((e) => {
+    expect(typeof e).toBe('object');
+  });
+  expect(reviews.length).toBeGreaterThanOrEqual(0);
+    });
+  });
+  
 });

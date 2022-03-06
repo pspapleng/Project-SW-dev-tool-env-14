@@ -18,4 +18,5 @@ build
 
 .nyc_output
 coverage
-cypress/fixtures
+cypress/videos
+cypress/screenshots

@@ -21,6 +21,7 @@ function Assessment() {
   }, []);
 
   function twoQ() {
+    // console.log(assessChoice)
     if ((assessChoice[1] === 0) & (assessChoice[2] === 0)) {
         setResult(0)
         return 0;
@@ -30,6 +31,7 @@ function Assessment() {
     } else {
       return null
     }
+    
   }
 
   function actionSubmit() {
@@ -48,10 +50,6 @@ function Assessment() {
     setAssessChoice(getChoice);
   };
 
-  const ActiveResultModal = () => {
-    return <ResultModal result={result} isActive={showResult}/>
-  }
-
   const lightTheme = createTheme({ palette: { mode: "light" } });
   const questions = [
     {
@@ -69,7 +67,7 @@ function Assessment() {
   return (
     <div className="background-color-gray">
       <DisclaimerModal />
-      <ActiveResultModal/>
+      {showResult ? <ResultModal result={result} /> : false}
       <Grid container justifyContent="center">
         <Grid item xs={10} style={{ textAlign: "right" }}>
           <h1 style={{ marginBottom: 0 }}>{questions.length || 0}Q</h1>
