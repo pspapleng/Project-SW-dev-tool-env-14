@@ -31,7 +31,19 @@
     "cypress:start:app": "cross-env BROWSER=none react-scripts -r @cypress/instrument-cra start",
     "cypress:start:wait": "start-test cypress:start:app http://localhost:3000",
     "cypress:run": "npm run cypress:start:wait -- \"cypress open\"",
-    "cypress:cov": "npx nyc report --reporter=text-summary"
+    "cypress:cov": "npx nyc report --reporter=text",
+
+    "cypress:component": "npx cypress run -s ./cypress/integration/component.spec.js",
+    "cypress:component:run": "npm run cypress:start:wait cypress:component",
+    "cypress:component:cov": "npm run cypress:component:run & npx nyc report --reporter=text",
+
+    "cypress:e2e": "npx cypress run -s ./cypress/integration/e2e.spec.js",
+    "cypress:e2e:run": "npm run cypress:start:wait cypress:e2e",
+    "cypress:e2e:cov": "npm run cypress:e2e:run & npx nyc report --reporter=text",
+
+    "cypress:integration": "npx cypress run -s ./cypress/integration/integration.spec.js",
+    "cypress:integration:run": "npm run cypress:start:wait cypress:integration",
+    "cypress:integration:cov": "npm run cypress:integration:run & npx nyc report --reporter=text"
   },
   "eslintConfig": {
     "extends": [
