@@ -40,6 +40,7 @@
     "cypress:e2e": "npx cypress run -s ./cypress/integration/e2e.spec.js",
     "cypress:e2e:run": "npm run cypress:start:wait cypress:e2e",
     "cypress:e2e:cov": "npm run cypress:e2e:run & npx nyc report --reporter=text",
+    "cypress:e2e:cov:cobertura": "npm run cypress:e2e:run & npx nyc report --reporter=cobertura",
 
     "cypress:integration": "npx cypress run -s ./cypress/integration/integration.spec.js",
     "cypress:integration:run": "npm run cypress:start:wait cypress:integration",
