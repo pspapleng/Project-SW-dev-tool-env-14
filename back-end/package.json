@@ -85,7 +85,7 @@
       "text",
       "cobertura"
     ],
-    "coverageDirectory": "../coverage-unit",
+    "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   }
 }
