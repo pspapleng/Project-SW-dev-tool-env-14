@@ -81,6 +81,10 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
+    "coverageReporters": [
+      "text",
+      "cobertura"
+    ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   }
