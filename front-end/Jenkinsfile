@@ -70,15 +70,16 @@ pipeline {
         stage('Run E2E Test') {
             steps {
                 dir('./front-end'){
-                    sh 'mkdir -p ./.nyc_output'
-                    sh 'yarn run cypress:e2e:cov:cobertura'
+                    echo "Step: E2E Test"
+                    // sh 'mkdir -p ./.nyc_output'
+                    // sh 'yarn run cypress:e2e:cov:cobertura'
                 }
             }
-            post {
-                always {
-                  step([$class: 'CoberturaPublisher', coberturaReportFile: 'front-end/coverage/cobertura-coverage.xml'])
-                }
-            }
+            // post {
+            //     always {
+            //       step([$class: 'CoberturaPublisher', coberturaReportFile: 'front-end/coverage/cobertura-coverage.xml'])
+            //     }
+            // }
         }
     }
     post{
