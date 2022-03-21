@@ -1,0 +1,107 @@
+def dockerImage
+
+def notifyLINE(status) {
+    def token = "T7Lx3OKg4LUAaxyJ2N0ZFJLBqnDluRBaqOGAWr0m8by"
+    def jobName = env.JOB_NAME
+    def buildNo = env.BUILD_NUMBER
+      
+    def url = 'https://notify-api.line.me/api/notify'
+    def message = "${jobName} Build #${buildNo} ${status} \r\n"
+    sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
+}
+
+pipeline {
+    agent any
+    options {
+        ansiColor('xterm')
+    }
+    stages {
+        stage('Pull code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/pspapleng/Project-SW-dev-tool-env-14.git'
+            }
+        }
+        stage('Download dependency') {
+            steps {
+                dir('./back-end'){
+                    sh 'yarn install'
+                }
+            }
+        }
+        stage('Run unit test') {
+            steps {
+                dir('./back-end'){
+                    sh 'yarn run test'
+                }
+            }
+
+        }
+        stage('Run component test') {
+            steps {
+                dir('./back-end'){
+                    sh 'POSTGRES_DATABASE=dev_moodment yarn run test:component'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('./back-end'){
+                    script{
+                        echo "Step: deploy"
+                        // dockerImage = docker.build("ghcr.io/pspapleng/project-sw-dev-tool-env-14/back-end:latest")
+                    }
+                }
+            }
+        }
+        stage('Push') {
+            steps {
+                script{
+                    echo "Step: deploy"
+                    // docker.withRegistry('https://ghcr.io', 'github-registry') {
+                    //     dockerImage.push("latest")
+                    // }
+                }
+            }
+        }
+        // ssh-mood-ment
+        stage('Deploy') {
+            steps {
+                script {
+                        echo "Step: deploy"
+                        // sshagent(credentials: ['ssh-mood-ment']) {
+                        // sh '''
+                        //     [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+                        //     ssh-keyscan -H 178.128.60.199 >> ~/.ssh/known_hosts
+                        //     ssh root@178.128.60.199 'cd ./deployments/ && sh ./setup.sh latest'
+                        // '''
+                        // }
+                }
+            }
+        }
+        stage('Test Backend') {
+            steps {
+                sh "curl https://moodment-api.ourweus.space/"
+            }
+        }
+        stage('E2E') {
+            steps {
+                dir('./back-end'){
+                    sh 'POSTGRES_DATABASE=postgres yarn run test:e2e:cov'
+                }
+            }
+            post {
+                always {
+                  step([$class: 'CoberturaPublisher', coberturaReportFile: 'back-end/coverage/cobertura-coverage.xml'])
+                }
+            }
+        }
+    }
+    post{
+        success{
+            notifyLINE("succeed")
+        }
+        failure{
+            notifyLINE("failure")
+        }
+    }
+}
