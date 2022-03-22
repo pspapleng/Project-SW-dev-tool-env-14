@@ -18,7 +18,7 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-                git branch: 'main', url: 'https://github.com/pspapleng/Project-SW-dev-tool-env-14.git'
+                git branch: 'fix/pipeline-backend', url: 'https://github.com/pspapleng/Project-SW-dev-tool-env-14.git'
             }
         }
         stage('Download dependency') {
@@ -31,15 +31,38 @@ pipeline {
         stage('Run unit test') {
             steps {
                 dir('./back-end'){
-                    sh 'yarn run test'
+                    sh 'yarn run test:cov'
                 }
             }
 
         }
+        stage('Generate unit test report') {
+            steps {
+                dir('./back-end'){
+                    sh 'yarn run test'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Unit Test Report'
+                    ]
+                }
+            }
+        }
         stage('Run component test') {
             steps {
                 dir('./back-end'){
-                    sh 'POSTGRES_DATABASE=dev_moodment yarn run test:component'
+                    sh 'POSTGRES_DATABASE=dev_moodment yarn run test:component:cov'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Component Test Report'
+                    ]
                 }
             }
         }
@@ -87,11 +110,14 @@ pipeline {
             steps {
                 dir('./back-end'){
                     sh 'POSTGRES_DATABASE=postgres yarn run test:e2e:cov'
-                }
-            }
-            post {
-                always {
-                  step([$class: 'CoberturaPublisher', coberturaReportFile: 'back-end/coverage/cobertura-coverage.xml'])
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'E2E Test Report'
+                    ]
                 }
             }
         }
