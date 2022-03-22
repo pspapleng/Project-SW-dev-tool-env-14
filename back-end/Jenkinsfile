@@ -44,8 +44,8 @@ pipeline {
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
-                        reportDir: './coverage/lcov-report',
-                        reportFiles: 'index.html',
+                        reportDir: './coverage',
+                        reportFiles: 'report.html',
                         reportName: 'Unit Test Report'
                     ]
                 }
@@ -59,8 +59,8 @@ pipeline {
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
-                        reportDir: './coverage/lcov-report',
-                        reportFiles: 'index.html',
+                        reportDir: './coverage',
+                        reportFiles: 'report.html',
                         reportName: 'Component Test Report'
                     ]
                 }
@@ -114,8 +114,8 @@ pipeline {
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
-                        reportDir: './coverage/lcov-report',
-                        reportFiles: 'index.html',
+                        reportDir: './coverage',
+                        reportFiles: 'report.html',
                         reportName: 'E2E Test Report'
                     ]
                 }
