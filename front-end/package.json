@@ -35,7 +35,7 @@
     "start-serve": "start-test record http://localhost:3000",
 
     "cy:run:e2e": "cypress run -s ./cypress/integration/e2e.spec.js",
-    "test:e2e:run": "npm run start-serve cy:run:e2e",
+    "test:e2e:run": "npm run start-serve cy:run:e2e & npx nyc report --reporter=text",
 
     "cy:run:component": "cypress run -s ./cypress/integration/component.spec.js",
     "test:component:run": "npm run start-serve cy:run:component & npx nyc report --reporter=text",
