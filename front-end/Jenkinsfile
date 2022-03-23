@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-                git branch: 'fix/e2e-test-frontend', url: 'https://github.com/pspapleng/Project-SW-dev-tool-env-14.git'
+                git branch: 'main', url: 'https://github.com/pspapleng/Project-SW-dev-tool-env-14.git'
             }
         }
         stage('Download dependency') {
