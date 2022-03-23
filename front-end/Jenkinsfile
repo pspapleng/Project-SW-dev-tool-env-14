@@ -43,7 +43,7 @@ pipeline {
         }
         stage('Run Component Test') {
             steps {
-        //         dir('./front-end'){
+                dir('./front-end'){
                     echo 'Step: Component Test'
         //             sh 'yarn test:component:run'
         //             publishHTML target: [
@@ -54,7 +54,7 @@ pipeline {
         //                 reportFiles: 'index.html',
         //                 reportName: 'Component Test Report'
         //             ]
-        //         }
+                }
             }
         }
         stage('Build') {
