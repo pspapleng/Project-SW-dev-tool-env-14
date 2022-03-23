@@ -1,0 +1,125 @@
+def dockerImage
+
+def notifyLINE(status) {
+    def token = "T7Lx3OKg4LUAaxyJ2N0ZFJLBqnDluRBaqOGAWr0m8by"
+    def jobName = env.JOB_NAME
+    def buildNo = env.BUILD_NUMBER
+      
+    def url = 'https://notify-api.line.me/api/notify'
+    def message = "${jobName} Build #${buildNo} ${status} \r\n"
+    sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
+}
+
+pipeline {
+    agent any
+    options {
+        ansiColor('xterm')
+    }
+    stages {
+        stage('Pull code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/pspapleng/Project-SW-dev-tool-env-14.git'
+            }
+        }
+        stage('Download dependency') {
+            steps {
+                dir('./back-end'){
+                    sh 'yarn install'
+                }
+            }
+        }
+        stage('Run unit test and Generate unit test report') {
+            steps {
+                dir('./back-end') {
+                    sh 'yarn run test:cov'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Unit Test Report'
+                    ]
+                }
+            }
+        }
+        stage('Run component test and Generate component test report') {
+            steps {
+                dir('./back-end') {
+                    sh 'yarn run test:component:cov'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Component Test Report'
+                    ]
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('./back-end') {
+                    script{
+                        echo "Step: deploy"
+                        // dockerImage = docker.build("ghcr.io/pspapleng/project-sw-dev-tool-env-14/back-end:latest")
+                    }
+                }
+            }
+        }
+        stage('Push') {
+            steps {
+                script{
+                    echo "Step: deploy"
+                    // docker.withRegistry('https://ghcr.io', 'github-registry') {
+                    //     dockerImage.push("latest")
+                    // }
+                }
+            }
+        }
+        // ssh-mood-ment
+        stage('Deploy') {
+            steps {
+                script {
+                        echo "Step: deploy"
+                        // sshagent(credentials: ['ssh-mood-ment']) {
+                        // sh '''
+                        //     [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+                        //     ssh-keyscan -H 178.128.60.199 >> ~/.ssh/known_hosts
+                        //     ssh root@178.128.60.199 'cd ./deployments/ && sh ./setup.sh latest'
+                        // '''
+                        // }
+                }
+            }
+        }
+        stage('Test Backend') {
+            steps {
+                sh "curl https://moodment-api.ourweus.space/"
+            }
+        }
+        stage('Run E2E test and Generate E2E test report') {
+            steps {
+                dir('./back-end') {
+                    sh 'yarn run test:e2e:cov'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'E2E Test Report'
+                    ]
+                }
+            }
+        }
+    }
+    post {
+        success {
+            notifyLINE("succeed")
+        }
+        failure {
+            notifyLINE("failure")
+        }
+    }
+}

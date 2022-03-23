@@ -13,7 +13,10 @@ function fakeLocation(latitude, longitude) {
 
 describe("Component Testing", function () {
   beforeEach(() => {
+    
     cy.visit("/", fakeLocation(13.7120371, 100.7887341));
+
+    cy.server()
 
     cy.intercept(
       {

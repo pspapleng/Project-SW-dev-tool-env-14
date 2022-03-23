@@ -1,0 +1,93 @@
+def notifyLINE(status) {
+    def token = "T7Lx3OKg4LUAaxyJ2N0ZFJLBqnDluRBaqOGAWr0m8by"
+    def jobName = env.JOB_NAME
+    def buildNo = env.BUILD_NUMBER
+      
+    def url = 'https://notify-api.line.me/api/notify'
+    def message = "${jobName} Build #${buildNo} ${status} \r\n"
+    sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
+}
+
+pipeline {
+    agent any
+    options {
+        ansiColor('xterm')
+    }
+    stages {
+        stage('Pull code') {
+            steps {
+                git branch: 'feature/test-npm-run-all', url: 'https://github.com/pspapleng/Project-SW-dev-tool-env-14.git'
+            }
+        }
+        stage('Download dependency') {
+            steps {
+                dir('./front-end'){
+                    sh 'yarn install'
+                }
+            }
+        }
+        stage('Run Unit Test') {
+            steps {
+                dir('./front-end'){
+                    sh 'yarn jest:unit:run'
+                }
+            }
+        }
+        stage('Run Component Test') {
+            steps {
+                dir('./front-end'){
+                    script{
+                        echo "Step: Component Test"
+                        // sh 'yarn cypress:component:run'
+                    }
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('./front-end'){
+                    script{
+                        echo "Step: deploy"
+                    }
+                }
+            }
+        }
+        stage('Push') {
+            steps {
+                script{
+                    echo "Step: deploy"
+                }
+            }
+        }
+        // ssh-mood-ment
+        stage('Deploy') {
+            steps {
+                script {
+                    echo "Step: deploy"
+                }
+            }
+        }
+        stage('Run E2E Test') {
+            steps {
+                dir('./front-end'){
+                    echo "Step: E2E Test"
+                    // sh 'mkdir -p ./.nyc_output'
+                    // sh 'yarn run cypress:e2e:cov:cobertura'
+                }
+            }
+            // post {
+            //     always {
+            //       step([$class: 'CoberturaPublisher', coberturaReportFile: 'front-end/coverage/cobertura-coverage.xml'])
+            //     }
+            // }
+        }
+    }
+    post{
+        success{
+            notifyLINE("succeed")
+        }
+        failure{
+            notifyLINE("failure")
+        }
+    }
+}
