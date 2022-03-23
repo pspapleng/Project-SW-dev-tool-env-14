@@ -28,24 +28,39 @@ pipeline {
                 }
             }
         }
-        stage('Run unit test') {
+        stage('Run unit test and Generate unit test report') {
             steps {
-                dir('./back-end'){
-                    sh 'yarn run test'
+                dir('./back-end') {
+                    sh 'yarn run test:cov'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Unit Test Report'
+                    ]
                 }
             }
-
         }
-        stage('Run component test') {
+        stage('Run component test and Generate component test report') {
             steps {
-                dir('./back-end'){
-                    sh 'POSTGRES_DATABASE=dev_moodment yarn run test:component'
+                dir('./back-end') {
+                    sh 'yarn run test:component:cov'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Component Test Report'
+                    ]
                 }
             }
         }
         stage('Build') {
             steps {
-                dir('./back-end'){
+                dir('./back-end') {
                     script{
                         echo "Step: deploy"
                         // dockerImage = docker.build("ghcr.io/pspapleng/project-sw-dev-tool-env-14/back-end:latest")
@@ -83,24 +98,27 @@ pipeline {
                 sh "curl https://moodment-api.ourweus.space/"
             }
         }
-        stage('E2E') {
+        stage('Run E2E test and Generate E2E test report') {
             steps {
-                dir('./back-end'){
-                    sh 'POSTGRES_DATABASE=postgres yarn run test:e2e:cov'
-                }
-            }
-            post {
-                always {
-                  step([$class: 'CoberturaPublisher', coberturaReportFile: 'back-end/coverage/cobertura-coverage.xml'])
+                dir('./back-end') {
+                    sh 'yarn run test:e2e:cov'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'E2E Test Report'
+                    ]
                 }
             }
         }
     }
-    post{
-        success{
+    post {
+        success {
             notifyLINE("succeed")
         }
-        failure{
+        failure {
             notifyLINE("failure")
         }
     }
