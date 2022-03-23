@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-                git branch: 'feature/test-npm-run-all', url: 'https://github.com/pspapleng/Project-SW-dev-tool-env-14.git'
+                git branch: 'fix/e2e-test-frontend', url: 'https://github.com/pspapleng/Project-SW-dev-tool-env-14.git'
             }
         }
         stage('Download dependency') {
@@ -28,19 +28,33 @@ pipeline {
         }
         stage('Run Unit Test') {
             steps {
-                dir('./front-end'){
-                    sh 'yarn jest:unit:run'
+                dir('./front-end') {
+                    sh 'yarn jest:unit:cov'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: "./coverage/lcov-report",
+                        reportFiles: "index.html",
+                        reportName: 'Unit Test Report'
+                    ]
                 }
             }
         }
         stage('Run Component Test') {
             steps {
-                dir('./front-end'){
-                    script{
-                        echo "Step: Component Test"
-                        // sh 'yarn cypress:component:run'
-                    }
-                }
+        //         dir('./front-end'){
+                    echo 'Step: Component Test'
+        //             sh 'yarn test:component:run'
+        //             publishHTML target: [
+        //                 allowMissing: false,
+        //                 alwaysLinkToLastBuild: false,
+        //                 keepAll: true,
+        //                 reportDir: './coverage/lcov-report',
+        //                 reportFiles: 'index.html',
+        //                 reportName: 'Component Test Report'
+        //             ]
+        //         }
             }
         }
         stage('Build') {
@@ -70,16 +84,19 @@ pipeline {
         stage('Run E2E Test') {
             steps {
                 dir('./front-end'){
-                    echo "Step: E2E Test"
-                    // sh 'mkdir -p ./.nyc_output'
-                    // sh 'yarn run cypress:e2e:cov:cobertura'
+                    // echo "Step: E2E Test"
+                    //  sh 'mkdir -p ./.nyc_output'
+                    sh 'yarn test:e2e:run'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'E2E Test Report'
+                    ]
                 }
             }
-            // post {
-            //     always {
-            //       step([$class: 'CoberturaPublisher', coberturaReportFile: 'front-end/coverage/cobertura-coverage.xml'])
-            //     }
-            // }
         }
     }
     post{
