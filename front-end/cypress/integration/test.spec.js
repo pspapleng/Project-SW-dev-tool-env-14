@@ -14,10 +14,7 @@ function fakeLocation(latitude, longitude) {
 describe('Component Testing', () => {
     beforeEach(() => {
         cy.visit("/", fakeLocation(13.7120371, 100.7887341));
-
         cy.server()
-    //    localStorage.setItem("name", 'arm')
-    //    localStorage.setItem("id", '6208861abb4fed735f833e07')
        cy.intercept(
          {
             method: "GET",
