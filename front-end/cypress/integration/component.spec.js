@@ -11,7 +11,7 @@ function fakeLocation(latitude, longitude) {
   };
 }
 
-describe("Component Testing", function () {
+describe("Component Testing", () =>{
   beforeEach(() => {
     
     cy.visit("/", fakeLocation(13.7120371, 100.7887341));
@@ -114,7 +114,7 @@ describe("Component Testing", function () {
     
   });
 
-  it("get correct id from assessment to service center", function () {
+  it("get correct id from assessment to service center", () =>{
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq("/");
     });
