@@ -114,42 +114,42 @@ describe("Component Testing", () =>{
     
   });
 
-  it("get correct id from assessment to service center", () =>{
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq("/");
-    });
+  // it("get correct id from assessment to service center", () =>{
+  //   cy.location().should((loc) => {
+  //     expect(loc.pathname).to.eq("/");
+  //   });
 
-    cy.get("button").contains("Start an assessment").click();
+  //   cy.get("button").contains("Start an assessment").click();
 
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq("/Assessment");
-    });
+  //   cy.location().should((loc) => {
+  //     expect(loc.pathname).to.eq("/Assessment");
+  //   });
 
-    cy.get("button").contains("ยอมรับ").click();
+  //   cy.get("button").contains("ยอมรับ").click();
 
-    cy.get('[type="radio"]').eq(1).check();
+  //   cy.get('[type="radio"]').eq(1).check();
 
-    cy.get('[type="radio"]').eq(3).check();
+  //   cy.get('[type="radio"]').eq(3).check();
 
-    cy.get("button").contains("Submit").click();
+  //   cy.get("button").contains("Submit").click();
 
-    cy.contains("การแปลผลประเมิน");
+  //   cy.contains("การแปลผลประเมิน");
 
-    cy.get(
-      '[class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-j0g0od-MuiPaper-root-MuiCard-root"]'
-    )
+  //   cy.get(
+  //     '[class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-j0g0od-MuiPaper-root-MuiCard-root"]'
+  //   )
 
-      .should("have.length", 2)
-      .eq(0)
-      .click();
+  //     .should("have.length", 2)
+  //     .eq(0)
+  //     .click();
 
-    cy.url().then((url) => {
-      const currentURL = url.split("/");
-      const currentID = currentURL[4];
-      cy.log(currentID)
+  //   cy.url().then((url) => {
+  //     const currentURL = url.split("/");
+  //     const currentID = currentURL[4];
+  //     cy.log(currentID)
 
-      cy.wait('@getServiceCenterById').its('response.body').its('0').its('id').should('eq', `${currentID}`)    
+  //     cy.wait('@getServiceCenterById').its('response.body').its('0').its('id').should('eq', `${currentID}`)    
      
-    });
-  });
+  //   });
+  // });
 });
