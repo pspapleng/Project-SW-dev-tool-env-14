@@ -32,7 +32,7 @@
     "cypress:start:wait": "start-test cypress:start:app http://localhost:3000",
     "cypress:run": "npm run cypress:start:wait -- \"cypress open\"",
     "cypress:cov": "npx nyc report --reporter=text",
-    "cypress:component": "npx cypress run -s ./cypress/integration/component.spec.js",
+    "cypress:component": "npx cypress run -s ./cypress/integration/test.spec.js",
     "cypress:component:run": "npm run cypress:start:wait cypress:component",
     "cypress:component:cov": "npm run cypress:component:run & npx nyc report --reporter=text",
     "cypress:e2e": "npx cypress run -s ./cypress/integration/e2e.spec.js",
