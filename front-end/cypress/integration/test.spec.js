@@ -133,14 +133,14 @@ describe('Component Testing', () => {
           .eq(0)
           .click();
     
-        cy.url().then((url) => {
-          const currentURL = url.split("/");
-          const currentID = currentURL[4];
-          cy.log(currentID)
+        // cy.url().then((url) => {
+        //   const currentURL = url.split("/");
+        //   const currentID = currentURL[4];
+        //   cy.log(currentID)
     
-          cy.wait('@getServiceCenterById').its('response.body').its('0').its('id').should('eq', `${currentID}`)    
+        //   cy.wait('@getServiceCenterById').its('response.body').its('0').its('id').should('eq', `${currentID}`)    
          
-        })
+        // })
       })
      
    })
