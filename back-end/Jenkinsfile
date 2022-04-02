@@ -38,6 +38,15 @@ pipeline {
                         keepAll: true,
                         reportDir: './coverage/lcov-report',
                         reportFiles: 'index.html',
+                        reportName: 'Unit Test Coverage Report'
+                    ]
+
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: "./coverage",
+                        reportFiles: "report.html",
                         reportName: 'Unit Test Report'
                     ]
                 }
@@ -53,6 +62,15 @@ pipeline {
                         keepAll: true,
                         reportDir: './coverage/lcov-report',
                         reportFiles: 'index.html',
+                        reportName: 'Component Test Coverage Report'
+                    ]
+
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: "./cypress/reports/html",
+                        reportFiles: "index.html",
                         reportName: 'Component Test Report'
                     ]
                 }
@@ -108,7 +126,7 @@ pipeline {
                         keepAll: true,
                         reportDir: './coverage/lcov-report',
                         reportFiles: 'index.html',
-                        reportName: 'E2E Test Report'
+                        reportName: 'E2E Test Coverage Report'
                     ]
                 }
             }
