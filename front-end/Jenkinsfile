@@ -104,7 +104,7 @@ pipeline {
             steps {
                 dir('./front-end'){
                     // echo "Step: E2E Test"
-                     sh 'mkdir -p ./.nyc_output'
+                    sh 'mkdir -p ./.nyc_output'
                     sh 'yarn cover:e2e'
                     publishHTML target: [
                         allowMissing: false,
@@ -112,17 +112,17 @@ pipeline {
                         keepAll: true,
                         reportDir: './coverage/lcov-report',
                         reportFiles: 'index.html',
-                        reportName: 'E2E Test Report'
+                        reportName: 'E2E Test Coverage Report'
                     ]
 
-                        publishHTML target: [
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: "./cypress/reports/html",
-                        reportFiles: "index.html",
-                        reportName: 'E2E Test Report'
-                    ]
+                    //     publishHTML target: [
+                    //     allowMissing: false,
+                    //     alwaysLinkToLastBuild: false,
+                    //     keepAll: true,
+                    //     reportDir: "./cypress/reports/html",
+                    //     reportFiles: "index.html",
+                    //     reportName: 'E2E Test Report'
+                    // ]
                 }
             }
         }

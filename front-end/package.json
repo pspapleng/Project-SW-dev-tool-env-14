@@ -30,7 +30,6 @@
     "jest:unit:cov": "jest --coverage ./src/tests/unit.test.js ./src/app.test.js",
     "record": "cross-env BROWSER=none react-scripts -r @cypress/instrument-cra start -- \"cypress open\"",
     "start-serve": "start-test record http://localhost:3000",
-    "start-mm-serve": "start-test record https://moodment.ourweus.space/",
     "cover:e2e": "npm run test:e2e:run  && npm run cover:report",
     "cy:run:e2e": "cypress run -s ./cypress/integration/e2e.spec.js",
     "test:e2e:run": "nyc --silent --no-clean npm run start-serve cy:run:e2e",
