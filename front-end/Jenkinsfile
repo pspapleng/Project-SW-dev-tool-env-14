@@ -47,14 +47,14 @@ pipeline {
                     echo 'Step: Component Test'
                     sh 'yarn test:component:run'
         
-        //             publishHTML target: [
-        //                 allowMissing: false,
-        //                 alwaysLinkToLastBuild: false,
-        //                 keepAll: true,
-        //                 reportDir: './coverage/lcov-report',
-        //                 reportFiles: 'index.html',
-        //                 reportName: 'Component Test Report'
-        //             ]
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Component Test Report'
+                    ]
                 }
             }
         }
