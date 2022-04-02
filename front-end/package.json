@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "@cypress/instrument-cra": "^1.4.0",
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.3.1",
-    "@mui/material": "^5.yarn run 4.0",
+    "@mui/material": "^5.5.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -26,22 +26,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-
     "jest:unit:run": "jest -i ./src/tests/unit.test.js",
     "jest:unit:cov": "jest --coverage ./src/tests/unit.test.js ./src/app.test.js",
-
-    "record":"cross-env BROWSER=none react-scripts -r @cypress/instrument-cra start -- \"cypress open\"",
-
+    "record": "cross-env BROWSER=none react-scripts -r @cypress/instrument-cra start -- \"cypress open\"",
     "start-serve": "start-test record http://localhost:3000",
-
     "cy:run:e2e": "cypress run -s ./cypress/integration/e2e.spec.js",
-    "test:e2e:run": "npm run start-serve cy:run:e2e & npx nyc report --reporter=text",
-
+    "test:e2e:run": "npm run start-serve cy:run:e2e",
     "cy:run:component": "cypress run -s ./cypress/integration/component.spec.js",
-    "test:component:run": "npm run start-serve cy:run:component & npx nyc report --reporter=text",
-
+    "test:component:run": "npm run start-serve cy:run:component ",
     "cy:run:integration": "cypress run -s ./cypress/integration/integration.spec.js",
-    "test:integration:run": "npm run start-serve cy:run:integration & npx nyc report --reporter=text"
+    "test:integration:run": "npm run start-serve cy:run:integration"
   },
   "eslintConfig": {
     "extends": [
