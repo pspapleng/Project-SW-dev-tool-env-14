@@ -128,14 +128,14 @@ pipeline {
                         reportFiles: 'index.html',
                         reportName: 'E2E Test Coverage Report'
                     ]
-                     publishHTML target: [
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: "./coverage",
-                        reportFiles: "report.html",
-                        reportName: 'E2E Test  Report'
-                    ]
+                    //  publishHTML target: [
+                    //     allowMissing: false,
+                    //     alwaysLinkToLastBuild: false,
+                    //     keepAll: true,
+                    //     reportDir: "./coverage",
+                    //     reportFiles: "report.html",
+                    //     reportName: 'E2E Test  Report'
+                    // ]
                 }
             }
         }
