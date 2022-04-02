@@ -54,7 +54,7 @@ pipeline {
                         keepAll: true,
                         reportDir: './coverage/lcov-report',
                         reportFiles: 'index.html',
-                        reportName: 'Component Test Report'
+                        reportName: 'Component Test Report',
                         reportTitles: 'Component Test Report'
                     ]
                 }
@@ -96,7 +96,7 @@ pipeline {
                         keepAll: true,
                         reportDir: './coverage/lcov-report',
                         reportFiles: 'index.html',
-                        reportName: 'E2E Test Report'
+                        reportName: 'E2E Test Report',
                         reportTitles: 'E2E Test Report'
                     ]
                 }
