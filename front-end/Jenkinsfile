@@ -45,7 +45,7 @@ pipeline {
             steps {
                 dir('./front-end'){
                     echo 'Step: Component Test'
-                    sh 'yarn test:component:run'
+                    sh 'yarn cover:component'
         
                     publishHTML target: [
                         allowMissing: false,
@@ -87,7 +87,7 @@ pipeline {
                 dir('./front-end'){
                     // echo "Step: E2E Test"
                     //  sh 'mkdir -p ./.nyc_output'
-                    sh 'yarn test:e2e:run'
+                    sh 'yarn cover:e2e'
                     publishHTML target: [
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
