@@ -134,7 +134,7 @@ pipeline {
                         keepAll: true,
                         reportDir: "./coverage",
                         reportFiles: "report.html",
-                        reportName: 'E2E Test  Report'
+                        reportName: 'E2E Test Report'
                     ]
                 }
             }

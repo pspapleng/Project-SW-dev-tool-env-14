@@ -54,24 +54,24 @@ pipeline {
             steps {
                 dir('./front-end'){
                     echo 'Step: Component Test'
-                    sh 'yarn cover:component'
+                    // sh 'yarn cover:component'
         
-                    publishHTML target: [
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: './coverage/lcov-report',
-                        reportFiles: 'index.html',
-                        reportName: 'Component Test Coverage Report'
-                    ]
+                    // publishHTML target: [
+                    //     allowMissing: false,
+                    //     alwaysLinkToLastBuild: false,
+                    //     keepAll: true,
+                    //     reportDir: './coverage/lcov-report',
+                    //     reportFiles: 'index.html',
+                    //     reportName: 'Component Test Coverage Report'
+                    // ]
 
-                    publishHTML target: [
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: "./cypress/reports/html",
-                        reportFiles: "index.html",
-                        reportName: 'Component Test Report'
+                    // publishHTML target: [
+                    //     allowMissing: false,
+                    //     alwaysLinkToLastBuild: false,
+                    //     keepAll: true,
+                    //     reportDir: "./cypress/reports/html",
+                    //     reportFiles: "index.html",
+                    //     reportName: 'Component Test Report'
                     ]
                 }
             }
