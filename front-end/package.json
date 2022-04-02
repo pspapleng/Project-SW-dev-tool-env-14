@@ -34,8 +34,11 @@
     "cy:run:e2e": "cypress run -s ./cypress/integration/e2e.spec.js",
     "test:e2e:run": "nyc --silent --no-clean npm run start-serve cy:run:e2e",
     "cover:report": "nyc report --reporter=lcov --reporter=text",
+
+    "cover:component": "npm run test:component:run && npm run cover:report",
     "cy:run:component": "cypress run -s ./cypress/integration/component.spec.js",
-    "test:component:run": "npm run  start-serve cy:run:component",
+    "test:component:run": "nyc --silent --no-clean npm run start-serve cy:run:component",
+
     "cy:run:integration": "cypress run -s ./cypress/integration/integration.spec.js",
     "test:integration:run": "npm run  start-serve cy:run:integration "
 
