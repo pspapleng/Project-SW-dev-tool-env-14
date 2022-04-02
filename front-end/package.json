@@ -34,14 +34,15 @@
 
     "start-serve": "start-test record http://localhost:3000",
 
+    "cover:e2e": "npm run test:e2e:run  && npm run cover:report",
     "cy:run:e2e": "cypress run -s ./cypress/integration/e2e.spec.js",
-    "test:e2e:run": "npm run start-serve cy:run:e2e & npx nyc report --reporter=text",
+    "test:e2e:run": "nyc --silent --no-clean npm run start-serve cy:run:e2e",
 
+    "cover:component": "npm run test:component:run && npm run cover:report",
     "cy:run:component": "cypress run -s ./cypress/integration/component.spec.js",
-    "test:component:run": "npm run start-serve cy:run:component & npx nyc report --reporter=text",
+    "test:component:run": "nyc --silent npm run start-serve cy:run:component",
+    "cover:report": "nyc report --reporter=lcov --reporter=text"
 
-    "cy:run:integration": "cypress run -s ./cypress/integration/integration.spec.js",
-    "test:integration:run": "npm run start-serve cy:run:integration & npx nyc report --reporter=text"
   },
   "eslintConfig": {
     "extends": [
