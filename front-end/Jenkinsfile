@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-                git branch: 'main', url: 'https://github.com/pspapleng/Project-SW-dev-tool-env-14.git'
+                checkout scm
             }
         }
         stage('Download dependency') {
@@ -45,7 +45,8 @@ pipeline {
             steps {
                 dir('./front-end'){
                     echo 'Step: Component Test'
-        //             sh 'yarn test:component:run'
+                    sh 'yarn test:component:run'
+        
         //             publishHTML target: [
         //                 allowMissing: false,
         //                 alwaysLinkToLastBuild: false,
