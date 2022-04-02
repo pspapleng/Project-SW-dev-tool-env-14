@@ -69,7 +69,7 @@ pipeline {
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
-                        reportDir: "./cypress/reports/html",
+                        reportDir: "./coverage",
                         reportFiles: "index.html",
                         reportName: 'Component Test Report'
                     ]
