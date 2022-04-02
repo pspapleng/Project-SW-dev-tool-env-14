@@ -70,7 +70,7 @@ pipeline {
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
                         reportDir: "./coverage",
-                        reportFiles: "index.html",
+                        reportFiles: "report.html",
                         reportName: 'Component Test Report'
                     ]
                 }
