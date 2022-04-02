@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-                git branch: 'feature/test-npm-run-all', url: 'https://github.com/pspapleng/Project-SW-dev-tool-env-14.git'
+                checkout scm
             }
         }
         stage('Download dependency') {
@@ -26,20 +26,53 @@ pipeline {
                 }
             }
         }
-        stage('Run Unit Test') {
+        stage('Run unit test and Generate unit test report') {
             steps {
-                dir('./front-end'){
-                    sh 'yarn jest:unit:run'
+                dir('./front-end') {
+                    sh 'yarn jest:unit:cov'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: "./coverage/lcov-report",
+                        reportFiles: "index.html",
+                        reportName: 'Unit Test Coverage Report'
+                    ]
+
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: "./coverage",
+                        reportFiles: "report.html",
+                        reportName: 'Unit Test Report'
+                    ]
                 }
             }
         }
-        stage('Run Component Test') {
+        stage('Run component test and Generate component test report') {
             steps {
                 dir('./front-end'){
-                    script{
-                        echo "Step: Component Test"
-                        // sh 'yarn cypress:component:run'
-                    }
+                    echo 'Step: Component Test'
+                    // sh 'yarn test:component:run'
+        
+                    // publishHTML target: [
+                    //     allowMissing: false,
+                    //     alwaysLinkToLastBuild: false,
+                    //     keepAll: true,
+                    //     reportDir: './coverage/lcov-report',
+                    //     reportFiles: 'index.html',
+                    //     reportName: 'Component Test Coverage Report'
+                    // ]
+
+                    // publishHTML target: [
+                    //     allowMissing: false,
+                    //     alwaysLinkToLastBuild: false,
+                    //     keepAll: true,
+                    //     reportDir: "./cypress/reports/html",
+                    //     reportFiles: "index.html",
+                    //     reportName: 'Component Test Report'
+                    // ]
                 }
             }
         }
@@ -67,19 +100,31 @@ pipeline {
                 }
             }
         }
-        stage('Run E2E Test') {
+        stage('Run E2E test and Generate E2E test report') {
             steps {
                 dir('./front-end'){
-                    echo "Step: E2E Test"
-                    // sh 'mkdir -p ./.nyc_output'
-                    // sh 'yarn run cypress:e2e:cov:cobertura'
+                    // echo "Step: E2E Test"
+                    sh 'mkdir -p ./.nyc_output'
+                    sh 'yarn cover:e2e'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'E2E Test Coverage Report'
+                    ]
+
+                    //     publishHTML target: [
+                    //     allowMissing: false,
+                    //     alwaysLinkToLastBuild: false,
+                    //     keepAll: true,
+                    //     reportDir: "./cypress/reports/html",
+                    //     reportFiles: "index.html",
+                    //     reportName: 'E2E Test Report'
+                    // ]
                 }
             }
-            // post {
-            //     always {
-            //       step([$class: 'CoberturaPublisher', coberturaReportFile: 'front-end/coverage/cobertura-coverage.xml'])
-            //     }
-            // }
         }
     }
     post{
