@@ -1,4 +1,4 @@
-def dockerImage
+// def dockerImage
 
 def notifyLINE(status) {
     def token = "T7Lx3OKg4LUAaxyJ2N0ZFJLBqnDluRBaqOGAWr0m8by"
