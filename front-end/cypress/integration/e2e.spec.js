@@ -19,7 +19,7 @@ function fakeLocation(latitude, longitude) {
 
 beforeEach(() => {
     
-    cy.visit('https://moodment.ourweus.space/', fakeLocation(13.7120371, 100.7887341))
+    cy.visit('/', fakeLocation(13.7120371, 100.7887341))
 })
 
 afterEach(() => {
@@ -70,6 +70,8 @@ describe('Do Assessment with Suggest Service Center result = ไม่มีค�
         });
     })
 })
+
+
 
 describe('Do Assessment with Suggest Service Center result = มีความเสี่ยง (ใช่/ใช่)', function () {
     it('the result should show มีความเสี่ยง and can redirect to ServiceCenterInfo page', function () {

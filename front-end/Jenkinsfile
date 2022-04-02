@@ -103,9 +103,9 @@ pipeline {
         stage('Run E2E Test') {
             steps {
                 dir('./front-end'){
-                    echo "Step: E2E Test"
+                    // echo "Step: E2E Test"
                      sh 'mkdir -p ./.nyc_output'
-                    sh 'yarn test:e2e:run'
+                    sh 'yarn cover:e2e'
                     publishHTML target: [
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
