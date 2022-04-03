@@ -31,7 +31,7 @@
     "jest:unit:cov": "yarn run test --coverage ./src/tests/unit.test.js ./src/app.test.js",
 
     "jest:component:run": "jest -i ./src/tests/component.test.js",
-    "jest:component:cov": "jest --coverage ./src/tests/component.test.js ./src/app.test.js",
+    "jest:component:cov": "yarn run test --coverage ./src/tests/component.test.js ./src/app.test.js",
 
     "record": "cross-env BROWSER=none react-scripts -r @cypress/instrument-cra start -- \"cypress open\"",
     "start-serve": "start-test record http://localhost:3000",
