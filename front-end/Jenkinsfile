@@ -103,9 +103,9 @@ pipeline {
         stage('Run E2E test and Generate E2E test report') {
             steps {
                 dir('./front-end'){
-                    // echo "Step: E2E Test"
+                    echo "Step: E2E Test"
                     // sh 'mkdir -p ./.nyc_output'
-                    sh 'yarn cover:e2e'
+                    // sh 'yarn cover:e2e'
                     // publishHTML target: [
                     //     allowMissing: false,
                     //     alwaysLinkToLastBuild: false,
@@ -115,14 +115,14 @@ pipeline {
                     //     reportName: 'E2E Test Coverage Report'
                     // ]
 
-                        publishHTML target: [
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: "./cypress/reports/html",
-                        reportFiles: "index.html",
-                        reportName: 'E2E Test Report'
-                    ]
+                    //     publishHTML target: [
+                    //     allowMissing: false,
+                    //     alwaysLinkToLastBuild: false,
+                    //     keepAll: true,
+                    //     reportDir: "./cypress/reports/html",
+                    //     reportFiles: "index.html",
+                    //     reportName: 'E2E Test Report'
+                    // ]
                 }
             }
         }
