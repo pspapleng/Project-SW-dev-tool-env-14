@@ -1,6 +1,5 @@
 def notifyLINE(status) {
-    // def token = credentials('token')
-    withCredentials([string(credentialsId: 'line-notify-token-14', variable: 'TOKEN')]) { //set SECRET with the credential content
+    withCredentials([string(credentialsId: 'line-notify-token-14', variable: 'TOKEN')]) { 
        def token = TOKEN
        def jobName = env.JOB_NAME
        def buildNo = env.BUILD_NUMBER
@@ -9,7 +8,6 @@ def notifyLINE(status) {
        def message = "${jobName} Build #${buildNo} ${status} \r\n"
        sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
     }
-    
 }
 
 pipeline {
