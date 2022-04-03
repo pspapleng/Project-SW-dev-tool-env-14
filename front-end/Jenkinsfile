@@ -105,7 +105,7 @@ pipeline {
             steps {
                 dir('./front-end'){
                     // echo "Step: E2E Test"
-                    // sh 'mkdir -p ./.nyc_output'
+                    sh 'mkdir -p ./.nyc_output'
                     sh 'yarn cover:e2e'
                     publishHTML target: [
                         allowMissing: false,
