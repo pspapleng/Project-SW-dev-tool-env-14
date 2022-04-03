@@ -29,6 +29,7 @@ pipeline {
         stage('Run unit test and Generate unit test report') {
             steps {
                 dir('./front-end') {
+                    sh 'rmdir /s ./coverage'
                     sh 'yarn jest:unit:cov'
                     publishHTML target: [
                         allowMissing: false,
