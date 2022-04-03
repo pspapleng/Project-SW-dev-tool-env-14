@@ -55,7 +55,7 @@ pipeline {
             steps {
                 dir('./front-end'){
                     // echo 'Step: Component Test'
-                    sh 'jest:component:cov'
+                    sh 'yarn run jest:component:cov'
         
                     publishHTML target: [
                         allowMissing: false,
