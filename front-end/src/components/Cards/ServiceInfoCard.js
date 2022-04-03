@@ -41,13 +41,14 @@ export default function ServiceInfoCard({ data }) {
         <Grid item xs={8} sx={{ paddingLeft: 5 }}>
           <CardContent sx={{ textAlign: "left", padding: "0px" }}>
             <Typography
+              className="name"
               component="div"
               variant="h5"
               sx={{ fontWeight: "bold", fontSize: 36, marginBottom: 3 }}
             >
               {data.name}
             </Typography>
-            <div style={contentStyle}>
+            <div className="address" style={contentStyle}>
               <span style={infoText}>
                 {data.type === "ONLINE"
                   ? "Online"
@@ -56,11 +57,11 @@ export default function ServiceInfoCard({ data }) {
                   : `${data.address} ${data.province}`}
               </span>
             </div>
-            <div style={contentStyle}>
+            <div className="office_hours" style={contentStyle}>
               <span style={infoText}>เวลาทำการ: {data.office_hours || "-"}</span>
             </div>
             {data.website ? (
-              <div style={contentStyle}>
+              <div className="website" style={contentStyle}>
                 <LanguageIcon sx={{ mr: 1 }} />
                 <a
                   href={data.website}
@@ -75,7 +76,7 @@ export default function ServiceInfoCard({ data }) {
               false
             )}
             {data.facebook ? (
-              <div style={contentStyle}>
+              <div className="facebook" style={contentStyle}>
                 <FacebookIcon sx={{ mr: 1 }} />
                 <a
                   href={data.facebook}
@@ -91,14 +92,14 @@ export default function ServiceInfoCard({ data }) {
             )}
             {data.email ? (
               data.email.length > 5 ? (
-                <div style={contentStyle}>
+                <div className="email" style={contentStyle}>
                   <LocalPostOfficeIcon sx={{ mr: 1 }}/>
                   <span style={infoText}>{data.email}</span>
                 </div>
               ) : null
             ) : null}
             {data.cost !== '฿฿' ? (
-              <div style={contentStyle}>
+              <div className="cost" style={contentStyle}>
                 <AttachMoneyIcon sx={{ mr: 1 }}/>
                 <span style={infoText}>{data.cost}</span>
               </div>
