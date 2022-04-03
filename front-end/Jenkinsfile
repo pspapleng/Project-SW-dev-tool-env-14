@@ -93,7 +93,6 @@ pipeline {
                 }
             }
         }
-        // ssh-mood-ment
         stage('Deploy') {
             steps {
                 script {
@@ -115,7 +114,6 @@ pipeline {
                         reportFiles: 'index.html',
                         reportName: 'E2E Test Coverage Report'
                     ]
-
                     //     publishHTML target: [
                     //     allowMissing: false,
                     //     alwaysLinkToLastBuild: false,
