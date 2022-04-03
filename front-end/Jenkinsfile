@@ -29,8 +29,8 @@ pipeline {
         stage('Run unit test and Generate unit test report') {
             steps {
                 dir('./front-end') {
-                    sh 'rmdir /s coverage'
-                    sh 'yarn jest:unit:cov'
+                    sh 'yarn run jest:unit:cov'
+                    
                     publishHTML target: [
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
@@ -104,17 +104,17 @@ pipeline {
         stage('Run E2E test and Generate E2E test report') {
             steps {
                 dir('./front-end'){
-                    echo "Step: E2E Test"
+                    // echo "Step: E2E Test"
                     // sh 'mkdir -p ./.nyc_output'
-                    // sh 'yarn cover:e2e'
-                    // publishHTML target: [
-                    //     allowMissing: false,
-                    //     alwaysLinkToLastBuild: false,
-                    //     keepAll: true,
-                    //     reportDir: './coverage/lcov-report',
-                    //     reportFiles: 'index.html',
-                    //     reportName: 'E2E Test Coverage Report'
-                    // ]
+                    sh 'yarn cover:e2e'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'E2E Test Coverage Report'
+                    ]
 
                     //     publishHTML target: [
                     //     allowMissing: false,
