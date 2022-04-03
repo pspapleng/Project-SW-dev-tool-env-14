@@ -29,7 +29,8 @@ pipeline {
         stage('Run unit test and Generate unit test report') {
             steps {
                 dir('./front-end') {
-                    sh 'yarn jest:unit:cov'
+                    sh 'yarn run jest:unit:cov'
+                    
                     publishHTML target: [
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
@@ -53,26 +54,26 @@ pipeline {
         stage('Run component test and Generate component test report') {
             steps {
                 dir('./front-end'){
-                    echo 'Step: Component Test'
-                    // sh 'yarn test:component:run'
+                    // echo 'Step: Component Test'
+                    sh 'yarn run jest:component:cov'
         
-                    // publishHTML target: [
-                    //     allowMissing: false,
-                    //     alwaysLinkToLastBuild: false,
-                    //     keepAll: true,
-                    //     reportDir: './coverage/lcov-report',
-                    //     reportFiles: 'index.html',
-                    //     reportName: 'Component Test Coverage Report'
-                    // ]
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Component Test Coverage Report'
+                    ]
 
-                    // publishHTML target: [
-                    //     allowMissing: false,
-                    //     alwaysLinkToLastBuild: false,
-                    //     keepAll: true,
-                    //     reportDir: "./cypress/reports/html",
-                    //     reportFiles: "index.html",
-                    //     reportName: 'Component Test Report'
-                    // ]
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: "./coverage",
+                        reportFiles: "report.html",
+                        reportName: 'Component Test Report'
+                    ]
                 }
             }
         }
@@ -92,7 +93,6 @@ pipeline {
                 }
             }
         }
-        // ssh-mood-ment
         stage('Deploy') {
             steps {
                 script {
@@ -114,7 +114,6 @@ pipeline {
                         reportFiles: 'index.html',
                         reportName: 'E2E Test Coverage Report'
                     ]
-
                     //     publishHTML target: [
                     //     allowMissing: false,
                     //     alwaysLinkToLastBuild: false,

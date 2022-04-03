@@ -8,6 +8,7 @@ module.exports = {
     window: {},
   },
   rootDir: "src",
+  coverageDirectory: "../coverage",
   reporters: [
     "default",
     [
