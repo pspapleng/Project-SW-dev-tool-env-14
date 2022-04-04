@@ -7,13 +7,9 @@ services:
             context: ./back-end
             target: production
             dockerfile: ./Dockerfile
-        ports:
-            - 8080:3000
     front_end:
         image: psppx/team-14-frontend
         build:
             context: ./front-end
             target: production
             dockerfile: ./Dockerfile
-        ports:
-            - 3000:80
