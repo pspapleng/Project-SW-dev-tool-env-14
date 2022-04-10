@@ -7,7 +7,7 @@ export class ServiceCenterController {
 
   @Get()
   async getAllServiceCenter(@Query('search') search: string) {
-    return 'getAllServiceCenter ' + search;
+    return this.serviceCenterSerivce.getAllServiceCenter()
   }
 
   @Get('/location')

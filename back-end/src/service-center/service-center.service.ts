@@ -41,4 +41,8 @@ export class ServiceCenterSerivce {
     }
     return service;
   }
+  async getAllServiceCenter(): Promise<any> {
+    const serviceCenters = await this.serviceCenterRepository.find();
+    return serviceCenters
+  }
 }
