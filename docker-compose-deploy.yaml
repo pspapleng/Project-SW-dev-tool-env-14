@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
     back_end:
-        image: psppx/team-14-backend
+        image: psppx/team-14-backend:1.0.0
         ports:
             - 4141:3000
     front_end:
-        image: psppx/team-14-frontend
+        image: psppx/team-14-frontend:1.0.0
         ports:
             - 1414:80
