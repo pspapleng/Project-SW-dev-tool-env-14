@@ -6,8 +6,12 @@ export class ServiceCenterController {
   constructor(private serviceCenterSerivce: ServiceCenterSerivce) {}
 
   @Get()
-  async getAllServiceCenter(@Query('search') search: string) {
+  async getAllServiceCenter() {
     return this.serviceCenterSerivce.getAllServiceCenter()
+  }
+  @Get('/search')
+  async getServiceCenterBySearch(@Query('search') search: string){
+    return this.serviceCenterSerivce.getServiceCenterBySearch(search)
   }
 
   @Get('/location')

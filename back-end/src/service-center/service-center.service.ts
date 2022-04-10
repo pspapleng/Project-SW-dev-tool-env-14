@@ -45,4 +45,16 @@ export class ServiceCenterSerivce {
     const serviceCenters = await this.serviceCenterRepository.find();
     return serviceCenters
   }
+  async getServiceCenterBySearch(search: string): Promise<any>{
+    const serviceCenters = await this.serviceCenterRepository.find();
+    const result = serviceCenters.map((serviceCenter) => {
+      if(serviceCenter.name.toLowerCase().includes(search) || serviceCenter.province.includes(search)){
+        return serviceCenter
+      }
+      else{
+        return null
+      }
+    })
+    return result
+  }
 }
