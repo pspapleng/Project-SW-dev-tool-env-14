@@ -76,27 +76,6 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
-            steps {
-                dir('./back-end') {
-                    script{
-                        echo "Step: deploy"
-                        // dockerImage = docker.build("ghcr.io/pspapleng/project-sw-dev-tool-env-14/back-end:latest")
-                    }
-                }
-            }
-        }
-        stage('Push') {
-            steps {
-                script{
-                    echo "Step: deploy"
-                    // docker.withRegistry('https://ghcr.io', 'github-registry') {
-                    //     dockerImage.push("latest")
-                    // }
-                }
-            }
-        }
-        // ssh-mood-ment
         stage('Deploy') {
             steps {
                 script {

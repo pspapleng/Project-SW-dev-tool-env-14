@@ -56,7 +56,6 @@ pipeline {
         stage('Run component test and Generate component test report') {
             steps {
                 dir('./front-end'){
-                    // echo 'Step: Component Test'
                     sh 'yarn run jest:component:cov'
         
                     publishHTML target: [
@@ -79,23 +78,6 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
-            steps {
-                dir('./front-end'){
-                    script{
-                        echo "Step: deploy"
-                        sh "docker --help"
-                    }
-                }
-            }
-        }
-        stage('Push') {
-            steps {
-                script{
-                    echo "Step: deploy"
-                }
-            }
-        }
         stage('Deploy') {
             steps {
                 script {
@@ -106,7 +88,6 @@ pipeline {
         stage('Run E2E test and Generate E2E test report') {
             steps {
                 dir('./front-end'){
-                    // echo "Step: E2E Test"
                     sh 'mkdir -p ./.nyc_output'
                     sh 'yarn cover:e2e'
                     publishHTML target: [
@@ -117,14 +98,6 @@ pipeline {
                         reportFiles: 'index.html',
                         reportName: 'E2E Test Coverage Report'
                     ]
-                    //     publishHTML target: [
-                    //     allowMissing: false,
-                    //     alwaysLinkToLastBuild: false,
-                    //     keepAll: true,
-                    //     reportDir: "./cypress/reports/html",
-                    //     reportFiles: "index.html",
-                    //     reportName: 'E2E Test Report'
-                    // ]
                 }
             }
         }
