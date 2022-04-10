@@ -22,3 +22,32 @@
 .disable-button{
     pointer-events: none;
 }
+.center-container{
+    padding: 30px;
+}
+
+.center-body-container{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 3fr 1fr;
+}
+
+.center-search{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 3fr 1fr;
+}
+.all-service{
+    width: 100%;
+}
+
+.header-filter-container{
+    text-align: left;
+    padding: 10px 20px 10px;
+    // font-size: 18px;
+    
+}
+.header-filter{
+    display: flex;
+    justify-content: center;
+}

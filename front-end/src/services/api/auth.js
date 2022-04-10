@@ -10,9 +10,9 @@ const auth = {
             console.log(e)
         }
     },
-    getAllServiceCenter: async (id) => {
+    getAllServiceCenter: async () => {
         try {
-            const response = request.get(`/getUser?id=${id}`)
+            const response = request.get(`/service_center`)
             return response
         }
         catch (e) {
