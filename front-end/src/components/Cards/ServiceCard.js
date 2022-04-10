@@ -46,7 +46,11 @@ function ServiceCenterCard({data}) {
                     <CardMedia
                       component="img"
                       style={{ width: 150, height: 150, objectFit: "cover" }}
-                      image={"https://cr.lnwfile.com/2p7f81.jpg"}
+                      image={
+                        service.imageUrl
+                          ? service.imageUrl
+                          : "https://cr.lnwfile.com/2p7f81.jpg"
+                      }
                       alt="Live from space album cover"
                     />
                   </Grid>
