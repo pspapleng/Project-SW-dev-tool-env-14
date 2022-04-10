@@ -182,6 +182,7 @@ function ResultModal({ result }) {
                     <CardContent sx={{ padding: "0px" }}>
                       <Box sx={{ textAlign: "left" }}>
                         <Typography
+                          className="rName"
                           component="div"
                           variant="h5"
                           width={'100%'}
