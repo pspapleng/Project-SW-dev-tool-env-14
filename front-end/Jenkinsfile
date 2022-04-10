@@ -78,10 +78,27 @@ pipeline {
                 }
             }
         }
+        stage('ฺBuild') {
+            steps {
+                script {
+                        echo "Step: build"
+                        // sh "docker-compose -f ./docker-compose-build.yaml build front_end"
+                }
+            }
+        }
+        stage('Push') {
+            steps {
+                script {
+                        echo "Step: push"
+                        // sh "docker-compose -f ./docker-compose-build.yaml push front_end"
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 script {
-                    echo "Step: deploy"
+                        echo "Step: deploy"
+                        // sh "docker-compose -f docker-compose-deploy.yaml up -d front_end"
                 }
             }
         }
