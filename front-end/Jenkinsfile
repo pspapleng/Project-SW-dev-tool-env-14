@@ -84,6 +84,7 @@ pipeline {
                 dir('./front-end'){
                     script{
                         echo "Step: deploy"
+                        sh "docker --help"
                     }
                 }
             }
