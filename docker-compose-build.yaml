@@ -8,7 +8,7 @@ services:
             target: production
             dockerfile: ./Dockerfile
     front_end:
-        image: psppx/team-14-frontend:1.0.0
+        image: psppx/team-14-frontend:1.0.1
         build:
             context: ./front-end
             target: production
