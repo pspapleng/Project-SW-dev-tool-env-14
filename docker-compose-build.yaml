@@ -2,13 +2,13 @@ version: '3.8'
 
 services:
     back_end:
-        image: psppx/team-14-backend:${BACK_END_VERSION}
+        image: psppx/team-14-backend:1.0.0
         build:
             context: ./back-end
             target: production
             dockerfile: ./Dockerfile
     front_end:
-        image: psppx/team-14-frontend:${FRONT_END_VERSION}
+        image: psppx/team-14-frontend:1.0.0
         build:
             context: ./front-end
             target: production
