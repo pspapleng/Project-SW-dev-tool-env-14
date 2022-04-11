@@ -13,14 +13,19 @@ import Grid from "@mui/material/Grid";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 function ServiceCenterCard({data}) {
+  const handleOnClick = useCallback(
+    (id) => (window.location.href =`/ServiceCenterInfo/${id}`, { serviceCenterId: id }),
+    []
+  );
+
     return(
         <>
         
         {data.map((service, i) => (
             <Card
+              onClick={() => handleOnClick(service.id)}
                 key={i}
-                // onClick={() => toService(service.id)}
-                // key={index}
+
                 sx={{
                   display: "flex",
                   padding: "20px",
