@@ -2,17 +2,19 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import ClearIcon from '@mui/icons-material/Clear';
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
 import ServiceCenterCard from "../../components/Cards/ServiceCard";
-import { MdFilterList } from "react-icons/md";
+import { MdFilterList, MdOutlineClose } from "react-icons/md";
 import axios from "axios";
 import request from "../../services/api/auth";
 
 function ServiceCenter() {
   const [inputText, setInputText] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
+  const [online, setOnline] = useState(false);
+  const [onsite, setOnsite] = useState(false); 
 
   const data = [
     {
@@ -43,7 +45,7 @@ function ServiceCenter() {
       "name": "คลินิกจิตเวช โรงพยาบาลกลาง",
       "description": "โรงพยาบาลกลางเป็นสถานที่ให้บริการบำบัดรักษาผู้ป่วย สร้างเสริมสุขภาพอนามัย และป้องกันโรค โดยเน้นบริการที่ดีเลิศ ตลอดจนปรับปรุงฟื้นฟูสภาพแวดล้อมและบรรยากาศทั้งภายในอาคารและรอบโรงพยาบาลให้ดีขึ้นเพื่อคุณภาพชีวิตที่ดีแก่ผู้รับบริการ",
       "imageUrl": "https://hivthai.org/wp-content/uploads/home-04.jpg",
-      "type": "OFFLINE",
+      "type": "ONLINE",
       "address": "514 ถนนหลวง ป้อมปราบศัตรูพ่าย",
       "province": "กรุงเทพมหานคร",
       "website": "http://www.klanghospital.go.th/",
@@ -103,7 +105,7 @@ function ServiceCenter() {
       "name": "โรงพยาบาลมนารมย์",
       "description": "โรงพยาบาลมนารมย์เป็นโรงพยาบาลเอกชนเฉพาะทางด้านสุขภาพจิต ที่มอบทางเลือกใหม่สำหรับผู้ที่ต้องการค้นหาและพัฒนาศักยภาพในตัวเองเพื่อคุณภาพชีวิตที่ดีขึ้น การดูแลรักษาสุขภาพจิตให้แข็งแรงสมบูรณ์เป็นการลงทุนที่คุ้มค่า และยั่งยืนสำหรับการใช้ชีวิตอย่างเป็นสุข",
       "imageUrl": "https://user-images.githubusercontent.com/56313629/152841505-46719a2b-ba36-4dc1-af34-c53c9dc2053b.jpg",
-      "type": "OFFLINE",
+      "type": "ONLINE",
       "address": "เลขที่ 9 ถนนสุขุมวิท 70/3 แขวงบางนาใต้ เขตบางนา",
       "province": "เชียงใหม่",
       "website": "https://www.manarom.com/",
@@ -122,18 +124,28 @@ function ServiceCenter() {
       e.preventDefault();
       const lowerCase = e.target.value.toLowerCase();
       setInputText(lowerCase);
-    
-    
     }
-    
   };
 
   const getSearchResult = useMemo(() => {
-    const result = data.filter((e) => e.name.toLowerCase().includes(inputText) || e.province.toLowerCase().includes(inputText));
-    // setSearchResult(result);
+    let result;
+    if (online && onsite) {
+      const resultCheck = data.filter((e) => e.type.includes("BOTH"));
+      result = resultCheck.filter((e) => e.name.toLowerCase().includes(inputText) || e.province.toLowerCase().includes(inputText));
+    } else if (onsite) {
+      const resultCheck = data.filter((e) => e.type.includes("OFFLINE") || e.type.includes("BOTH")  );
+      result = resultCheck.filter((e) => e.name.toLowerCase().includes(inputText) || e.province.toLowerCase().includes(inputText));
+    } else if (online) {
+      const resultCheck = data.filter((e) => e.type.includes("ONLINE") || e.type.includes("BOTH"));
+      result = resultCheck.filter((e) => e.name.toLowerCase().includes(inputText) || e.province.toLowerCase().includes(inputText));
+    } else {
+      result = data.filter((e) => e.name.toLowerCase().includes(inputText) || e.province.toLowerCase().includes(inputText));
+    }
+
     return result;
-  }, [inputText])
+  }, [inputText, online, onsite])
   console.log(inputText)
+
 
 
   // useEffect( () => {
@@ -172,6 +184,7 @@ function ServiceCenter() {
               placeholder="Search equipment name and province"
               onKeyDown={inputHandler}
             />
+            {/* <ClearIcon sx={{ p: 1, fontSize: "25px", color: "white" }} /> */}
           </Paper>
         </div>
         <div className="center-body">
@@ -200,8 +213,8 @@ function ServiceCenter() {
                   </div>
                   <FormControlLabel control={<Checkbox color="default"/>} label="Favorite" />
                   <h3>รูปแบบการให้บริการ</h3>
-                  <FormControlLabel control={<Checkbox color="default"/>} label="Onsite" /><br />
-                  <FormControlLabel control={<Checkbox color="default"/>} label="Online" />
+                  <FormControlLabel control={<Checkbox color="default"/>} label="Onsite" value="onsite" onChange={(e) => setOnsite(e.target.checked)}/><br />
+                  <FormControlLabel control={<Checkbox color="default"/>} label="Online" onChange={(e) => setOnline(e.target.checked)}/>
                 </div>
               </Paper>
             </div>

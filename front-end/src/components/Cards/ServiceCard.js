@@ -10,7 +10,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
-import { MdFavorite } from "react-icons/md";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 function ServiceCenterCard({data}) {
     return(
@@ -29,7 +29,6 @@ function ServiceCenterCard({data}) {
                   mt: 2,
                   ":hover": {
                     bgcolor: "lightgray",
-                    // opacity: .6,
                     cursor: "pointer",
                     transition: "background-color 500ms",
                   },
@@ -60,22 +59,18 @@ function ServiceCenterCard({data}) {
                         <Typography
                           className="rName"
                           component="div"
-                          variant="h5"
                           width={"100%"}
-                          sx={{ fontWeight: "bold", paddingBottom: 2 }}
+                          sx={{ fontWeight: "bold", paddingBottom: 2, fontSize: "18px"}}
                         >
                           {service.name}
                         </Typography>
                         <Typography
                           style={{ display: "flex", alignItems: "flex-end" }}
                         >
-                          {service.type === 'ONLINE' ? false : service.province}
+                          {service.province}
                           <br />
                           {service.type === 'ONLINE' ? 'Online' : service.type === 'BOTH' ? 'Online and On Site' : 'On Site'}
                           <br />
-                          {/* {service.distance > -1 & service.type !== 'ONLINE'
-                              ? `${(service.distance/1000).toFixed(2)} km. away`
-                              : ""} */}
                           10 reviews
                         </Typography>
                        
@@ -83,6 +78,7 @@ function ServiceCenterCard({data}) {
                     </CardContent>
                   </Grid>
                   <Grid item xs={7} style={{ justifySelf: "right" }}>
+                    {/* MdFavoriteBorder */}
                     <MdFavorite style={{ fontSize: "25px"}}/>
                   </Grid>
                 </Grid>
