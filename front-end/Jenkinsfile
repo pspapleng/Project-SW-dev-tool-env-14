@@ -12,6 +12,9 @@ def notifyLINE(status) {
 
 pipeline {
     agent any
+    environment {
+		DOCKERHUB_CREDENTIALS=credentials('team-14-docker-hub-credential')
+	}
     options {
         ansiColor('xterm')
     }
@@ -56,7 +59,6 @@ pipeline {
         stage('Run component test and Generate component test report') {
             steps {
                 dir('./front-end'){
-                    // echo 'Step: Component Test'
                     sh 'yarn run jest:component:cov'
         
                     publishHTML target: [
@@ -79,33 +81,39 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
-            steps {
-                dir('./front-end'){
-                    script{
-                        echo "Step: deploy"
-                    }
-                }
-            }
-        }
-        stage('Push') {
-            steps {
-                script{
-                    echo "Step: deploy"
-                }
-            }
-        }
+		stage('Build') {
+			steps {
+                echo "stage: Build"
+				// sh 'docker-compose -f ./docker-compose-build.yaml build front_end'
+			}
+		}
+		stage('Login to Docker Hub') {
+			steps {
+                echo "stage: Login"
+				// sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+		stage('Push') {
+			steps {
+                echo "stage: Push"
+				// sh 'docker-compose -f ./docker-compose-build.yaml build front_end'
+			}
+		}
         stage('Deploy') {
             steps {
-                script {
-                    echo "Step: deploy"
-                }
+                echo "stage: Deploy"
+                // sshagent(credentials: ['team14-frontend-server']) {
+                //     sh '''
+                //         [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+                //         ssh-keyscan -H 159.65.12.177 >> ~/.ssh/known_hosts
+                //         ssh root@159.65.12.177 'cd ./frontend-14/ && docker-compose -f ./docker-compose-deploy.yaml pull && docker-compose -f ./docker-compose-deploy.yaml up -d'
+                //     '''
+                // }               
             }
         }
         stage('Run E2E test and Generate E2E test report') {
             steps {
                 dir('./front-end'){
-                    // echo "Step: E2E Test"
                     sh 'mkdir -p ./.nyc_output'
                     sh 'yarn cover:e2e'
                     publishHTML target: [
@@ -116,14 +124,6 @@ pipeline {
                         reportFiles: 'index.html',
                         reportName: 'E2E Test Coverage Report'
                     ]
-                    //     publishHTML target: [
-                    //     allowMissing: false,
-                    //     alwaysLinkToLastBuild: false,
-                    //     keepAll: true,
-                    //     reportDir: "./cypress/reports/html",
-                    //     reportFiles: "index.html",
-                    //     reportName: 'E2E Test Report'
-                    // ]
                 }
             }
         }

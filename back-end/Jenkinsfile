@@ -12,6 +12,9 @@ def notifyLINE(status) {
 
 pipeline {
     agent any
+    environment {
+		DOCKERHUB_CREDENTIALS=credentials('team-14-docker-hub-credential')
+	}
     options {
         ansiColor('xterm')
     }
@@ -76,44 +79,39 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
-            steps {
-                dir('./back-end') {
-                    script{
-                        echo "Step: deploy"
-                        // dockerImage = docker.build("ghcr.io/pspapleng/project-sw-dev-tool-env-14/back-end:latest")
-                    }
-                }
-            }
-        }
-        stage('Push') {
-            steps {
-                script{
-                    echo "Step: deploy"
-                    // docker.withRegistry('https://ghcr.io', 'github-registry') {
-                    //     dockerImage.push("latest")
-                    // }
-                }
-            }
-        }
-        // ssh-mood-ment
+		stage('Build') {
+			steps {
+                echo "stage: Build"
+				// sh 'docker-compose -f ./docker-compose-build.yaml build back_end'
+			}
+		}
+		stage('Login to Docker Hub') {
+			steps {
+                echo "stage: Login"
+				// sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+		stage('Push') {
+			steps {
+                echo "stage: Push"
+				// sh 'docker-compose -f ./docker-compose-build.yaml build back_end'
+			}
+		}
         stage('Deploy') {
             steps {
-                script {
-                        echo "Step: deploy"
-                        // sshagent(credentials: ['ssh-mood-ment']) {
-                        // sh '''
-                        //     [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                        //     ssh-keyscan -H 178.128.60.199 >> ~/.ssh/known_hosts
-                        //     ssh root@178.128.60.199 'cd ./deployments/ && sh ./setup.sh latest'
-                        // '''
-                        // }
-                }
+                echo "stage: Deploy"
+                // sshagent(credentials: ['team14-backend-server']) {
+                //     sh '''
+                //         [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+                //         ssh-keyscan -H 159.223.45.216 >> ~/.ssh/known_hosts
+                //         ssh root@159.223.45.216 'cd ./backend-14/ && docker-compose -f ./docker-compose-deploy.yaml pull && docker-compose -f ./docker-compose-deploy.yaml up -d'
+                //     '''
+                // }               
             }
         }
         stage('Test Backend') {
             steps {
-                sh "curl https://moodment-api.ourweus.space/"
+                sh "curl http://159.223.45.216:4141/"
             }
         }
         stage('Run E2E test and Generate E2E test report') {
