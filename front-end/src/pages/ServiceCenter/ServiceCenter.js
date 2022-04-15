@@ -474,6 +474,8 @@ function ServiceCenter() {
           >
             <SearchIcon sx={{ p: 1, fontSize: "25px", color: "white" }} />
             <InputBase
+              id="search-bar"
+              className="search"
               sx={{
                 ml: 1,
                 mt: "4px",
@@ -512,10 +514,10 @@ function ServiceCenter() {
                     />
                     <h3>Filter</h3>
                   </div>
-                  <FormControlLabel control={<Checkbox color="default"/>} label="Favorite" />
+                  <FormControlLabel control={<Checkbox color="default" id="chcek-favorite"/>} label="Favorite"/>
                   <h3>รูปแบบการให้บริการ</h3>
-                  <FormControlLabel control={<Checkbox color="default"/>} label="On Site" value="onsite" onChange={(e) => setOnsite(e.target.checked)}/><br />
-                  <FormControlLabel control={<Checkbox color="default"/>} label="Online" onChange={(e) => setOnline(e.target.checked)}/>
+                  <FormControlLabel control={<Checkbox color="default" id="chcek-onsite"/>} label="On Site" value="onsite" onChange={(e) => setOnsite(e.target.checked)}/><br />
+                  <FormControlLabel control={<Checkbox color="default" id="chcek-online"/>} label="Online" onChange={(e) => setOnline(e.target.checked)}/>
                 </div>
               </Paper>
             </div>
