@@ -1,3 +1,8 @@
+def remote = [:]
+remote.name = "backend-remove-server"
+remote.host = "159.223.45.216"
+remote.allowAnyHosts = true
+
 def notifyLINE(status) {
     withCredentials([string(credentialsId: 'line-notify-token-14', variable: 'TOKEN')]) { 
        def token = TOKEN
@@ -76,13 +81,14 @@ pipeline {
         }
         stage('Build and Deploy') {
             steps {
-                sshagent(credentials: ['team14-backend-server']) {
-                    sh '''
-                        [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                        ssh-keyscan -H 159.223.45.216 >> ~/.ssh/known_hosts
-                        ssh root@159.223.45.216 'echo "Hello world"'
-                    '''
-                }            
+                withCredentials([sshUserPrivateKey(credentialsId: 'team14-backend-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+                    remote.user = userName
+                    remote.identityFile = identity
+                    stage("SSH Steps Rocks!") {
+                        writeFile file: 'abc.sh', text: 'ls'
+                        sshCommand remote: remote, command: 'echo "hellow world"'
+                    }
+                }         
                 // withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')], [string(credentialsId: 'backend-server', variable: 'HOST')])
                 // withCredentials([string(credentialsId: 'backend-server', variable: 'HOST')])
                 // script{
