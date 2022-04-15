@@ -23,6 +23,8 @@ function ServiceCenterCard({data}) {
         
         {data.map((service, i) => (
             <Card
+              id="service-card"
+              className="services"
               onClick={() => handleOnClick(service.id)}
                 key={i}
 
@@ -48,6 +50,8 @@ function ServiceCenterCard({data}) {
                 >
                   <Grid item xs={3}>
                     <CardMedia
+                      id="img-card"
+                      className="image"
                       component="img"
                       style={{ width: 150, height: 150, objectFit: "cover" }}
                       image={
@@ -62,7 +66,8 @@ function ServiceCenterCard({data}) {
                     <CardContent sx={{ padding: "0px" }}>
                       <Box sx={{ textAlign: "left" }}>
                         <Typography
-                          className="rName"
+                          id="name-card"
+                          className="name"
                           component="div"
                           width={"100%"}
                           sx={{ fontWeight: "bold", paddingBottom: 2, fontSize: "18px"}}
@@ -70,6 +75,8 @@ function ServiceCenterCard({data}) {
                           {service.name}
                         </Typography>
                         <Typography
+                          id="province-type-card"
+                          className="province-type"
                           style={{ display: "flex", alignItems: "flex-end" }}
                         >
                           {service.province}
@@ -84,7 +91,7 @@ function ServiceCenterCard({data}) {
                   </Grid>
                   <Grid item xs={7} style={{ justifySelf: "right" }}>
                     {/* MdFavoriteBorder */}
-                    <MdFavorite style={{ fontSize: "25px"}}/>
+                    <MdFavorite style={{ fontSize: "25px"}} id="favorite-button" className="favorite"/>
                   </Grid>
                 </Grid>
               </Card>
