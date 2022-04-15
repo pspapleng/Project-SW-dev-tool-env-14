@@ -76,7 +76,8 @@ pipeline {
         }
         stage('Build and Deploy') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')], [string(credentialsId: 'backend-server', variable: 'HOST')])
+                withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
+                withCredentials([string(credentialsId: 'backend-server', variable: 'HOST')])
                 script{
                     def remote = [:]
                     remote.name = "team-14-backend"
