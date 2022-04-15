@@ -78,6 +78,9 @@ pipeline {
             steps {
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'team14-backend-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+                        def remote = [:]
+                        remote.name = "team-14-backend"
+                        remote.host = "159.223.45.216"
                         remote.user = userName
                         remote.identityFile = identity
                         sshCommand remote: remote, command: 'echo "Hwllo world"'    
