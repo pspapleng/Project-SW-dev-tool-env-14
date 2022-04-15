@@ -1,8 +1,3 @@
-def remote = [:]
-remote.name = "backend-remove-server"
-remote.host = "159.223.45.216"
-remote.allowAnyHosts = true
-
 def notifyLINE(status) {
     withCredentials([string(credentialsId: 'line-notify-token-14', variable: 'TOKEN')]) { 
        def token = TOKEN
@@ -79,32 +74,34 @@ pipeline {
                 }
             }
         }
-        stage('Build and Deploy') {
-            steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'team14-backend-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
-                    remote.user = userName
-                    remote.identityFile = identity
-                    stage("SSH Steps Rocks!") {
-                        sshCommand remote: remote, command: 'echo "hellow world"'
-                    }
-                }         
-                // withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')], [string(credentialsId: 'backend-server', variable: 'HOST')])
-                // withCredentials([string(credentialsId: 'backend-server', variable: 'HOST')])
-                // script{
-                //     def remote = [:]
-                //     remote.name = "team-14-backend"
-                //     remote.host = "$HOST"
-                //     remote.user = "$USERNAME"
-                //     remote.password = "$PASSWORD"
-                //     remote.allowAnyHosts = true
-                //     sshCommand remote: remote, command: "git clone -b main https://github.com/pspapleng/Project-SW-dev-tool-env-14.git team-14-backend"
-                //     sshCommand remote: remote, command: "docker-compose -f team-14-backend/docker-compose-build.yaml build back_end"
-                //     sshCommand remote: remote, command: "docker-compose -f team-14-backend/docker-compose-deploy.yaml up -d back_end"
-                //     sshCommand remote: remote, command: "rm -r team-14-backend"
-                //     sshCommand remote: remote, command: "docker rmi \$(docker images --format '{{.Repository}}:{{.Tag}}' | grep 'psppx/team-14-backend') || true"
-                // }          
+        withCredentials([sshUserPrivateKey(credentialsId: 'team14-backend-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+            def remote = [:]
+            remote.name = "backend-remove-server"
+            remote.host = "159.223.45.216"
+            remote.allowAnyHosts = true
+            remote.user = userName
+            remote.identityFile = identity
+            stage('Build and Deploy') {
+                steps {
+                    sshCommand remote: remote, command: 'echo "hellow world"'
+                    // withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')], [string(credentialsId: 'backend-server', variable: 'HOST')])
+                    // withCredentials([string(credentialsId: 'backend-server', variable: 'HOST')])
+                    // script{
+                    //     def remote = [:]
+                    //     remote.name = "team-14-backend"
+                    //     remote.host = "$HOST"
+                    //     remote.user = "$USERNAME"
+                    //     remote.password = "$PASSWORD"
+                    //     remote.allowAnyHosts = true
+                    //     sshCommand remote: remote, command: "git clone -b main https://github.com/pspapleng/Project-SW-dev-tool-env-14.git team-14-backend"
+                    //     sshCommand remote: remote, command: "docker-compose -f team-14-backend/docker-compose-build.yaml build back_end"
+                    //     sshCommand remote: remote, command: "docker-compose -f team-14-backend/docker-compose-deploy.yaml up -d back_end"
+                    //     sshCommand remote: remote, command: "rm -r team-14-backend"
+                    //     sshCommand remote: remote, command: "docker rmi \$(docker images --format '{{.Repository}}:{{.Tag}}' | grep 'psppx/team-14-backend') || true"
+                    // }          
+                }
             }
-        }
+        }         
         stage('Test Backend') {
             steps {
                 sh "curl http://159.223.45.216:4141/"
