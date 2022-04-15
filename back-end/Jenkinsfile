@@ -74,14 +74,14 @@ pipeline {
                 }
             }
         }
-        withCredentials([sshUserPrivateKey(credentialsId: 'team14-backend-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+        stage('Build and Deploy') {
+            withCredentials([sshUserPrivateKey(credentialsId: 'team14-backend-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
             def remote = [:]
             remote.name = "backend-remove-server"
             remote.host = "159.223.45.216"
             remote.allowAnyHosts = true
             remote.user = userName
             remote.identityFile = identity
-            stage('Build and Deploy') {
                 steps {
                     sshCommand remote: remote, command: 'echo "hellow world"'
                     // withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')], [string(credentialsId: 'backend-server', variable: 'HOST')])
