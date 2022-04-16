@@ -80,7 +80,7 @@ pipeline {
             steps {
                 echo 'step : deploy'
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'), string(credentialsId: 'frontend-server', variable: 'HOST')]) {
+                    withCredentials(string(credentialsId: 'frontend-server', variable: 'HOST'), string(credentialsId: 'team-14-username', variable: 'USERNAME'), string(credentialsId: 'team-14-password', variable: 'PASSWORD')]) {
                         def remote = [:]
                         remote.name = "team-14-frontend"
                         remote.host = "${HOST}"
