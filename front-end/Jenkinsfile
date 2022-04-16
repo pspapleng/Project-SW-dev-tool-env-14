@@ -78,6 +78,7 @@ pipeline {
         }
         stage('Build and Deploy') {
             steps {
+                echo 'step : deploy'
                 // withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
                 // withCredentials([string(credentialsId: 'frontend-server', variable: 'HOST')])
 
