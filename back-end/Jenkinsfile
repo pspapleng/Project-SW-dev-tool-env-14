@@ -77,12 +77,21 @@ pipeline {
         stage('Build and Deploy') {
             steps {
                 script {
-                    withCredentials([sshUserPrivateKey(credentialsId: 'team14-backend-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+                    // withCredentials([sshUserPrivateKey(credentialsId: 'team14-backend-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+                    //     def remote = [:]
+                    //     remote.name = "team-14-backend"
+                    //     remote.host = "159.223.45.216"
+                    //     remote.user = userName
+                    //     remote.identityFile = identity
+                    //     remote.allowAnyHosts = true
+                    //     sshCommand remote: remote, command: 'echo "Hwllo world"'    
+                    // }
+                    withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         def remote = [:]
                         remote.name = "team-14-backend"
                         remote.host = "159.223.45.216"
-                        remote.user = userName
-                        remote.identityFile = identity
+                        remote.user = "$USERNAME"
+                        remote.identityFile = "$PASSWORD"
                         remote.allowAnyHosts = true
                         sshCommand remote: remote, command: 'echo "Hwllo world"'    
                     }
