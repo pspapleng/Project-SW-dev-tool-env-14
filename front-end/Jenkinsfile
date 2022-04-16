@@ -79,6 +79,21 @@ pipeline {
         stage('Build and Deploy') {
             steps {
                 echo 'step : deploy'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        def remote = [:]
+                        remote.name = "team-14-frontend"
+                        remote.host = "159.65.12.177"
+                        remote.user = "${USERNAME}"
+                        remote.identityFile = "${PASSWORD}"
+                        remote.allowAnyHosts = true
+                        sshCommand remote: remote, command: "git clone -b main https://github.com/pspapleng/Project-SW-dev-tool-env-14.git team-14-frontend"
+                        sshCommand remote: remote, command: "docker-compose -f team-14-frontend/docker-compose-build.yaml build front_end"
+                        sshCommand remote: remote, command: "docker-compose -f team-14-frontend/docker-compose-deploy.yaml up -d front_end"
+                        sshCommand remote: remote, command: "rm -r team-14-frontend"
+                        sshCommand remote: remote, command: "docker rmi \$(docker images --format '{{.Repository}}:{{.Tag}}' | grep 'psppx/team-14-frontend') || true"
+                    }
+                }
                 // withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
                 // withCredentials([string(credentialsId: 'frontend-server', variable: 'HOST')])
 
