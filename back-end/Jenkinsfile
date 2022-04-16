@@ -86,10 +86,10 @@ pipeline {
                     //     remote.allowAnyHosts = true
                     //     sshCommand remote: remote, command: 'echo "Hwllo world"'    
                     // }
-                    withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'), string(credentialsId: 'backend-server', variable: 'HOST')]) {
                         def remote = [:]
                         remote.name = "team-14-backend"
-                        remote.host = "159.223.45.216"
+                        remote.host = "${HOST}"
                         remote.user = "${USERNAME}"
                         remote.identityFile = "${PASSWORD}"
                         remote.allowAnyHosts = true

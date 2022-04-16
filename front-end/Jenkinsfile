@@ -80,10 +80,10 @@ pipeline {
             steps {
                 echo 'step : deploy'
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'team-14', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'), string(credentialsId: 'frontend-server', variable: 'HOST')]) {
                         def remote = [:]
                         remote.name = "team-14-frontend"
-                        remote.host = "159.65.12.177"
+                        remote.host = "${HOST}"
                         remote.user = "${USERNAME}"
                         remote.identityFile = "${PASSWORD}"
                         remote.allowAnyHosts = true
