@@ -95,6 +95,7 @@ pipeline {
         }         
         stage('Test Backend') {
             steps {
+                sleep time: 30, unit: 'SECONDS'
                 sh "curl http://159.223.45.216:4141/"
             }
         }
