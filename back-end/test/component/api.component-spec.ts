@@ -38,7 +38,11 @@ describe('Component test backend', () => {
   describe('GetServiceCenterByLocation', () => {
     it('should return correct service center', async () => {
       const { body: services } = await supertest(app.getHttpServer())
-        .get(`/service_center/location?lat=13.7749&lon=100.5197`)
+        .get(`/service_center/location`)
+        .query({
+          lat: 13.7749,
+          lon: 100.5197,
+        })
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200);
@@ -53,31 +57,63 @@ describe('Component test backend', () => {
   //Test Api GetServiceCenterById using ServiceCenterId
   describe('GetServiceCenterById', () => {
     it('should return correct service center', async () => {
-      const id = "31a26fa9-55db-4059-b4a3-4c59de3f9b5b";
-    const { body: service } = await supertest(app.getHttpServer())
-    .get(`/service_center/${id}`)
-    .set('Accept', 'application/json')
-    .expect('Content-Type', /json/)
-    .expect(200);
-    expect(typeof service).toBe('object');
-    expect(service.id).toBe(id);
+      const id = '31a26fa9-55db-4059-b4a3-4c59de3f9b5b';
+      const { body: service } = await supertest(app.getHttpServer())
+        .get(`/service_center/${id}`)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200);
+      expect(typeof service).toBe('object');
+      expect(service.id).toBe(id);
     });
   });
 
   //Test Api GetReviewByServiceCenterId using ServiceCenterId
   describe('GetReviewByServiceCenter', () => {
     it('should return correct service center', async () => {
-      const serviceId = "31a26fa9-55db-4059-b4a3-4c59de3f9b5b";
+      const serviceId = '31a26fa9-55db-4059-b4a3-4c59de3f9b5b';
       const { body: reviews } = await supertest(app.getHttpServer())
-    .get(`/review/${serviceId}`)
-    .set('Accept', 'application/json')
-    .expect('Content-Type', /json/)
-    .expect(200);
-  reviews.forEach((e) => {
-    expect(typeof e).toBe('object');
-  });
-  expect(reviews.length).toBeGreaterThanOrEqual(0);
+        .get(`/review/${serviceId}`)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200);
+      reviews.forEach((e) => {
+        expect(typeof e).toBe('object');
+      });
+      expect(reviews.length).toBeGreaterThanOrEqual(0);
     });
   });
-  
+
+  describe('GetAllServiceCenter', () => {
+    it('should return All correct service center', async () => {
+      const { body: services } = await supertest(app.getHttpServer())
+        .get(`/service_center/search`)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200);
+      services.forEach((e) => {
+        expect(typeof e).toBe('object');
+      });
+      expect(services.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('GetServiceCenterBySearch', () => {
+    it('should return correct service center', async () => {
+      const search = 'กรุงเทพมหานคร';
+      const { body: services } = await supertest(app.getHttpServer())
+        .get(`/service_center/search`)
+        .query({
+          search: 'กรุงเทพมหานคร',
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200);
+      services.forEach((e) => {
+        expect(typeof e).toBe('object');
+        expect(e.province).toEqual(search);
+      });
+      expect(services.length).toBeGreaterThan(0);
+    });
+  });
 });
