@@ -36,7 +36,7 @@ export default function AlertModal({alert, closeAlert}) {
         <DialogActions >
           {/* <Button onClick={handleClose}>Disagree</Button> */}
           <DarkGrayBut style={{fontWeight: 'bold', padding: '10px 25px'}} onClick={handleClose} autoFocus>
-            Agree
+            Close
           </DarkGrayBut>
         </DialogActions>
       </Dialog>
