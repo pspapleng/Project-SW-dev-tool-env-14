@@ -1,10 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-
 import "@testing-library/jest-dom";
 
-import ServiceCenterInfo from "../pages/ServiceCenter/ServiceCenterInfo";
-import ResultModal from "../components/Modals/ResultModal";
 import ServiceCenter from "../pages/ServiceCenter/ServiceCenter";
 import ServiceCard from "../components/Cards/ServiceCard";
 
