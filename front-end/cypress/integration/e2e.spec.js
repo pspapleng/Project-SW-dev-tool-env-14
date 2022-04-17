@@ -18,10 +18,8 @@ function fakeLocation(latitude, longitude) {
 }
 
 beforeEach(() => {
-    
     cy.visit('/', fakeLocation(13.7120371, 100.7887341))
 })
-
 afterEach(() => {
     cy.clearLocalStorage()
 })
@@ -186,5 +184,61 @@ describe('Do Assessment with Suggest Service Center When Click ไม่ยอ�
                 '/Home'
             )
         })
+    })
+})
+
+describe('Search Service Center', function () {
+    it('Search Province', function () {
+        cy.get('button').contains('Start an assessment').click()
+        cy.get('button').contains('ยอมรับ').click()
+        cy.visit('http://localhost:3000/Servicecenter')
+        cy.location().should((loc) => {
+            expect(loc.pathname).to.eq(
+                '/Servicecenter'
+            )
+        })
+        cy.get('[id="search-bar"]').click().type('นครนายก{enter}')
+        cy.get('[id="province-type-card"]').contains('นครนายก')
+
+    })
+    it('Search Name', function () {
+        cy.get('button').contains('Start an assessment').click()
+        cy.get('button').contains('ยอมรับ').click()
+        cy.visit('http://localhost:3000/Servicecenter')
+        cy.location().should((loc) => {
+            expect(loc.pathname).to.eq(
+                '/Servicecenter'
+            )
+        })
+
+        cy.get('[id="search-bar"]').click().type('The Oasis{enter}')
+        cy.get('[id="name-card"]').contains('The Oasis')
+    })
+
+    it('Search Not Found', function () {
+        cy.get('button').contains('Start an assessment').click()
+        cy.get('button').contains('ยอมรับ').click()
+        cy.visit('http://localhost:3000/Servicecenter')
+        cy.location().should((loc) => {
+            expect(loc.pathname).to.eq(
+                '/Servicecenter'
+            )
+        })
+
+        cy.get('[id="search-bar"]').click().type('Mahanakron{enter}')
+        cy.get('[class="all-service"]').children().should('have.length', 0)
+    })
+    it('Search Empty Input', function () {
+        cy.get('button').contains('Start an assessment').click()
+        cy.get('button').contains('ยอมรับ').click()
+        cy.visit('http://localhost:3000/Servicecenter')
+        cy.location().should((loc) => {
+            expect(loc.pathname).to.eq(
+                '/Servicecenter'
+            )
+        })
+
+        cy.get('[id="search-bar"]').click().type('{enter}')
+        cy.get('[class="all-service"]').children().should('have.length.gt', 10)
     })
 })
