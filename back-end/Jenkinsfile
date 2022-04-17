@@ -88,7 +88,6 @@ pipeline {
                         sshCommand remote: remote, command: "cd team-14-backend && VERSION=\$(git describe --tags --abbrev=0) docker-compose -f ./docker-compose-build.yaml build back_end"
                         sshCommand remote: remote, command: "cd team-14-backend && VERSION=\$(git describe --tags --abbrev=0) docker-compose -f ./docker-compose-deploy.yaml up -d back_end"
                         sshCommand remote: remote, command: "rm -r team-14-backend"
-                        // sshCommand remote: remote, command: "docker rmi \$(docker images --format '{{.Repository}}:{{.Tag}}' | grep 'psppx/team-14-backend') || true"
                     }    
                 }     
             }
