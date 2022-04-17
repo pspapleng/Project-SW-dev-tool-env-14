@@ -7,6 +7,8 @@ import { shallow } from "enzyme";
 import InputBase from "@mui/material/InputBase";
 import Checkbox from "@mui/material/Checkbox";
 import SearchIcon from "@mui/icons-material/Search";
+import Card from "@mui/material/Card";
+import { MdFavorite } from "react-icons/md";
 
 import Home from "../pages/Home/Home";
 import DisclaimerModal from "../components/Modals/DisclaimerModal";
@@ -748,5 +750,52 @@ describe("ServiceCenter: Should render correct function", () => {
       wrapper.setProps({ allMockService });
     }
     expect(wrapper.find("#name-card")).toHaveLength(20);
+  });
+});
+
+
+describe("ServiceCenterCard", () => {
+  const allMockService = [
+    {
+      id: "025acdad-900a-4172-982c-f45d0310c436",
+      createAt: "2022-02-10T16:19:25.359Z",
+      updateAt: "2022-02-10T16:19:25.359Z",
+      deleteAt: null,
+      name: "Center for Psychological Wellness",
+      description:
+        "ศูนย์สุขภาวะทางจิต เป็นศูนย์ให้บริการทางจิตวิทยาของคณะจิตวิทยา จุฬาลงกรณ์มหาวิทยาลัย ที่มีจุดมุ่งหมายในการบูรณาการองค์ความรู้ทางจิตวิทยากับการให้บริการเพื่อพัฒนาและเสริมสร้างสุขภาวะทางจิตให้กับสังคมไทย",
+      imageUrl:
+        "https://user-images.githubusercontent.com/56313629/152805064-8554e1d2-4d2a-4138-9214-2a5a9cffbf23.jpg",
+      type: "BOTH",
+      address:
+        "ชั้น 5 อาคารบรมราชชนนีศรีศตพรรษ จุฬาลงกรณ์มหาวิทยาลัย ซอยจุฬาฯ12 ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน",
+      province: "เชียงใหม่",
+      website: "-",
+      facebook: "https://www.facebook.com/WellnessPsyCU/",
+      phone: "02-218-1171, 061-736-2859",
+      email: "wellness.chula@gmail.com",
+      office_hours:
+        "วันจันทร์ - ศุกร์ เวลา 09.00 - 17.00 น. (ยกเว้นวันหยุดนักขัตฤกษ์)",
+      cost: "800฿",
+      latitude: "13.7552463",
+      longitude: "100.5296089",
+    }
+  ];
+  it("show ServiceCenter Card", () => {
+    const wrapper = shallow(<ServiceCenterCard data={allMockService}/>);
+    const card = wrapper.find(Card);
+    expect(card).toHaveLength(1);
+
+  });
+  it("show favorite icons", () => {
+    const wrapper = shallow(<ServiceCenterCard data={allMockService} />);
+    const fav = wrapper.find(MdFavorite);
+    expect(fav).toHaveLength(1);
+  });
+
+  it("go to serviceCenterInfo when click card", () => {
+    const mockCallBack = jest.fn();
+    const wrapper = shallow(<ServiceCenterCard data={allMockService} handleOnClick={mockCallBack} />);
+    wrapper.find(Card).simulate('click');
   });
 });
