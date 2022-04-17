@@ -7,11 +7,12 @@ export class ServiceCenterController {
 
   @Get()
   async getAllServiceCenter() {
-    return this.serviceCenterSerivce.getAllServiceCenter()
+    return this.serviceCenterSerivce.getAllServiceCenter();
   }
+
   @Get('/search')
-  async getServiceCenterBySearch(@Query('search') search: string){
-    return this.serviceCenterSerivce.getServiceCenterBySearch(search)
+  async getServiceCenterBySearch(@Query('search') search: string) {
+    return this.serviceCenterSerivce.getServiceCenterBySearch(search);
   }
 
   @Get('/location')
@@ -24,6 +25,6 @@ export class ServiceCenterController {
 
   @Get('/:id')
   async getServiceCenterById(@Param('id') id: string) {
-    return this.serviceCenterSerivce.getServiceCenterById(id);   
+    return this.serviceCenterSerivce.getServiceCenterById(id);
   }
 }

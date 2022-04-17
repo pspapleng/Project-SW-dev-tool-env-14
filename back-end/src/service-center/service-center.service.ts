@@ -1,7 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { getDistance } from 'geolib';
-import { ServiceCenterEntity } from 'src/dal/service-center/service-center.entity';
+import { getRepository } from 'typeorm';
 import { ServiceCenterRepository } from './../dal/service-center/service-cennter.repository';
+import { ServiceCenterEntity } from './../dal/service-center/service-center.entity';
 
 @Injectable()
 export class ServiceCenterSerivce {
@@ -34,27 +35,26 @@ export class ServiceCenterSerivce {
       .sort((a, b) => a.distance - b.distance); // sort by distance desc
     return result;
   }
+
   async getServiceCenterById(id: string): Promise<ServiceCenterEntity> {
-    const service = await this.serviceCenterRepository.findOne(id).catch( (error) => {throw new BadRequestException(error.message)}) ;
-    if (!service){
-         throw new BadRequestException("service_not_found");
+    const service = await this.serviceCenterRepository
+      .findOne(id)
+      .catch((error) => {
+        throw new BadRequestException(error.message);
+      });
+    if (!service) {
+      throw new BadRequestException('service_not_found');
     }
     return service;
   }
+
   async getAllServiceCenter(): Promise<any> {
     const serviceCenters = await this.serviceCenterRepository.find();
-    return serviceCenters
+    return serviceCenters;
   }
-  async getServiceCenterBySearch(search: string): Promise<any>{
-    const serviceCenters = await this.serviceCenterRepository.find();
-    const result = serviceCenters.map((serviceCenter) => {
-      if(serviceCenter.name.toLowerCase().includes(search) || serviceCenter.province.includes(search)){
-        return serviceCenter
-      }
-      else{
-        return null
-      }
-    })
-    return result
+
+  async getServiceCenterBySearch(search: string): Promise<any> {
+    const searchQuery = search;
+    return this.serviceCenterRepository.findWithSearch(searchQuery);
   }
 }

@@ -10,10 +10,12 @@ describe('ServiceCenterService', () => {
   let serviceCenterSerivce: ServiceCenterSerivce;
   let find: jest.Mock;
   let findOne: jest.Mock;
+  let findWithSearch: jest.Mock;
 
   beforeAll(async () => {
     find = jest.fn();
     findOne = jest.fn();
+    findWithSearch = jest.fn();
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ServiceCenterSerivce,
@@ -22,6 +24,7 @@ describe('ServiceCenterService', () => {
           useValue: {
             find,
             findOne,
+            findWithSearch,
           },
         },
       ],
@@ -78,6 +81,29 @@ describe('ServiceCenterService', () => {
         await expect(
           serviceCenterSerivce.getServiceCenterById(id),
         ).rejects.toThrowError(new BadRequestException('service_not_found'));
+      });
+    });
+  });
+
+  describe('call getServiceCenterBySearch method', () => {
+    describe('with matched', () => {
+      let search = '';
+      let serviceCenterEntity: ServiceCenterEntity;
+      let serviceCenters = [];
+      beforeEach(() => {
+        serviceCenterEntity = new ServiceCenterEntity();
+        search = 'กรุงเทพมหานคร';
+        serviceCenters = [serviceCenterEntity];
+        findWithSearch.mockReturnValue(Promise.resolve(serviceCenters));
+      });
+      it('should return array of service center which matched', async () => {
+        const fetchedData = await serviceCenterSerivce.getServiceCenterBySearch(
+          search,
+        );
+        fetchedData.forEach((e) => {
+          expect(typeof e).toBe('object');
+        });
+        expect(fetchedData).toEqual([serviceCenterEntity]);
       });
     });
   });
