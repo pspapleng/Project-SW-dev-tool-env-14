@@ -1,4 +1,4 @@
 const service = {
-  BASE_URL: "http://159.223.45.216:4141",
+  BASE_URL: 'https://moodment-api.ourweus.space',
 };
 export default service;

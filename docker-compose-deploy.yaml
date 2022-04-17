@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
     back_end:
-        image: psppx/team-14-backend:1.0.1
+        image: psppx/team-14-backend:${VERSION:-latest}
         ports:
             - 4141:3000
         environment:
@@ -20,6 +20,6 @@ services:
             - JWT_REFRESH_TOKEN_LIFE="30d"
             - BCRYPT_SALT_ROUNDS=8
     front_end:
-        image: psppx/team-14-frontend:1.0.2
+        image: psppx/team-14-frontend:${VERSION:-latest}
         ports:
             - 1414:80
