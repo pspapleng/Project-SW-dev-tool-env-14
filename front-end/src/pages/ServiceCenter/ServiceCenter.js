@@ -26,6 +26,9 @@ useEffect( () => {
    }
 
    fetchMyAPI()
+   return () => {
+    setData({}); // This worked for me
+  };
  }, []);
 
 
