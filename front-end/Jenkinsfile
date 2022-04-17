@@ -91,7 +91,7 @@ pipeline {
                         sshCommand remote: remote, command: "cd team-14-frontend && VERSION=\$(git describe --tags --abbrev=0) docker-compose -f ./docker-compose-build.yaml build front_end"
                         sshCommand remote: remote, command: "cd team-14-frontend && VERSION=\$(git describe --tags --abbrev=0) docker-compose -f ./docker-compose-deploy.yaml up -d front_end"
                         sshCommand remote: remote, command: "rm -r team-14-frontend"
-                        sshCommand remote: remote, command: "docker rmi \$(docker images --format '{{.Repository}}:{{.Tag}}' | grep 'psppx/team-14-frontend') || true"
+                        // sshCommand remote: remote, command: "docker rmi \$(docker images --format '{{.Repository}}:{{.Tag}}' | grep 'psppx/team-14-frontend') || true"
                     }
                 }        
             }
