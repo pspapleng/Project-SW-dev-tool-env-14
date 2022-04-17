@@ -11,7 +11,11 @@ describe('Suggest Service Center Feature', () => {
     it('should return correct service center and correct review', async () => {
       // GET /service_center/location
       const { body: services } = await supertest(config.baseURL)
-        .get(`/service_center/location?lat=13.7749&lon=100.5197`)
+        .get(`/service_center/location`)
+        .query({
+          lat: 13.7749,
+          lon: 100.5197,
+        })
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200);
@@ -42,29 +46,6 @@ describe('Suggest Service Center Feature', () => {
         expect(typeof e).toBe('object');
       });
       expect(reviews.length).toBeGreaterThanOrEqual(0);
-
-      // GET /service_center/search?search=
-      const { body: searchServices } = await supertest(config.baseURL)
-      .get(`/service_center/search?search=กรุงเทพมหานคร`)
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(200);
-      searchServices.forEach((e) => {
-        expect(typeof e).toBe('object');
-      });
-      expect(searchServices.length).toBeGreaterThan(0);
-
-      // GET /service_center/search
-    const { body: allServices } = await supertest(config.baseURL)
-    .get(`/service_center/search`)
-    .set('Accept', 'application/json')
-    .expect('Content-Type', /json/)
-    .expect(200);
-    allServices.forEach((e) => {
-      expect(typeof e).toBe('object');
     });
-    expect(allServices.length).toBeGreaterThan(0);
-
   });
-});
 });
