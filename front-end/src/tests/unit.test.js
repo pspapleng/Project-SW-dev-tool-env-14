@@ -21,9 +21,15 @@ import ServiceCenter from "../pages/ServiceCenter/ServiceCenter";
 import ServiceCenterCard from "../components/Cards/ServiceCard";
 
 let mockFn = jest.fn();
+let assignMock = jest.fn();
+
+// delete window.location;
+// window.location = { assign: assignMock };
+
 
 afterEach(() => {
   jest.clearAllMocks();
+  // assignMock.mockClear();
 });
 
 const mockGeolocation = {
