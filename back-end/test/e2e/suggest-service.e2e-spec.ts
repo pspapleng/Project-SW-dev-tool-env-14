@@ -42,6 +42,29 @@ describe('Suggest Service Center Feature', () => {
         expect(typeof e).toBe('object');
       });
       expect(reviews.length).toBeGreaterThanOrEqual(0);
+
+      // GET /service_center/search?search=
+      const { body: searchServices } = await supertest(config.baseURL)
+      .get(`/service_center/search?search=กรุงเทพมหานคร`)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200);
+      searchServices.forEach((e) => {
+        expect(typeof e).toBe('object');
+      });
+      expect(searchServices.length).toBeGreaterThan(0);
+
+      // GET /service_center/search
+    const { body: allServices } = await supertest(config.baseURL)
+    .get(`/service_center/search`)
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect(200);
+    allServices.forEach((e) => {
+      expect(typeof e).toBe('object');
     });
+    expect(allServices.length).toBeGreaterThan(0);
+
   });
+});
 });

@@ -81,4 +81,17 @@ describe('ServiceCenterService', () => {
       });
     });
   });
+
+  describe('call getServiceCenterBySearch method', () => {
+    describe('with matched', () => {
+      let search = 'กรุงเทพมหานคร';
+      it('should return array of service center which matched', async () => {
+        const fetchedData = await serviceCenterSerivce.getServiceCenterBySearch(search);
+        fetchedData.forEach((e) => {
+          expect(typeof e).toBe('object');
+          expect(e.province).toEqual(search);
+        });
+      });
+    });
+  });
 });

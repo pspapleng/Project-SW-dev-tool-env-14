@@ -79,5 +79,35 @@ describe('Component test backend', () => {
   expect(reviews.length).toBeGreaterThanOrEqual(0);
     });
   });
+
+  describe('GetAllServiceCenter', () => {
+    it('should return All correct service center', async () => {
+    const { body: services } = await supertest(app.getHttpServer())
+    .get(`/service_center/search`)
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect(200);
+    services.forEach((e) => {
+      expect(typeof e).toBe('object');
+    });
+    expect(services.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('GetServiceCenterBySearch', () => {
+    it('should return correct service center', async () => {
+      const search = "กรุงเทพมหานคร";
+    const { body: services } = await supertest(app.getHttpServer())
+    .get(`/service_center/search?search=${search}`)
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect(200);
+    services.forEach((e) => {
+      expect(typeof e).toBe('object');
+      expect(e.province).toEqual(search);
+    });
+    expect(services.length).toBeGreaterThan(0);
+    });
+  });
   
 });
