@@ -12,9 +12,6 @@ def notifyLINE(status) {
 
 pipeline {
     agent any
-    environment {
-		DOCKERHUB_CREDENTIALS=credentials('team-14-docker-hub-credential')
-	}
     options {
         ansiColor('xterm')
     }
@@ -44,7 +41,6 @@ pipeline {
                         reportFiles: "index.html",
                         reportName: 'Unit Test Coverage Report'
                     ]
-
                     publishHTML target: [
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
@@ -69,7 +65,6 @@ pipeline {
                         reportFiles: 'index.html',
                         reportName: 'Component Test Coverage Report'
                     ]
-
                     publishHTML target: [
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
@@ -81,34 +76,23 @@ pipeline {
                 }
             }
         }
-		stage('Build') {
-			steps {
-                echo "stage: Build"
-				// sh 'docker-compose -f ./docker-compose-build.yaml build front_end'
-			}
-		}
-		stage('Login to Docker Hub') {
-			steps {
-                echo "stage: Login"
-				// sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
-		stage('Push') {
-			steps {
-                echo "stage: Push"
-				// sh 'docker-compose -f ./docker-compose-build.yaml build front_end'
-			}
-		}
-        stage('Deploy') {
+        stage('Build and Deploy') {
             steps {
-                echo "stage: Deploy"
-                // sshagent(credentials: ['team14-frontend-server']) {
-                //     sh '''
-                //         [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                //         ssh-keyscan -H 159.65.12.177 >> ~/.ssh/known_hosts
-                //         ssh root@159.65.12.177 'cd ./frontend-14/ && docker-compose -f ./docker-compose-deploy.yaml pull && docker-compose -f ./docker-compose-deploy.yaml up -d'
-                //     '''
-                // }               
+                echo 'step : deploy'
+                withCredentials([string(credentialsId: 'frontend-server', variable: 'HOST'), string(credentialsId: 'team-14-username', variable: 'USERNAME'), string(credentialsId: 'team-14-password', variable: 'PASSWORD')]) {
+                    script {
+                        def remote = [:]
+                        remote.name = "team-14-frontend"
+                        remote.host = "${HOST}"
+                        remote.user = "${USERNAME}"
+                        remote.password = "${PASSWORD}"
+                        remote.allowAnyHosts = true
+                        sshCommand remote: remote, command: "git clone -b main https://github.com/pspapleng/Project-SW-dev-tool-env-14.git team-14-frontend"
+                        sshCommand remote: remote, command: "cd team-14-frontend && VERSION=\$(git describe --tags --abbrev=0) docker-compose -f ./docker-compose-build.yaml build front_end"
+                        sshCommand remote: remote, command: "cd team-14-frontend && VERSION=\$(git describe --tags --abbrev=0) docker-compose -f ./docker-compose-deploy.yaml up -d front_end"
+                        sshCommand remote: remote, command: "rm -r team-14-frontend"
+                    }
+                }        
             }
         }
         stage('Run E2E test and Generate E2E test report') {
